@@ -1,590 +1,377 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO & Meta Tags -->
-    <title>امیرمحمد دهقان پور | معمار آینده دیجیتال</title>
-    <meta name="description" content="رزومه تعاملی و پویای امیرمحمد دهقان پور، دارنده ۴ مدال طلای المپیاد کامپیوتر و معمار سیستم‌های کلان. کاوشی در دنیای نوآوری، زیرساخت و خلق آینده دیجیتال.">
-    <meta name="keywords" content="امیرمحمد دهقان پور, رزومه, معمار دیجیتال, مرکز نخبگان, متخصص ICT, توسعه دهنده فول استک, المپیاد کامپیوتر, زیرساخت شبکه, امنیت سایبری, Digital Architect">
-    <meta name="author" content="امیرمحمد دهقان پور">
-
-    <!-- Open Graph / Facebook / Twitter -->
-    <meta property="og:title" content="امیرمحمد دهقان پور | معمار آینده دیجیتال">
-    <meta property="og:description" content="کاوش در سفر حرفه‌ای یک متخصص فناوری که ایده‌ها را به زیرساخت‌های قدرتمند ملی تبدیل می‌کند.">
-    <meta property="og:image" content="https://scontent-iad3-1.cdninstagram.com/v/t51.2885-19/335805566_524103133202931_7218671609148007461_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_cat=108&_nc_ohc=80-u18l0pQoAX_C_59-&edm=AOQ1B0wBAAAA&ccb=7-5&oh=00_AfC241UaW-59N0c2F4N9vY3s79g20qHh1v-fag&oe=65E1E661&_nc_sid=8b3546"> <!-- لینک تصویر شما -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-domain.com/">
-    <meta property="twitter:card" content="summary_large_image">
-
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
-
-    <!-- Libraries from CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
-    <!-- All CSS is embedded here -->
-    <style>
-        :root {
-            --bg-color: #020c1b;
-            --main-color: #0a192f;
-            --accent-color-1: #00f5a0;
-            --accent-color-2: #00d9e9;
-            --accent-gradient: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
-            --text-light: #ccd6f6;
-            --text-dark: #8892b0;
-            --glass-bg: rgba(10, 25, 47, 0.6);
-            --glass-border: rgba(0, 245, 160, 0.25);
-            --font-main: 'Vazirmatn', sans-serif;
-            --neon-glow: 0 0 5px var(--accent-color-1), 0 0 10px var(--accent-color-1), 0 0 15px var(--accent-color-2);
-        }
-
-        /* --- Preloader --- */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--main-color);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid var(--glass-border);
-            border-top-color: var(--accent-color-1);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        
-        /* --- General & Scrollbar --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            font-family: var(--font-main);
-            overflow-x: hidden;
-        }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-gradient);
-            border-radius: 10px;
-        }
-        a { color: var(--accent-color-1); text-decoration: none; transition: color 0.3s ease; }
-        a:hover { color: var(--accent-color-2); }
-
-        /* --- Sidebar Navigation --- */
-        .sidebar {
-            position: fixed; top: 0; right: 0; width: 280px; height: 100vh;
-            background-color: var(--main-color);
-            border-left: 1px solid var(--glass-border);
-            display: flex; flex-direction: column; align-items: center;
-            padding: 40px 20px; z-index: 100;
-        }
-        .sidebar-profile-img-container {
-            position: relative;
-            margin-bottom: 15px;
-        }
-        .sidebar-profile-img {
-            width: 120px; height: 120px; border-radius: 50%;
-            border: 3px solid var(--accent-color-1);
-            object-fit: cover;
-            position: relative; z-index: 2;
-        }
-        .sidebar-profile-img-container::before {
-            content: '';
-            position: absolute; top: -5px; left: -5px;
-            width: 130px; height: 130px; border-radius: 50%;
-            background: var(--accent-gradient);
-            z-index: 1;
-            animation: glow-pulse 4s linear infinite;
-        }
-        @keyframes glow-pulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.7; }
-        }
-        .sidebar-name {
-            font-size: 24px; font-weight: 700; color: var(--text-light);
-            margin-bottom: 5px; text-shadow: 0 0 5px var(--accent-color-2);
-        }
-        .sidebar-title {
-            font-size: 14px; font-weight: 400; color: var(--accent-color-1);
-            margin-bottom: 30px;
-        }
-        .sidebar-nav { list-style: none; width: 100%; }
-        .sidebar-nav li a {
-            display: block; padding: 12px 20px; color: var(--text-dark);
-            font-size: 16px; font-weight: 500;
-            border-right: 3px solid transparent; transition: all 0.3s ease;
-        }
-        .sidebar-nav li a:hover, .sidebar-nav li a.active {
-            color: var(--accent-color-1); background-color: var(--glass-bg);
-            border-right-color: var(--accent-color-1);
-            transform: translateX(-5px);
-        }
-        .sidebar-social { margin-top: auto; display: flex; }
-        .sidebar-social a {
-            font-size: 22px; margin: 0 15px; color: var(--text-dark);
-            transition: all 0.3s ease;
-        }
-        .sidebar-social a:hover {
-            color: var(--accent-color-1); transform: translateY(-3px);
-            text-shadow: var(--neon-glow);
-        }
-
-        /* --- Main Content Area --- */
-        .main-content { margin-right: 280px; }
-        .section {
-            padding: 100px 80px; min-height: 100vh;
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .section-heading { margin-bottom: 60px; display: flex; align-items: center; }
-        .section-heading .number {
-            color: var(--accent-color-1); font-size: 24px;
-            font-weight: 400; margin-left: 15px;
-        }
-        .section-heading h2 {
-            color: var(--text-light); font-size: 36px; font-weight: 700;
-            position: relative;
-        }
-        .section-heading h2::after {
-            content: ''; display: block; width: 80px; height: 3px;
-            background: var(--accent-gradient); margin-top: 10px;
-        }
-
-        /* --- Home/Hero Section --- */
-        #home { display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
-        #vanta-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        #home h1 {
-            font-size: 20px; font-weight: 400;
-            color: var(--accent-color-1); margin-bottom: 20px;
-        }
-        #home h2 {
-            font-size: 68px; font-weight: 900; color: var(--text-light);
-            margin-bottom: 15px; line-height: 1.1; text-shadow: 0 0 10px rgba(204, 214, 246, 0.3);
-        }
-        #home h3 {
-            font-size: 50px; font-weight: 700; color: var(--text-dark);
-            line-height: 1.3;
-        }
-        .typed-cursor { color: var(--accent-color-1); font-size: 50px; }
-
-        /* --- Glassmorphism Cards --- */
-        .glass-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            padding: 25px;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 245, 160, 0.5);
-            box-shadow: 0 15px 30px -10px rgba(2, 12, 27, 0.7);
-        }
-        
-        /* --- About Section --- */
-        #about .about-content { display: flex; align-items: flex-start; gap: 50px; }
-        #about .about-text { flex: 3; }
-        #about .about-text p { font-size: 17px; line-height: 1.8; margin-bottom: 20px; }
-        #about .about-text p strong { color: var(--text-light); font-weight: 700; }
-        #about .about-image-wrapper { flex: 2; position: relative; }
-        #about .about-image-wrapper img { border-radius: 8px; position: relative; z-index: 2; }
-        #about .about-image-border {
-            position: absolute; top: 20px; right: -20px; width: 100%;
-            height: 100%; border: 3px solid var(--accent-color-1); border-radius: 8px;
-            z-index: 1; transition: all 0.3s ease;
-        }
-        #about .about-image-wrapper:hover .about-image-border { transform: translate(10px, -10px); }
-
-        /* --- Skills Matrix --- */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .skill-category h3 {
-            color: var(--accent-color-1); font-size: 20px; margin-bottom: 20px;
-            display: flex; align-items: center; text-shadow: 0 0 5px var(--accent-color-1);
-        }
-        .skill-category h3 i { margin-left: 10px; width: 22px; }
-        .skill-category ul { list-style: none; }
-        .skill-category ul li { margin-bottom: 12px; position: relative; padding-right: 25px; }
-        .skill-category ul li::before {
-            content: '⬢'; position: absolute; right: 0; top: 2px;
-            color: var(--accent-color-1); font-size: 14px;
-        }
-
-        /* --- Experience Timeline --- */
-        .timeline { list-style: none; position: relative; }
-        .timeline::before {
-            content: ''; position: absolute; top: 0; bottom: 0;
-            right: 15px; width: 3px; background: var(--glass-bg);
-        }
-        .timeline-item { margin-bottom: 40px; position: relative; padding-right: 60px; }
-        .timeline-icon {
-            position: absolute; right: 0; top: 0; width: 33px; height: 33px;
-            border-radius: 50%; background: var(--main-color);
-            border: 3px solid var(--accent-color-1); display: flex;
-            align-items: center; justify-content: center;
-            color: var(--accent-color-1); font-size: 16px; box-shadow: var(--neon-glow);
-        }
-        .timeline-date {
-            font-size: 14px; font-weight: 500; color: var(--accent-color-1);
-            margin-bottom: 10px;
-        }
-        .timeline-title {
-            font-size: 20px; font-weight: 700; color: var(--text-light);
-            margin-bottom: 5px;
-        }
-        .timeline-company { font-size: 16px; font-style: italic; color: var(--text-dark); margin-bottom: 15px; }
-
-        /* --- Projects Section --- */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .project-card {
-            background: var(--glass-bg); border: 1px solid var(--glass-border);
-            border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
-        }
-        .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px -15px rgba(2, 12, 27, 0.8); }
-        .project-image { height: 200px; object-fit: cover; filter: grayscale(50%) contrast(1.1); transition: filter 0.3s ease; }
-        .project-card:hover .project-image { filter: grayscale(0%) contrast(1); }
-        .project-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .project-title { font-size: 22px; font-weight: 700; color: var(--text-light); margin-bottom: 10px; }
-        .project-description { font-size: 15px; line-height: 1.6; flex-grow: 1; margin-bottom: 15px; }
-        .project-links a { font-size: 20px; margin-left: 15px; }
-
-        /* --- Contact Section --- */
-        #contact { text-align: center; }
-        #contact p { max-width: 600px; margin: 0 auto 40px; font-size: 18px; line-height: 1.7; }
-        .contact-btn {
-            background-color: transparent; color: var(--accent-color-1);
-            border: 2px solid var(--accent-color-1); border-radius: 5px;
-            padding: 15px 40px; font-size: 18px; font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        .contact-btn:hover { background-color: rgba(0, 245, 160, 0.1); box-shadow: var(--neon-glow); }
-
-        /* --- Footer --- */
-        .footer { padding: 40px; text-align: center; font-size: 14px; line-height: 1.8; }
-        .footer a { font-weight: 700; }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 1200px) {
-            .sidebar { width: 250px; }
-            .main-content { margin-right: 250px; }
-            .section { padding: 80px 40px; }
-        }
-        @media (max-width: 992px) {
-            .sidebar {
-                width: 100%; height: auto; flex-direction: row;
-                justify-content: space-between; padding: 15px 20px;
-                border-bottom: 1px solid var(--glass-border);
-            }
-            .sidebar-profile-img-container, .sidebar-title, .sidebar-social { display: none; }
-            .sidebar-name { font-size: 20px; }
-            .sidebar-nav { display: flex; width: auto; }
-            .sidebar-nav li a { padding: 8px 15px; border-right: none; border-bottom: 3px solid transparent; }
-            .sidebar-nav li a:hover, .sidebar-nav li a.active {
-                transform: none; border-bottom-color: var(--accent-color-1); background-color: transparent;
-            }
-            .main-content { margin-right: 0; padding-top: 75px; }
-            #home h2 { font-size: 48px; }
-            #home h3, .typed-cursor { font-size: 38px; }
-            .section-heading h2 { font-size: 30px; }
-            #about .about-content { flex-direction: column; }
-        }
-        @media (max-width: 576px) {
-            .section { padding: 60px 20px; }
-            #home h2 { font-size: 40px; }
-            #home h3, .typed-cursor { font-size: 32px; }
-        }
-
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>امیرمحمد دهقان پور</title>
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/aos.css" rel="stylesheet">
+    <!-- main style -->
+    <link href="css/style.css" rel="stylesheet">
 </head>
+
 <body>
-    
+
+    <!-- Preloader -->
     <div id="preloader">
-        <div class="spinner"></div>
-    </div>
+        <div id="status">
 
-    <!-- Sidebar -->
-    <aside class="sidebar" data-aos="fade-left">
-        <a href="#home">
-            <div class="sidebar-profile-img-container">
-                <img src="https://scontent-iad3-1.cdninstagram.com/v/t51.2885-19/335805566_524103133202931_7218671609148007461_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_cat=108&_nc_ohc=80-u18l0pQoAX_C_59-&edm=AOQ1B0wBAAAA&ccb=7-5&oh=00_AfC241UaW-59N0c2F4N9vY3s79g20qHh1v-fag&oe=65E1E661&_nc_sid=8b3546" alt="امیرمحمد دهقان پور" class="sidebar-profile-img">
+            <div class="preloader" aria-busy="true" aria-label="Loading, please wait." role="progressbar">
             </div>
-        </a>
-        <h1 class="sidebar-name">امیرمحمد دهقان پور</h1>
-        <p class="sidebar-title">Digital Architect & Innovator</p>
 
+        </div>
+    </div>
+    <!-- ./Preloader -->
+    
+    <!-- header -->
+    <header class="navbar-fixed-top">
         <nav>
-            <ul class="sidebar-nav">
-                <li><a href="#home" class="active">خانه</a></li>
-                <li><a href="#about">درباره من</a></li>
-                <li><a href="#skills">ماتریس مهارت</a></li>
-                <li><a href="#experience">سفر حرفه‌ای</a></li>
-                <li><a href="#projects">آثار منتخب</a></li>
-                <li><a href="#contact">تماس</a></li>
+            <ul>
+                <li><a href="#about">درباره</a></li>
+                <li><a href="#experience">تجارب</a></li>
+                <li><a href="#projects">پروژه ها</a></li>
+                <li><a href="#contact">ارتباط</a></li>
             </ul>
         </nav>
-
-        <div class="sidebar-social">
-            <a href="https://github.com/your-github" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/your-linkedin" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/amirm.dehghanpour/?hl=en" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div id="vanta-bg"></div>
-
-        <!-- Home Section -->
-        <section id="home">
-            <h1 data-aos="fade-up" data-aos-delay="100">سلام، جهان دیجیتال من اینجاست.</h1>
-            <h2 data-aos="fade-up" data-aos-delay="200">من معمار آینده دیجیتال هستم.</h2>
-            <h3 data-aos="fade-up" data-aos-delay="300"><span id="typed-strings"></span></h3>
-        </section>
-
-        <!-- About Section -->
-        <section id="about">
-            <div class="section-heading" data-aos="fade-up">
-                <span class="number">01.</span><h2>من کیستم؟</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text" data-aos="fade-right">
-                    <p>
-                        من امیرمحمد دهقان‌پور، یک معمار و استراتژیست دیجیتال هستم که در تقاطع کد، زیرساخت و نوآوری زندگی می‌کنم. سفر من از دنیای رقابتی المپیادهای کامپیوتر آغاز شد، جایی که کسب <strong>۴ مدال طلا</strong> به من آموخت که هر مسئله غیرقابل حلی، در واقع یک الگوریتم زیباست که در انتظار کشف شدن است.
-                    </p>
-                    <p>
-                        امروز، با بیش از <strong>۵ سال تجربه در راهبری پروژه‌های فناورانه ملی</strong>، آن دیدگاه الگوریتمی را برای حل چالش‌های دنیای واقعی به کار می‌گیرم. از طراحی مراکز داده‌ی امن و پایدار گرفته تا توسعه‌ی نرم‌افزارهایی که فرآیندهای حیاتی صنعتی را متحول می‌کنند. تحصیل در <strong>دانشگاه صنعت نفت</strong>، دانش فنی مرا با نیازهای استراتژیک صنایع کلان کشور گره زده است.
-                    </p>
-                    <p>
-                        من به قدرت فناوری برای ساختن آینده‌ای بهتر ایمان دارم. برای من، هر خط کد و هر کابل شبکه، گامی به سوی تحقق یک هدف بزرگ‌تر است. باور دارم که هیچ محدودیتی وجود ندارد، زیرا <strong>آسمان نزدیک است</strong>.
-                    </p>
-                </div>
-                <div class="about-image-wrapper" data-aos="fade-left" data-aos-delay="200">
-                    <img src="https://via.placeholder.com/400x450/0a192f/00f5a0?text=AD" alt="پرتره امیرمحمد دهقان پور" >
-                    <div class="about-image-border"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills">
-            <div class="section-heading" data-aos="fade-up">
-                <span class="number">02.</span><h2>ماتریس مهارت‌ها</h2>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-category glass-card" data-aos="fade-up" data-aos-delay="100">
-                    <h3><i class="fas fa-server"></i> معماری زیرساخت و شبکه</h3>
-                    <ul>
-                        <li>طراحی و مدیریت مراکز داده (Data Center)</li>
-                        <li>پیکربندی پیشرفته تجهیزات Cisco و Mikrotik</li>
-                        <li>مدیریت سرورهای Linux (CentOS, Ubuntu)</li>
-                        <li>مجازی‌سازی سازمانی (VMware vSphere)</li>
-                        <li>امنیت شبکه و پیاده‌سازی فایروال</li>
-                    </ul>
-                </div>
-                <div class="skill-category glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <h3><i class="fas fa-code-branch"></i> مهندسی نرم‌افزار</h3>
-                    <ul>
-                        <li>زبان‌ها: Python, Java, C#</li>
-                        <li>توسعه Full-Stack (Django, Node.js, React)</li>
-                        <li>پایگاه‌های داده (PostgreSQL, SQL Server)</li>
-                        <li>معماری میکروسرویس و طراحی API</li>
-                        <li>اسکریپت‌نویسی و اتوماسیون (Bash, PowerShell)</li>
-                    </ul>
-                </div>
-                <div class="skill-category glass-card" data-aos="fade-up" data-aos-delay="300">
-                    <h3><i class="fas fa-shield-halved"></i> استراتژی و امنیت</h3>
-                    <ul>
-                        <li>امنیت اطلاعات و سامانه‌ها (InfoSec)</li>
-                        <li>راهبری و مدیریت پروژه‌های ICT</li>
-                        <li>تحلیل و طراحی سیستم‌های اطلاعاتی</li>
-                        <li>استانداردهای امنیت سایبری (ISO 27001)</li>
-                        <li>تکنولوژی‌های صنعت نفت و گاز</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience">
-            <div class="section-heading" data-aos="fade-up">
-                <span class="number">03.</span><h2>سفر حرفه‌ای</h2>
-            </div>
-            <ul class="timeline">
-                <li class="timeline-item" data-aos="fade-up">
-                    <div class="timeline-icon"><i class="fas fa-satellite-dish"></i></div>
-                    <div class="timeline-content glass-card">
-                        <div class="timeline-date">۱۴۰۰ - ۱۴۰۱</div>
-                        <h3 class="timeline-title">تکنسین فنی ارشد پروژه‌های ملی</h3>
-                        <div class="timeline-company">وزارت ارتباطات و فناوری اطلاعات</div>
-                        <p>راهبری و نگهداری زیرساخت‌های حیاتی سامانه‌های ملی از جمله «شاهکار» و «کارپوشه پیام ایران» و تضمین پایداری سرویس‌ها.</p>
-                    </div>
-                </li>
-                <li class="timeline-item" data-aos="fade-up">
-                    <div class="timeline-icon"><i class="fas fa-building-columns"></i></div>
-                    <div class="timeline-content glass-card">
-                        <div class="timeline-date">۱۳۹۹</div>
-                        <h3 class="timeline-title">معمار و مدیر اولین دیتاسنتر استان</h3>
-                        <div class="timeline-company">پروژه زیرساخت، لرستان</div>
-                        <p>طراحی کامل و مدیریت اجرایی ساخت اولین مرکز داده استان با ظرفیت ۲۴۶ رک، از پی‌ریزی تا بهره‌برداری کامل.</p>
-                    </div>
-                </li>
-                <li class="timeline-item" data-aos="fade-up">
-                    <div class="timeline-icon"><i class="fas fa-medal"></i></div>
-                    <div class="timeline-content glass-card">
-                        <div class="timeline-date">۱۳۹۸</div>
-                        <h3 class="timeline-title">۴ مدال طلای المپیاد کامپیوتر</h3>
-                        <div class="timeline-company">المپیاد علمی کشوری</div>
-                        <p>اثبات تسلط بر تفکر الگوریتمی و حل مسائل پیچیده در بالاترین سطح رقابت‌های علمی کشور.</p>
-                    </div>
-                </li>
-            </ul>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects">
-            <div class="section-heading" data-aos="fade-up">
-                <span class="number">04.</span><h2>آثار منتخب</h2>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://www.khodrobank.com/Images/Article/9525/Car-Repair-and-Maintenance-Tips.jpg" alt="پروژه هاب مسافربری" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">معماری هاب یکپارچه مسافربری</h3>
-                        <p class="project-description">طراحی زیرساخت و توسعه پلتفرم مرکزی فروش بلیت و مدیریت یکپارچه سفر، با هدف اتصال تمامی شرکت‌های مسافربری کشور.</p>
-                        <div class="project-links">
-                            <a href="#" target="_blank" title="مشاهده پروژه"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="#" target="_blank" title="کد منبع"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://via.placeholder.com/400x200/0a192f/00d9e9?text=Automation" alt="سامانه اداری مکانیزه" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">اتوماسیون فرآیندهای اداری</h3>
-                        <p class="project-description">خلق مجموعه‌ای از ابزارهای نرم‌افزاری سفارشی برای مکانیزه کردن و افزایش بهره‌وری در فرآیندهای اداری آموزش و پرورش.</p>
-                        <div class="project-links">
-                            <a href="#" target="_blank" title="مشاهده پروژه"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-                    <img src="https://via.placeholder.com/400x200/0a192f/00f5a0?text=Virtual+Expo" alt="نمایشگاه مجازی" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">پلتفرم نمایشگاه مجازی سه‌بعدی</h3>
-                        <p class="project-description">پیاده‌سازی اولین پلتفرم بومی نمایشگاه مجازی در استان با استفاده از تکنولوژی‌های عکاسی ۳۶۰ درجه و مدل‌سازی تعاملی.</p>
-                        <div class="project-links">
-                            <a href="#" target="_blank" title="مشاهده پروژه"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="#" target="_blank" title="کد منبع"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <div class="section-heading" style="justify-content: center;" data-aos="fade-up">
-                <span class="number">05.</span><h2>ارتباط با من</h2>
-            </div>
-            <h2 data-aos="fade-up" style="font-size: 42px; color: var(--text-light); text-align: center; margin-bottom: 20px;">بیایید آینده را با هم بسازیم.</h2>
-            <p data-aos="fade-up">من به دنبال چالش‌های بزرگ و همکاری با ذهن‌های خلاق هستم. اگر پروژه‌ای دارید که می‌تواند مرزهای ممکن را جابجا کند، یا به دنبال راه‌حلی برای یک مشکل پیچیده هستید، آماده‌ام تا صدایتان را بشنوم.</p>
-            <a href="mailto:amirm.dehghanpour@gmail.com" class="contact-btn" data-aos="fade-up" data-aos-delay="100">شروع گفتگو</a>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>
-                کلیه حقوق مادی و معنوی این اثر متعلق به <a href="#home">«مرکز نخبگان»</a> می‌باشد.
-                <br>
-                بازنشر با کسب اجازه از امیرمحمد دهقان‌پور مجاز است.
-            </p>
-        </footer>
-
-    </main>
-
-    <!-- JS Libraries from CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    </header>
+    <!-- ./header -->
     
-    <!-- Embedded JS for Initialization -->
-    <script>
-        // --- Preloader Script ---
-        const preloader = document.getElementById('preloader');
-        window.addEventListener('load', () => {
-            preloader.style.opacity = '0';
-            preloader.style.visibility = 'hidden';
-        });
+    <!-- home -->
+    <div class="section" id="home" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="disply-table">
+                <div class="table-cell" data-aos="fade-up" data-aos-delay="0">
+                    <h4>امیرمحمد دهقان پور</h4>
+                    <h1>SERVER MANAGER <br /> ICT MANAGER <br /> DEVELOPER</h1></div>
+            </div>
+        </div>
+    </div>
+    <!-- ./home -->
+    
+    <!-- about -->
+    <div class="section" id="about">
+        <div class="container">
+            <div class="col-md-6" data-aos="fade-up">
+                <h4>01</h4>
+                <h1 class="size-50"> آشنایی بیشتر با<br /> امیرمحمد دهقان پور</h1>
+                <div class="h-50"></div>
+                <p> امیر محمد دهقان پور ،زاده 7 مرداد سال 1383 خرم آباد توسعه دهنده و طراح سیستم های کامپیوتری  </p>
+                <p>از ابتدایی کودکی علاقه بی انتهایی نسبت به کامپیوتر در من ایجاد شد که تا کنون پشتیبان انگیزه من بوده </p>
+                <p>((آسمان نزدیک است))</p>
+                <div class="h-50"></div> <img src="img/Signature.svg" width="230" alt="" />
+                <div class="h-50"></div>
+            </div>
+            <div class="col-md-6 about-img-div">
+                <div class="about-border" data-aos="fade-up" data-aos-delay=".5"></div>
+                <img src="img/about-img.jpg" width="400" class="img-responsive" alt="" align="right" data-aos="fade-right" data-aos-delay="0" />
+            </div>
+        </div>
+    </div>
+    <!-- ./about -->
+    
+    <!-- experience  -->
+    <div class="section" id="experience">
+        <div class="container">
+            <div class="col-md-12">
+                <h4>02</h4>
+                <h1 class="size-50">سوابق کاری</h1>
+                <a href="amirmdehghanpour.ir" class="timeline-event-thumbnail">PDF دانلود نسخه کامل رزومه</a>
+                <div class="h-50"></div>
+            </div>
+            <div class="col-md-12">
+                <ul class="timeline">
+                    <li class="timeline-event" data-aos="fade-up">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">تابستان 1398</p>
+                            <h3>مرحله کشوری المپیاد کدنویسی</h3>
+                            <h4>سعد السطنه-قزوین</h4>
+                            <p><strong>رتبه اول کد نویسی کشور</strong>
+                                <br>ساخت پلتفرم بومی برگزاری ازمون و کوئیز</p>
+                        </div>
+                    </li>
+                    <li class="timeline-event" data-aos="fade-up" data-aos-delay=".2">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">بهار 1399</p>
+                            <h3>توسعه میان افزار پرینتر سه بعدی </h3>
+                            <h4>خانه فناور-اصفهان</h4>
+                            <p><strong>برنامه نویس ارشد</strong>
+                                <br>باز طراحی،ساخت و توسعه فریمور(میان افزار) پرینتر های سه بعدی برای افزایش ابعاد شیث و پشتیبانی از فلایمت های رنگی</p>
+                        </div>
+                    </li>
+                    <li class="timeline-event" data-aos="fade-up" data-aos-delay=".2">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">زمستان 1399</p>
+                            <h3>ساخت نرم افزار نمایشگاه مجازی مدرسه انقلاب </h3>
+                            <h4>اتحادیه انجمن های اسلامی -لرستان</h4>
+                            <p><strong>توسعه دهنده فول استک</strong>
+                                <br>عکاسی و ساخت اولین نمایشگاه مجازی استان لرستان</p>
+                        </div>
+                    </li>
+                     <li class="timeline-event" data-aos="fade-up" data-aos-delay=".2">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">پاییز 1399</p>
+                            <h3>طراحی سیستم ارتباطی و الکترونیک مرکز داده های اینترنتی</h3>
+                            <h4>داده پردازی سروین گستر-شیراز</h4>
+                            <p><strong>توسعه شبکه</strong>
+                                <br>ایجاد سیستم سوئیچینگ و افزایش پهنای باند با تچهیزات سیسکو</p>
+                        </div>
+                    </li>
+                    <li class="timeline-event" data-aos="fade-up" data-aos-delay=".4">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">تابستان و پاییز 1399</p>
+                            <h3>طراحی و ساخت اولین سرور روم استان لرستان</h3>
+                            <h4>خرم آباد-لرستان</h4>
+                            <p><strong>مدیر توسعه شبکه</strong>
+                                <br>طراحی و ساخت اولین سرور روم استان لرستان با 246 رک سرور و لینک ارتباط فیبر نوری و ماهواره</p>
+                        </div>
+                    </li>
+                    <li class="timeline-event" data-aos="fade-up" data-aos-delay=".4">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">تابستان 1400</p>
+                            <h3>تدریس برنامه نویسی مقدماتی</h3>
+                            <h4>لرستان</h4>
+                            <p><strong>مدرس</strong>
+                                <br>تدریس مبانی و مقدمات برنامه نویسی به نو آموزان برنامه نویسی در استان</p>
+                        </div>
+                    </li>
+                    <li class="timeline-event" data-aos="fade-up" data-aos-delay=".4">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">تابستان و پاییز 1400</p>
+                            <h3>پیمان کار آموزش و پروش استان لرستان</h3>
+                            <h4>خرم آباد-لرستان</h4>
+                            <p><strong> توسعه دهنده</strong>
+                                <br>ساخت سامانه های نظام مند مکانیزه جهت افزایش بهره وری و افزایش کارامدی و چابکی اداری</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- ./experience -->
+    
+    <!-- projects -->
+    <div class="section" id="projects">
+        <div class="container">
+            <div class="col-md-12">
+                <h4>03</h4>
+                <h1 class="size-50">گالری پروژه ها</h1> 
+            </div>
+            <!-- main container -->
+            <div class="main-container portfolio-inner clearfix">
+                <!-- portfolio div -->
+                <div class="portfolio-div">
+                    <div class="portfolio">
+                        <!-- portfolio_filter -->
+                        <div class="categories-grid wow fadeInLeft">
+                            <nav class="categories">
+                                <ul class="portfolio_filter">
+                                    <li><a href="" class="active" data-filter="*">همه</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- portfolio_filter -->
+                        
+                        <!-- portfolio_container -->
+                        <div class="no-padding portfolio_container clearfix" data-aos="fade-up">
+                            <!-- single work -->
+                            <div class="col-md-4 col-sm-6  fashion logo">
+                                <a id="demo01" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/1.jpg" alt="image" class="img-responsive" />
+                                    <div class="portfolio_item_hover">
+                                        <div class="portfolio-border clearfix">
+                                            <div class="item_info"> <span>اناق کنترل سرور</span> <em>ایران / تهران</em> </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- end single work -->
+                            
+                            <!-- single work -->
+                            <div class="col-md-4 col-sm-6 ads graphics">
+                                <a id="demo02" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/3.jpg" alt="image" class="img-responsive" />
+                                    <div class="portfolio_item_hover">
+                                        <div class="portfolio-border clearfix">
+                                            <div class="item_info"> <span>پرینتر سه بعدی چند رنگی</span> <em>اصفهان</em> </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- end single work -->
+                            
+                            <!-- single work -->
+                            <div class="col-md-4 col-sm-6 photography">
+                                <a id="demo03" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/2.png" alt="image" class="img-responsive" />
+                                    <div class="portfolio_item_hover">
+                                        <div class="portfolio-border clearfix">
+                                            <div class="item_info"> <span>کنترل سلامت</span> <em>پیاده سازی شده با جاوا</em> </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- end single work -->
+                            
+                            <!-- single work -->
+                            <div class="col-md-4 col-sm-6 fashion ads">
+                                <a id="demo04" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/4.jpg" alt="image" class="img-responsive" />
+                                    <div class="portfolio_item_hover">
+                                        <div class="portfolio-border clearfix">
+                                            <div class="item_info"> <span>جزوه اموزش مبانی کامپیوتر</span> <em>ویرایش نهم</em> </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- end single work -->
+                            
+                            <!-- single work -->
+                            <div class="col-md-4 col-sm-6 graphics ads">
+                                <a id="demo05" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/5.jpg" alt="image" class="img-responsive" />
+                                    <div class="portfolio_item_hover">
+                                        <div class="portfolio-border clearfix">
+                                            <div class="item_info"> <span>خروجی پرینتر سه بعدی با ترکیب فلامیتی</span> <em>اصفهان</em> </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- end single work -->
+                            
+                            <!-- single work -->
+                            <div class="col-md-4 col-sm-6 photography">
+                                <a id="demo06" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/10.jpg" alt="image" class="img-responsive" />
+                                    <div class="portfolio_item_hover">
+                                        <div class="portfolio-border clearfix">
+                                            <div class="item_info"> <span>نفر اول المپیاد برنامه نویسی کشور</span> <em>قزوین</em> </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- end single work -->
+                            
+                            <!-- single work -->
+                            <div class="col-md-4 col-sm-6 graphics ads">
+                                <a id="demo07" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/6.jpg" alt="image" class="img-responsive" />
+                                    <div class="portfolio_item_hover">
+                                        <div class="portfolio-border clearfix">
+                                            <div class="item_info"> <span>توسعه شبکه </span> <em>تهران</em> </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- end single work -->
+                            
+                            <!-- single work -->
+                            <div class="col-md-4 col-sm-6 graphics ads">
+                                <a id="demo08" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/7.jpg" alt="image" class="img-responsive" />
+                                    <div class="portfolio_item_hover">
+                                        <div class="portfolio-border clearfix">
+                                            <div class="item_info"> <span>کنترل دیتا سرور </span> <em>شیراز </em> </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- end single work -->
+                            
+                            <!-- single work -->
+                            <div class="col-md-4 col-sm-6 graphics ads">
+                                <a id="demo09" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/8.jpg" alt="image" class="img-responsive" />
+                                    <div class="portfolio_item_hover">
+                                        <div class="portfolio-border clearfix">
+                                            <div class="item_info"> <span>مرکز داده اینترنتی</span> <em>اصفهان</em> </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- end single work -->
+                        </div>
+                        <!-- end portfolio_container -->
+                    </div>
+                    <!-- portfolio -->
+                </div>
+                <!-- end portfolio div -->
+            </div>
+            <!-- end main container -->
+        </div>
+    </div>
+    <!-- ./projects -->
+    
+    <!-- contact -->
+    <div class="section" id="contact">
+        <div class="container">
+            <div class="col-md-12">
+                <h4>04</h4>
+                <h1 class="size-50">تماس</h1>
+                <div class="h-50"></div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up">
 
-        // --- AOS (Animate on Scroll) Initialization ---
-        AOS.init({ duration: 800, once: true, offset: 50 });
+                <h3>شماره تلفن</h3>
+                <p>+98 998 167 8218</p>
+                <h3>ایمیل</h3>
+                <p>amirm.dehghanpour@gmail.com </p>
 
-        // --- Vanta.js 3D Globe Background ---
-        VANTA.GLOBE({
-            el: "#vanta-bg",
-            mouseControls: true, touchControls: true, gyroControls: false,
-            minHeight: 200.00, minWidth: 200.00,
-            scale: 1.00, scaleMobile: 1.00,
-            color: '#00f5a0', color2: '#00d9e9',
-            backgroundColor: '#0a192f', size: 1.2
-        });
+                <h3>Social Network</h3>
 
-        // --- Typed.js for typing effect ---
-        new Typed('#typed-strings', {
-            strings: [ 'من یک حل‌کننده مسئله هستم.', 'یک توسعه‌دهنده زیرساخت.', 'و یک نوآور بی‌وقفه.' ],
-            typeSpeed: 60, backSpeed: 30, backDelay: 2000,
-            startDelay: 500, loop: true
-        });
+                <ul class="social">
+                    <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com/amirm.dehghanpour/?hl=en"><i class="ion-social-instagram"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+                <div class="h-50"></div>
+            </div>
+            <div class="col-md-8" data-aos="fade-up">
+                <form class="contact-bg" id="contact-form" name="contact" method="post" novalidate="novalidate">
+                    <input type="text" name="name" class="form-control" placeholder="نام" />
+                    <input type="email" name="email" class="form-control" placeholder="ایمیل" />
+                    <input type="text" name="phone" class="form-control" placeholder="شماره تلفن" />
+                    <textarea name="message" class="form-control" placeholder="پیام شما" style="height:120px"></textarea>
+                    <button id="submit" type="submit" name="submit" class="btn btn-glance">ارسال</button>
+                    <div id="success">
+                        <p class="green textcenter"> پیام شما موفقییت دریافت در اولین فرصت با شما تماس خواهم گرفت </p>
+                    </div>
+                    <div id="error">
+                        <p>  مشکلی در ثبت پیام شما اتفاق افتاده لطفا دوباره امتحان کنید  </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- ./contact -->
+<!-- Footer -->
+<footer class="page-footer font-small blue">
 
-        // --- Active link highlighting on scroll (Scrollspy) ---
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.sidebar-nav a');
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© ۱۴۰۱ تمامی حقوق محقوظ است
+      <a href=""> امیرمحمد دهقان پور</a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+    <!--DEMO01-->
 
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
-                    current = section.getAttribute('id');
-                }
-            });
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!--  plugins  -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') == '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // --- Dynamic Page Title ---
-        const originalTitle = document.title;
-        window.addEventListener('blur', () => {
-            document.title = 'برگرد! ما آینده را می‌سازیم...';
-        });
-        window.addEventListener('focus', () => {
-            document.title = originalTitle;
-        });
-    </script>
+    <!--  main script  -->
+    <script src="js/custom.js"></script>
+    <script src="js/me.js"></script>
 </body>
+
 </html>
