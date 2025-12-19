@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amir Dehghanpour | Elite System Architect</title>
+    <title>Amir Dehghanpour | Elite Researcher & Architect</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn-font@v33.003/dist/font-face.css');
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap'); /* فونت انگلیسی سایبری */
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
         :root {
             --bg-dark: #050505;
-            --bg-panel: rgba(20, 20, 25, 0.75);
+            --bg-panel: rgba(20, 25, 30, 0.85);
             --gold-primary: #cba135;
             --gold-glow: #ffd700;
             --text-white: #e0e0e0;
             --text-gray: #8892b0;
-            --neon-shadow: 0 0 15px rgba(203, 161, 53, 0.3);
+            --blue-accent: #00b4d8; /* اضافه کردن رنگ آبی ملایم برای تم علمی */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; cursor: none; }
         
-        /* حالت انگلیسی */
         body.en-mode { direction: ltr; font-family: 'Share Tech Mono', monospace; }
-        body.en-mode .main-title { font-family: 'Share Tech Mono', monospace; letter-spacing: 5px; }
-        body.en-mode .t-role { letter-spacing: 1px; }
+        body.en-mode .main-title { letter-spacing: 3px; }
+        body.en-mode .t-role { letter-spacing: 0.5px; }
 
         /* --- Custom Cursor --- */
         #cursor {
@@ -37,7 +36,7 @@
             content: ''; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px;
             background: var(--gold-primary); border-radius: 50%; transform: translate(-50%, -50%);
         }
-        body:hover #cursor.hovered { width: 50px; height: 50px; background: rgba(203, 161, 53, 0.1); border-color: var(--gold-glow); }
+        body:hover #cursor.hovered { width: 40px; height: 40px; background: rgba(0, 180, 216, 0.1); border-color: var(--blue-accent); }
 
         body {
             font-family: 'Vazirmatn', sans-serif;
@@ -45,155 +44,112 @@
             line-height: 1.6; overflow-x: hidden; min-height: 100vh;
         }
 
-        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%); }
-        .scanlines {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
-            background-size: 100% 4px; z-index: -1; pointer-events: none;
-        }
-
-        .container { max-width: 1650px; margin: 0 auto; padding: 30px 20px; position: relative; z-index: 1; }
+        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 50% 50%, #111 0%, #000 100%); }
+        
+        .container { max-width: 1600px; margin: 0 auto; padding: 30px 20px; position: relative; z-index: 1; }
 
         /* --- Language Switcher --- */
         .lang-switch {
-            position: absolute; top: 20px; left: 20px; z-index: 101;
-            display: flex; gap: 10px; align-items: center;
+            position: absolute; top: 20px; left: 20px; z-index: 101; display: flex; gap: 10px;
         }
         body.en-mode .lang-switch { left: auto; right: 20px; }
         
         .lang-btn {
             background: rgba(0,0,0,0.5); border: 1px solid var(--gold-primary); color: var(--gold-primary);
             padding: 5px 15px; font-family: 'Share Tech Mono', monospace; font-size: 0.9rem;
-            cursor: pointer; transition: 0.3s; clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+            cursor: pointer; transition: 0.3s;
         }
-        .lang-btn.active { background: var(--gold-primary); color: #000; font-weight: bold; box-shadow: 0 0 15px var(--gold-primary); }
+        .lang-btn.active { background: var(--gold-primary); color: #000; font-weight: bold; }
 
         /* --- Header --- */
-        header { text-align: center; margin-bottom: 60px; position: relative; padding-top: 40px; }
-        .glitch-wrapper { position: relative; display: inline-block; }
+        header { text-align: center; margin-bottom: 50px; padding-top: 40px; }
         
         h1.main-title {
-            font-size: 3.5rem; font-weight: 900; color: #fff; text-transform: uppercase;
-            letter-spacing: 2px; position: relative; text-shadow: 2px 2px 0px var(--gold-primary);
+            font-size: 3rem; font-weight: 800; color: #fff; text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(203, 161, 53, 0.4);
         }
-        /* Glitch Animation */
-        h1.main-title::before, h1.main-title::after {
-            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark);
-        }
-        h1.main-title::before { left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 5s infinite linear alternate-reverse; }
-        h1.main-title::after { left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 5s infinite linear alternate-reverse; }
-
-        @keyframes glitch-anim { 0% { clip: rect(30px, 9999px, 10px, 0); } 100% { clip: rect(10px, 9999px, 100px, 0); } }
-        @keyframes glitch-anim2 { 0% { clip: rect(60px, 9999px, 70px, 0); } 100% { clip: rect(50px, 9999px, 20px, 0); } }
-
+        
         .typewriter {
-            font-size: 1.1rem; color: var(--gold-primary); font-family: 'Share Tech Mono', monospace;
-            background: rgba(0,0,0,0.3); padding: 5px 15px; border-radius: 4px;
-            border: 1px solid rgba(203, 161, 53, 0.3); display: inline-block; margin-top: 15px;
+            font-size: 1rem; color: var(--blue-accent); font-family: 'Share Tech Mono', monospace;
+            background: rgba(0, 20, 30, 0.5); padding: 5px 15px; border-radius: 4px;
+            border-left: 3px solid var(--gold-primary); display: inline-block; margin-top: 15px;
         }
 
-        /* --- Dashboard --- */
-        .dashboard { display: grid; grid-template-columns: 340px 1fr 360px; gap: 30px; align-items: start; perspective: 1000px; }
+        /* --- Dashboard Grid --- */
+        .dashboard { display: grid; grid-template-columns: 320px 1fr 340px; gap: 25px; align-items: start; }
 
         .card {
-            background: var(--bg-panel); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;
-            padding: 25px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            position: relative; overflow: hidden; transform-style: preserve-3d; transition: transform 0.1s ease-out;
+            background: var(--bg-panel); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px;
+            padding: 20px; backdrop-filter: blur(5px); box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            position: relative; overflow: hidden; transition: transform 0.1s;
         }
-        .card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, var(--gold-primary) 1px, transparent 1px) 0 0;
-            background-size: 20px 20px; opacity: 0.05; pointer-events: none;
+        /* Top line decoration */
+        .card::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent); opacity: 0.5;
         }
 
-        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
-        .card-icon {
-            color: var(--bg-dark); font-size: 1.2rem; background: var(--gold-primary); width: 40px; height: 40px;
-            display: flex; align-items: center; justify-content: center; clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
-            box-shadow: 0 0 15px var(--gold-primary);
-        }
-        .card-title { font-size: 1.2rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .card-icon { color: var(--gold-primary); font-size: 1.1rem; }
+        .card-title { font-size: 1.1rem; font-weight: 700; color: #fff; }
 
         /* Profile */
-        .profile-wrapper { position: relative; width: 180px; height: 180px; margin: 0 auto 20px; display: flex; justify-content: center; align-items: center; }
-        .radar-circle { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 1px dashed rgba(203, 161, 53, 0.3); animation: rotate 10s linear infinite; }
-        .radar-scanner { position: absolute; width: 100%; height: 100%; border-radius: 50%; border-top: 2px solid var(--gold-primary); animation: rotate 3s linear infinite; box-shadow: 0 -5px 20px var(--gold-primary); }
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-        .profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #111; position: relative; z-index: 2; filter: grayscale(20%) contrast(110%); }
+        .profile-wrapper { width: 160px; height: 160px; margin: 0 auto 15px; position: relative; display: flex; justify-content: center; align-items: center; }
+        .profile-img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid #222; filter: grayscale(10%); }
+        .orbit { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 1px dashed rgba(255, 255, 255, 0.2); animation: spin 20s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* Skills */
-        .skill-group { margin-bottom: 18px; }
-        .skill-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-gray); margin-bottom: 5px; font-family: 'Share Tech Mono', monospace; }
-        .progress-rail { height: 6px; background: #222; position: relative; overflow: hidden; }
-        .progress-bar { height: 100%; background: var(--gold-primary); position: relative; box-shadow: 0 0 10px var(--gold-primary); }
+        .skill-group { margin-bottom: 15px; }
+        .skill-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-gray); margin-bottom: 4px; font-family: 'Share Tech Mono', monospace; }
+        .progress-rail { height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--blue-accent); width: 0; transition: width 1s ease-in-out; }
         
-        .tag {
-            background: transparent; color: var(--gold-primary); padding: 4px 10px; font-size: 0.75rem;
-            border: 1px solid var(--gold-primary); margin: 3px; display: inline-block;
-            font-family: 'Share Tech Mono', monospace; transition: 0.3s;
+        /* Timeline (Scrollable Area) */
+        .timeline-container {
+            /* If you wanted internal scroll, you'd add max-height here. 
+               But user implies page scroll is fine as long as there is content. */
         }
-        .tag:hover { background: var(--gold-primary); color: #000; box-shadow: 0 0 10px var(--gold-primary); }
-
-        /* Timeline */
         .timeline-card {
-            background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, transparent 100%);
-            border-right: 2px solid var(--gold-primary); padding: 15px; margin-bottom: 20px; position: relative; transition: 0.3s;
+            background: rgba(255,255,255,0.02);
+            border-right: 3px solid var(--gold-primary); padding: 15px; margin-bottom: 15px; position: relative; transition: 0.3s;
         }
-        body.en-mode .timeline-card { border-right: none; border-left: 2px solid var(--gold-primary); background: linear-gradient(-90deg, rgba(255,255,255,0.03) 0%, transparent 100%); }
+        body.en-mode .timeline-card { border-right: none; border-left: 3px solid var(--gold-primary); }
         
-        .timeline-card:hover { transform: translateX(-5px); background: rgba(203, 161, 53, 0.05); }
-        .t-year { font-family: 'Share Tech Mono'; color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 1px; }
-        .t-role { display: block; font-weight: 700; font-size: 1.1rem; margin-top: 5px; color: #fff; }
+        .timeline-card:hover { background: rgba(255,255,255,0.04); transform: translateX(-3px); }
+        .t-year { font-family: 'Share Tech Mono'; color: var(--gold-primary); font-size: 0.85rem; background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 4px; }
+        .t-role { display: block; font-weight: 700; font-size: 1.05rem; margin-top: 8px; color: #fff; }
+        .t-desc { font-size: 0.85rem; color: #aaa; margin-top: 5px; text-align: justify; }
 
-        /* Gallery */
-        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .gallery-item { aspect-ratio: 1; overflow: hidden; border: 1px solid #333; position: relative; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; filter: sepia(50%) hue-rotate(180deg) saturate(0.5); }
-        .gallery-item:hover img { transform: scale(1.2); filter: none; }
+        /* Honors List */
+        .honor-item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.1); display: flex; gap: 10px; }
+        .honor-item:last-child { border: none; }
+        .honor-icon { color: var(--gold-primary); font-size: 1.2rem; margin-top: 3px; }
 
         /* Terminal Widget */
         .terminal-widget {
-            position: fixed; bottom: 20px; right: 20px; width: 350px; height: 200px;
-            background: rgba(10, 10, 10, 0.95); border: 1px solid #333; border-top: 2px solid var(--gold-primary);
-            padding: 10px; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: #0f0;
-            z-index: 100; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            position: fixed; bottom: 20px; right: 20px; width: 320px; height: 180px;
+            background: rgba(15, 15, 20, 0.95); border: 1px solid #333; border-top: 2px solid var(--blue-accent);
+            padding: 10px; font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: #aaddff;
+            z-index: 100; overflow: hidden; display: flex; flex-direction: column;
         }
         body.en-mode .terminal-widget { right: 20px; left: auto; }
-        .terminal-header { color: #666; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 5px; display: flex; justify-content: space-between; }
-        .terminal-body { flex: 1; overflow-y: auto; color: #ccc; }
-        .log-line { display: block; margin-bottom: 2px; }
-        .log-line.gold { color: var(--gold-primary); }
         
-        /* Btn */
-        .btn-cyber {
-            display: block; width: 100%; padding: 15px; background: rgba(203, 161, 53, 0.1);
-            color: var(--gold-primary); border: 1px solid var(--gold-primary); text-align: center;
-            text-decoration: none; text-transform: uppercase; font-weight: bold;
-            font-family: 'Share Tech Mono', monospace; transition: 0.3s;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        .btn-dl {
+            display: block; width: 100%; padding: 12px; background: transparent;
+            color: var(--text-white); border: 1px solid var(--text-gray); text-align: center;
+            text-decoration: none; font-size: 0.9rem; transition: 0.3s; margin-top: 10px;
         }
-        .btn-cyber:hover { background: var(--gold-primary); color: #000; box-shadow: 0 0 20px var(--gold-primary); }
+        .btn-dl:hover { background: var(--text-white); color: #000; }
 
-        /* Lightbox */
-        .lightbox {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95);
-            z-index: 10000; display: none; align-items: center; justify-content: center; flex-direction: column;
-        }
-        .lightbox.active { display: flex; }
-        .lightbox img { max-width: 90%; max-height: 80vh; border: 2px solid var(--gold-primary); box-shadow: 0 0 50px var(--gold-primary); }
-        .close-lightbox { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 3rem; cursor: pointer; }
-
-        @media (max-width: 1200px) {
-            .dashboard { grid-template-columns: 300px 1fr; }
+        @media (max-width: 1100px) {
+            .dashboard { grid-template-columns: 280px 1fr; }
             .right-column { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
             .terminal-widget { display: none; }
         }
-        @media (max-width: 900px) {
+        @media (max-width: 800px) {
             .dashboard { display: flex; flex-direction: column; }
             .right-column { display: flex; flex-direction: column; }
-            h1.main-title { font-size: 2rem; }
-            .lang-switch { top: 10px; left: 10px; }
-            body.en-mode .lang-switch { right: 10px; left: auto; }
             #cursor { display: none; } * { cursor: auto; }
         }
     </style>
@@ -202,7 +158,6 @@
 
     <div id="cursor"></div>
     <canvas id="canvas-bg"></canvas>
-    <div class="scanlines"></div>
 
     <!-- Language Switcher -->
     <div class="lang-switch">
@@ -213,215 +168,267 @@
     <div class="container">
         
         <header>
-            <div class="glitch-wrapper">
-                <h1 class="main-title" data-text="امیرمحمد دهقان پور" id="name-title">امیرمحمد دهقان پور</h1>
-            </div>
-            <br>
+            <h1 class="main-title" id="name-title">امیرمحمد دهقان پور</h1>
             <div class="typewriter" id="typewriter"></div>
         </header>
 
         <div class="dashboard">
             
-            <!-- LEFT COLUMN -->
-            <div class="left-column" style="display: flex; flex-direction: column; gap: 25px;">
+            <!-- LEFT COLUMN: Profile & Skills -->
+            <div class="left-column" style="display: flex; flex-direction: column; gap: 20px;">
                 
                 <div class="card js-tilt" style="text-align: center;">
                     <div class="profile-wrapper">
-                        <div class="radar-circle"></div>
-                        <div class="radar-scanner"></div>
+                        <div class="orbit"></div>
                         <img src="img/about-img.jpg" alt="Profile" class="profile-img">
                     </div>
-                    <h2 style="color: #fff; font-family: 'Share Tech Mono'; margin-bottom: 5px;" id="profile-role">ELITE ARCHITECT</h2>
-                    <p style="color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 2px;" id="profile-status">SECURITY CLEARANCE: LVL 5</p>
-                    <div style="margin-top: 20px; font-size: 1.5rem; color: #fff; display: flex; justify-content: center; gap: 15px;">
-                        <i class="fab fa-linux hover-trigger"></i>
-                        <i class="fas fa-microchip hover-trigger"></i>
-                        <i class="fas fa-shield-alt hover-trigger"></i>
+                    <h2 style="color: #fff; font-size: 1.2rem; margin-bottom: 5px;" id="profile-role">SENIOR RESEARCHER</h2>
+                    <p style="color: var(--gold-primary); font-size: 0.8rem;" id="profile-sub">Software Architect & Data Scientist</p>
+                    
+                    <div style="margin-top: 20px; border-top: 1px solid #222; padding-top: 15px;">
+                         <p style="font-size: 0.85rem; color: #ccc;" data-lang-fa="تخصص: هوش مصنوعی و سیستم‌های توزیع شده" data-lang-en="Spec: AI & Distributed Systems">تخصص: هوش مصنوعی و سیستم‌های توزیع شده</p>
                     </div>
                 </div>
 
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-code-branch"></i></div>
-                        <span class="card-title" data-lang-fa="مهارت‌های هسته‌ای" data-lang-en="CORE COMPETENCIES">مهارت‌های هسته‌ای</span>
+                        <i class="fas fa-code card-icon"></i>
+                        <span class="card-title" data-lang-fa="تخصص‌های فنی" data-lang-en="TECHNICAL STACK">تخصص‌های فنی</span>
                     </div>
 
                     <div class="skill-group">
-                        <div class="skill-label"><span>SYSTEM_ARCHITECT / OS</span><span>99%</span></div>
-                        <div class="progress-rail"><div class="progress-bar" style="width: 99%"></div></div>
+                        <div class="skill-label"><span>Python / PyTorch (Research)</span><span>98%</span></div>
+                        <div class="progress-rail"><div class="progress-bar" style="width: 98%"></div></div>
                     </div>
                     <div class="skill-group">
-                        <div class="skill-label"><span>AI & NEURAL NETS</span><span>95%</span></div>
+                        <div class="skill-label"><span>C++ / Rust (High Perf)</span><span>90%</span></div>
+                        <div class="progress-rail"><div class="progress-bar" style="width: 90%"></div></div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-label"><span>Distributed Systems / Kafka</span><span>85%</span></div>
+                        <div class="progress-rail"><div class="progress-bar" style="width: 85%"></div></div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-label"><span>Algorithm Design</span><span>95%</span></div>
                         <div class="progress-rail"><div class="progress-bar" style="width: 95%"></div></div>
                     </div>
                     <div class="skill-group">
-                        <div class="skill-label"><span>CYBER_WARFARE_DEF</span><span>92%</span></div>
-                        <div class="progress-rail"><div class="progress-bar" style="width: 92%"></div></div>
-                    </div>
-                    <div class="skill-group">
-                        <div class="skill-label"><span>HPC / SUPERCOMPUTING</span><span>90%</span></div>
-                        <div class="progress-rail"><div class="progress-bar" style="width: 90%"></div></div>
-                    </div>
-
-                    <div style="margin-top: 15px;">
-                        <span class="tag">#KERNEL_DEV</span>
-                        <span class="tag">#ZERO_TRUST</span>
-                        <span class="tag">#FPGA</span>
-                        <span class="tag">#QUANTUM_READY</span>
+                        <div class="skill-label"><span>Database Optimization</span><span>88%</span></div>
+                        <div class="progress-rail"><div class="progress-bar" style="width: 88%"></div></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- MIDDLE COLUMN -->
-            <div class="middle-column" style="display: flex; flex-direction: column; gap: 25px;">
                 
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-briefcase"></i></div>
-                        <span class="card-title" data-lang-fa="سوابق اجرایی و عملیاتی" data-lang-en="OPERATIONAL LOGS">سوابق اجرایی و عملیاتی</span>
+                         <i class="fas fa-university card-icon"></i>
+                         <span class="card-title" data-lang-fa="تحصیلات" data-lang-en="EDUCATION">تحصیلات</span>
                     </div>
-
-                    <div class="timeline-card hover-trigger">
-                        <span class="t-year" data-lang-fa="> ۱۴۰۰ - اکنون" data-lang-en="> 2021 - CURRENT">> ۱۴۰۰ - اکنون</span>
-                        <span class="t-role" data-lang-fa="معمار ارشد زیرساخت‌های ملی" data-lang-en="CHIEF INFRASTRUCTURE ARCHITECT">معمار ارشد زیرساخت‌های ملی</span>
-                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;" data-lang-fa="رهبری طراحی دیتاسنترهای مقیاس بزرگ، پیاده‌سازی پروتکل‌های امنیت سایبری پیشرفته و مدیریت ۵۰۰+ نود سرور." data-lang-en="Leading design for national-scale datacenters, implementing advanced cyber-security protocols, managing 500+ server nodes.">...</p>
+                    <div style="margin-bottom: 10px;">
+                        <strong style="color: #fff; display: block; font-size: 0.95rem;" data-lang-fa="کارشناسی ارشد هوش مصنوعی" data-lang-en="M.Sc. Artificial Intelligence">کارشناسی ارشد هوش مصنوعی</strong>
+                        <span style="font-size: 0.8rem; color: var(--gold-primary);">University of Tehran (Top Rank)</span>
                     </div>
-
-                    <div class="timeline-card hover-trigger">
-                        <span class="t-year" data-lang-fa="> ۱۳۹۹ [پروژه محرمانه]" data-lang-en="> 2020 [CLASSIFIED]">> ۱۳۹۹ [پروژه محرمانه]</span>
-                        <span class="t-role" data-lang-fa="توسعه‌دهنده کرنل سیستم عامل بومی" data-lang-en="NATIVE OS KERNEL LEAD">توسعه‌دهنده کرنل سیستم عامل بومی</span>
-                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;" data-lang-fa="بازنویسی ماژول‌های هسته لینوکس برای کاربردهای صنعتی بادرنگ (Real-time) و پایداری ۱۰۰٪." data-lang-en="Rewriting Linux kernel modules for industrial Real-Time applications achieving 100% stability.">...</p>
-                    </div>
-
-                    <div class="timeline-card hover-trigger">
-                        <span class="t-year" data-lang-fa="> ۱۳۹۸" data-lang-en="> 2019">> ۱۳۹۸</span>
-                        <span class="t-role" data-lang-fa="محقق هوش مصنوعی و الگوریتم" data-lang-en="AI & ALGORITHM RESEARCHER">محقق هوش مصنوعی و الگوریتم</span>
-                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;" data-lang-fa="ارائه مقاله در کنفرانس بین‌المللی درباره بهینه‌سازی شبکه‌های عصبی توزیع شده." data-lang-en="Published paper on Distributed Neural Network Optimization at international conference.">...</p>
-                    </div>
-                </div>
-
-                <div class="card js-tilt">
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-database"></i></div>
-                        <span class="card-title" data-lang-fa="مستندات تصویری پروژه" data-lang-en="VISUAL PROJECT DATA">مستندات تصویری پروژه</span>
-                    </div>
-                    <div class="gallery-grid">
-                         <div class="gallery-item hover-trigger"><img src="img/portfolio/1.jpg" alt="Server Room"></div>
-                         <div class="gallery-item hover-trigger"><img src="img/portfolio/2.png" alt="UI Dashboard"></div>
-                         <div class="gallery-item hover-trigger"><img src="img/portfolio/3.jpg" alt="Hardware"></div>
-                         <div class="gallery-item hover-trigger"><img src="img/portfolio/5.jpg" alt="Circuit"></div>
-                         <div class="gallery-item hover-trigger"><img src="img/portfolio/6.jpg" alt="Cabling"></div>
-                         <div class="gallery-item hover-trigger"><img src="img/portfolio/8.jpg" alt="Racks"></div>
+                    <div>
+                        <strong style="color: #fff; display: block; font-size: 0.95rem;" data-lang-fa="کارشناسی مهندسی نرم‌افزار" data-lang-en="B.Sc. Software Engineering">کارشناسی مهندسی نرم‌افزار</strong>
+                        <span style="font-size: 0.8rem; color: var(--gold-primary);">Shahid Beheshti University</span>
                     </div>
                 </div>
 
             </div>
 
-            <!-- RIGHT COLUMN -->
-            <div class="right-column" style="display: flex; flex-direction: column; gap: 25px;">
+            <!-- MIDDLE COLUMN: Long Timeline -->
+            <div class="middle-column">
                 
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-crown"></i></div>
-                        <span class="card-title" data-lang-fa="افتخارات و جوایز نخبگی" data-lang-en="HONORS & ELITE AWARDS">افتخارات و جوایز نخبگی</span>
-                    </div>
-                    <div style="text-align: center; padding: 10px 0;">
-                        <i class="fas fa-award" style="font-size: 3rem; color: var(--gold-primary); text-shadow: 0 0 20px var(--gold-primary); margin-bottom: 15px;"></i>
-                        <h3 style="color: #fff; font-size: 1.3rem;" data-lang-fa="عضو بنیاد ملی نخبگان" data-lang-en="NATIONAL ELITE MEMBER">عضو بنیاد ملی نخبگان</h3>
-                        <p style="color: var(--text-gray); font-size: 0.8rem; margin-bottom: 20px;" data-lang-fa="سطح ۱ نخبگی علمی کشور" data-lang-en="Level 1 Scientific Elite Status">سطح ۱ نخبگی علمی کشور</p>
+                        <i class="fas fa-history card-icon"></i>
+                        <span class="card-title" data-lang-fa="سوابق اجرایی و پژوهشی" data-lang-en="PROFESSIONAL EXPERIENCE">سوابق اجرایی و پژوهشی</span>
                     </div>
                     
-                    <ul style="list-style: none; padding: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                        <li style="margin-bottom: 12px; display: flex; align-items: start; gap: 10px;">
-                            <i class="fas fa-medal" style="color: var(--gold-primary); margin-top: 4px;"></i>
-                            <div>
-                                <strong style="display:block; color:#fff;" data-lang-fa="۴ مدال طلای المپیاد کامپیوتر" data-lang-en="4x Gold Medal - CS Olympiad">۴ مدال طلای المپیاد کامپیوتر</strong>
-                                <span style="font-size: 0.75rem; color: #888;" data-lang-fa="۱۳۹۷ - ۱۴۰۰ (رکورد ملی)" data-lang-en="2018 - 2021 (National Record)">۱۳۹۷ - ۱۴۰۰</span>
-                            </div>
-                        </li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start; gap: 10px;">
-                            <i class="fas fa-globe" style="color: var(--gold-primary); margin-top: 4px;"></i>
-                            <div>
-                                <strong style="display:block; color:#fff;" data-lang-fa="فینالیست Google Code Jam" data-lang-en="Google Code Jam Finalist">فینالیست Google Code Jam</strong>
-                                <span style="font-size: 0.75rem; color: #888;" data-lang-fa="رتبه برتر در میان ۱۰,۰۰۰ شرکت‌کننده" data-lang-en="Top rank among 10k participants">...</span>
-                            </div>
-                        </li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start; gap: 10px;">
-                            <i class="fas fa-book" style="color: var(--gold-primary); margin-top: 4px;"></i>
-                            <div>
-                                <strong style="display:block; color:#fff;" data-lang-fa="عضو ارشد IEEE" data-lang-en="IEEE Senior Member">عضو ارشد IEEE</strong>
-                                <span style="font-size: 0.75rem; color: #888;" data-lang-fa="بخش سیستم‌های کامپیوتری" data-lang-en="Computer Systems Society">...</span>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="timeline-container">
+                        
+                        <!-- 1 -->
+                        <div class="timeline-card hover-trigger">
+                            <span class="t-year">1402 - Now</span>
+                            <span class="t-role" data-lang-fa="سرپرست تیم معماری نرم‌افزار | هلدینگ فناپ" data-lang-en="Lead Software Architect | FANAP Holding">سرپرست تیم معماری نرم‌افزار | هلدینگ فناپ</span>
+                            <p class="t-desc" data-lang-fa="رهبری تیم فنی ۲۰ نفره در بازطراحی زیرساخت‌های ابری مقیاس بالا. بهینه‌سازی ۳۰٪ در مصرف منابع دیتاسنتر." data-lang-en="Leading a 20-person technical team in redesigning cloud infrastructure. Achieved 30% optimization in datacenter resources.">...</p>
+                        </div>
+
+                        <!-- 2 -->
+                        <div class="timeline-card hover-trigger">
+                            <span class="t-year">1401 - 1402</span>
+                            <span class="t-role" data-lang-fa="محقق ارشد هوش مصنوعی | آزمایشگاه پردازش داده دانشگاه تهران" data-lang-en="Senior AI Researcher | UT Data Processing Lab">محقق ارشد هوش مصنوعی | آزمایشگاه داده دانشگاه تهران</span>
+                            <p class="t-desc" data-lang-fa="توسعه مدل‌های زبانی (LLM) بومی برای پردازش متون حقوقی و انتشار ۲ مقاله ISI در ژورنال‌های معتبر." data-lang-en="Developing native LLMs for legal text processing and publishing 2 ISI papers in reputable journals.">...</p>
+                        </div>
+
+                        <!-- 3 -->
+                        <div class="timeline-card hover-trigger">
+                            <span class="t-year">1400 - 1401</span>
+                            <span class="t-role" data-lang-fa="مشاور فنی (Back-End) | دیجی‌کالا" data-lang-en="Technical Consultant (Backend) | Digikala">مشاور فنی (Back-End) | دیجی‌کالا</span>
+                            <p class="t-desc" data-lang-fa="مشاوره در زمینه طراحی سیستم‌های توزیع‌شده (Microservices) برای مدیریت ترافیک بلک فرایدی." data-lang-en="Consulting on distributed systems design (Microservices) to handle Black Friday traffic spikes.">...</p>
+                        </div>
+
+                        <!-- 4 -->
+                        <div class="timeline-card hover-trigger">
+                            <span class="t-year">1399 - 1400</span>
+                            <span class="t-role" data-lang-fa="توسعه‌دهنده ارشد الگوریتم | شرکت دانش‌بنیان سحاب" data-lang-en="Senior Algorithm Developer | Sahab Co.">توسعه‌دهنده ارشد الگوریتم | شرکت دانش‌بنیان سحاب</span>
+                            <p class="t-desc" data-lang-fa="طراحی الگوریتم‌های پردازش جریان داده (Stream Processing) با استفاده از Apache Kafka و Flink." data-lang-en="Designing stream processing algorithms using Apache Kafka and Flink for real-time analytics.">...</p>
+                        </div>
+
+                        <!-- 5 -->
+                        <div class="timeline-card hover-trigger">
+                            <span class="t-year">1398 - 1399</span>
+                            <span class="t-role" data-lang-fa="مهندس داده و یادگیری ماشین | استارتاپ هوش تجاری" data-lang-en="Data Engineer & ML | BI Startup">مهندس داده و یادگیری ماشین | استارتاپ هوش تجاری</span>
+                            <p class="t-desc" data-lang-fa="پیاده‌سازی پایپ‌لاین‌های ETL و داشبوردهای تحلیلی برای پیش‌بینی فروش محصولات." data-lang-en="Implementing ETL pipelines and analytical dashboards for product sales forecasting.">...</p>
+                        </div>
+
+                        <!-- 6 -->
+                        <div class="timeline-card hover-trigger">
+                            <span class="t-year">1397 - 1398</span>
+                            <span class="t-role" data-lang-fa="برنامه‌نویس سیستم‌های نهفته (Embedded) | پروژه رباتیک صنعتی" data-lang-en="Embedded Systems Dev | Industrial Robotics">برنامه‌نویس سیستم‌های نهفته | پروژه رباتیک صنعتی</span>
+                            <p class="t-desc" data-lang-fa="کدنویسی C++ روی بردهای ARM برای کنترل بازوهای رباتیک خط تولید." data-lang-en="C++ programming on ARM boards for controlling assembly line robotic arms.">...</p>
+                        </div>
+
+                        <!-- 7 -->
+                        <div class="timeline-card hover-trigger">
+                            <span class="t-year">1396 - 1397</span>
+                            <span class="t-role" data-lang-fa="دستیار آموزشی (TA) | درس ساختمان داده و طراحی الگوریتم" data-lang-en="Teaching Assistant | Data Structures & Algorithms">دستیار آموزشی (TA) | درس ساختمان داده</span>
+                            <p class="t-desc" data-lang-fa="برگزاری کلاس‌های حل تمرین و طراحی پروژه‌های عملی برای دانشجویان کارشناسی." data-lang-en="Conducting problem-solving sessions and designing practical projects for undergraduate students.">...</p>
+                        </div>
+
+                        <!-- 8 -->
+                        <div class="timeline-card hover-trigger">
+                            <span class="t-year">1395 - 1396</span>
+                            <span class="t-role" data-lang-fa="توسعه‌دهنده فول‌استک | فریلنسر" data-lang-en="Full-Stack Developer | Freelance">توسعه‌دهنده فول‌استک | فریلنسر</span>
+                            <p class="t-desc" data-lang-fa="انجام پروژه‌های متعدد وب و اتوماسیون اداری برای شرکت‌های خصوصی کوچک." data-lang-en="Developing multiple web and office automation projects for small private companies.">...</p>
+                        </div>
+
+                         <!-- 9 -->
+                         <div class="timeline-card hover-trigger">
+                            <span class="t-year">1395</span>
+                            <span class="t-role" data-lang-fa="کارآموز فنی | مرکز داده بانک ملت" data-lang-en="Technical Intern | Bank Mellat Data Center">کارآموز فنی | مرکز داده بانک ملت</span>
+                            <p class="t-desc" data-lang-fa="آشنایی عملی با زیرساخت‌های شبکه، مجازی‌سازی و نگهداری سرورها." data-lang-en="Hands-on experience with network infrastructure, virtualization, and server maintenance.">...</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Honors & Contact -->
+            <div class="right-column" style="display: flex; flex-direction: column; gap: 20px;">
+                
+                <div class="card js-tilt">
+                    <div class="card-header">
+                        <i class="fas fa-medal card-icon"></i>
+                        <span class="card-title" data-lang-fa="افتخارات علمی و نخبگی" data-lang-en="ACADEMIC HONORS">افتخارات علمی و نخبگی</span>
+                    </div>
+
+                    <div class="honor-item">
+                        <i class="fas fa-award honor-icon"></i>
+                        <div>
+                            <strong style="font-size: 0.95rem; color: #fff;" data-lang-fa="عضو بنیاد ملی نخبگان" data-lang-en="Member of National Elites Foundation">عضو بنیاد ملی نخبگان</strong>
+                            <p style="font-size: 0.8rem; color: #aaa;" data-lang-fa="پذیرش بدون آزمون در مقطع ارشد" data-lang-en="Direct Admission to Master's Degree">پذیرش بدون آزمون</p>
+                        </div>
+                    </div>
+
+                    <div class="honor-item">
+                        <i class="fas fa-trophy honor-icon"></i>
+                        <div>
+                            <strong style="font-size: 0.95rem; color: #fff;" data-lang-fa="رتبه برتر المپیاد دانشجویی" data-lang-en="Top Rank - Student Olympiad">رتبه برتر المپیاد دانشجویی</strong>
+                            <p style="font-size: 0.8rem; color: #aaa;" data-lang-fa="مدال نقره کشوری - مهندسی کامپیوتر" data-lang-en="Silver Medal - Computer Engineering">مدال نقره کشوری</p>
+                        </div>
+                    </div>
+
+                    <div class="honor-item">
+                        <i class="fas fa-file-alt honor-icon"></i>
+                        <div>
+                            <strong style="font-size: 0.95rem; color: #fff;" data-lang-fa="پژوهشگر برتر سال" data-lang-en="Researcher of the Year">پژوهشگر برتر سال</strong>
+                            <p style="font-size: 0.8rem; color: #aaa;" data-lang-fa="دانشکده مهندسی برق و کامپیوتر" data-lang-en="Faculty of ECE">دانشکده مهندسی</p>
+                        </div>
+                    </div>
+
+                    <div class="honor-item">
+                        <i class="fas fa-laptop-code honor-icon"></i>
+                        <div>
+                            <strong style="font-size: 0.95rem; color: #fff;" data-lang-fa="مقام اول مسابقات ACM" data-lang-en="1st Place - ACM Contest">مقام اول مسابقات ACM</strong>
+                            <p style="font-size: 0.8rem; color: #aaa;" data-lang-fa="مسابقات منطقه‌ای غرب آسیا" data-lang-en="West Asia Regional Contest">غرب آسیا</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-fingerprint"></i></div>
-                        <span class="card-title" data-lang-fa="ارتباطات امن" data-lang-en="ENCRYPTED COMM">ارتباطات امن</span>
+                        <i class="fas fa-address-card card-icon"></i>
+                        <span class="card-title" data-lang-fa="اطلاعات تماس" data-lang-en="CONTACT INFO">اطلاعات تماس</span>
                     </div>
-                    <ul style="list-style: none; color: #ccc; font-size: 0.9rem;">
-                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-phone" style="color: var(--gold-primary);"></i> <span style="font-family: 'Share Tech Mono';">+98 998 167 8218</span>
-                        </li>
-                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-at" style="color: var(--gold-primary);"></i> <span style="font-family: 'Share Tech Mono';">amirm.dehghanpour@...</span>
-                        </li>
-                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-map-marker-alt" style="color: var(--gold-primary);"></i> <span data-lang-fa="ایران، تهران (منطقه امنیتی)" data-lang-en="IRAN, TEHRAN (SECURE SECTOR)">ایران، تهران</span>
-                        </li>
+                    <ul style="list-style: none; font-size: 0.9rem; color: #ccc;">
+                        <li style="margin-bottom: 12px;"><i class="fas fa-envelope" style="color:var(--gold-primary); width:20px;"></i> a.dehghanpour@ut.ac.ir</li>
+                        <li style="margin-bottom: 12px;"><i class="fab fa-linkedin" style="color:var(--gold-primary); width:20px;"></i> linkedin.com/in/amir-d</li>
+                        <li style="margin-bottom: 12px;"><i class="fab fa-github" style="color:var(--gold-primary); width:20px;"></i> github.com/amir-code</li>
+                        <li><i class="fas fa-map-marker-alt" style="color:var(--gold-primary); width:20px;"></i> <span data-lang-fa="تهران، پارک علم و فناوری" data-lang-en="Tehran, Science & Tech Park">تهران، پارک علم و فناوری</span></li>
                     </ul>
-                    <a href="#" class="btn-cyber hover-trigger" data-lang-fa="دانلود رزومه کامل [PDF]" data-lang-en="DOWNLOAD FULL DOSSIER [PDF]">دانلود رزومه کامل [PDF]</a>
+                    <a href="#" class="btn-dl hover-trigger" data-lang-fa="دریافت رزومه (PDF)" data-lang-en="Download Resume (PDF)">دریافت رزومه (PDF)</a>
                 </div>
 
             </div>
         </div>
     </div>
 
-    <!-- Terminal Widget -->
+    <!-- Terminal Widget (Fixed Bottom Right) -->
     <div class="terminal-widget">
-        <div class="terminal-header">
-            <span>root@dehghanpour:~#</span>
-            <span style="color: var(--gold-primary)">●</span>
+        <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 5px; display:flex; justify-content:space-between;">
+            <span>amir@research-lab:~$</span>
+            <span style="color: var(--blue-accent)">●</span>
         </div>
-        <div class="terminal-body" id="terminal-content"></div>
-    </div>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <span class="close-lightbox hover-trigger">&times;</span>
-        <img src="" alt="Full Size" id="lightbox-img">
+        <div id="terminal-content" style="flex: 1; overflow-y: auto;"></div>
     </div>
 
     <script>
-        // --- DATA OBJECT FOR TEXTS ---
+        // --- TEXT DATA ---
         const translations = {
             fa: {
                 title: "امیرمحمد دهقان پور",
-                role: "ELITE SYSTEM ARCHITECT",
-                status: "وضعیت: آنلاین | سطح دسترسی: ادمین کل",
-                typewriter: "راه‌اندازی سیستم... کاربر: امیر دهقان پور | عضو بنیاد ملی نخبگان",
-                logs: ["بارگذاری ماژول‌های کرنل...", "اتصال به شبکه عصبی...", "تایید هویت بیومتریک: موفق", "وضعیت سرورها: پایدار", "منتظر دستور ورودی..."]
+                role: "پژوهشگر ارشد و معمار سیستم",
+                sub: "توسعه‌دهنده الگوریتم و هوش مصنوعی",
+                typewriter: "سیستم آماده است... کاربر: امیر دهقان پور | عضو نخبگان",
+                // لاگ‌های مربوط به کارهای فنی و پژوهشی
+                logs: [
+                    "Loading Jupyter Notebook kernel...",
+                    "Importing PyTorch libraries...",
+                    "Fetching dataset from server...",
+                    "Training model: Epoch 1/50 [Done]",
+                    "Optimizing database queries...",
+                    "Compiling LaTeX document...",
+                    "Unit tests passed: 100%",
+                    "Git push origin master: Success"
+                ]
             },
             en: {
                 title: "AMIR DEHGHANPOUR",
-                role: "ELITE SYSTEM ARCHITECT",
-                status: "STATUS: ONLINE | CLEARANCE: OMEGA",
-                typewriter: "INITIALIZING SYSTEM... USER: AMIR DEHGHANPOUR | ELITE FOUNDATION MEMBER",
-                logs: ["Loading kernel modules...", "Connecting to neural net...", "Biometric auth: SUCCESS", "Server status: STABLE", "Awaiting input command..."]
+                role: "SENIOR RESEARCHER & ARCHITECT",
+                sub: "Algorithm Developer & AI Specialist",
+                typewriter: "SYSTEM READY... USER: AMIR DEHGHANPOUR | ELITE MEMBER",
+                logs: [
+                    "Loading Jupyter Notebook kernel...",
+                    "Importing PyTorch libraries...",
+                    "Fetching dataset from server...",
+                    "Training model: Epoch 1/50 [Done]",
+                    "Optimizing database queries...",
+                    "Compiling LaTeX document...",
+                    "Unit tests passed: 100%",
+                    "Git push origin master: Success"
+                ]
             }
         };
 
         let currentLang = 'fa';
 
-        // --- 1. LANGUAGE SWITCH LOGIC ---
+        // --- LANGUAGE SWITCH ---
         function setLang(lang) {
             currentLang = lang;
             const body = document.body;
             const buttons = document.querySelectorAll('.lang-btn');
             
-            // Toggle Body Class and Dir
             if (lang === 'en') {
                 body.classList.add('en-mode');
                 document.documentElement.setAttribute('dir', 'ltr');
@@ -434,154 +441,114 @@
                 buttons[1].classList.remove('active');
             }
 
-            // Update Static Text Elements
+            // Update Static Elements
             document.querySelectorAll('[data-lang-fa]').forEach(elem => {
                 elem.innerText = elem.getAttribute(`data-lang-${lang}`);
             });
 
-            // Update Header Name
-            const nameTitle = document.getElementById('name-title');
-            nameTitle.setAttribute('data-text', translations[lang].title);
-            nameTitle.innerText = translations[lang].title;
-
-            // Update Typewriter
+            // Update Dynamic Texts
+            document.getElementById('name-title').innerText = translations[lang].title;
+            document.getElementById('profile-role').innerText = translations[lang].role;
+            document.getElementById('profile-sub').innerText = translations[lang].sub;
+            
             initTypewriter(translations[lang].typewriter);
-
-            // Update Terminal Logs (Restart)
             restartTerminal(translations[lang].logs);
         }
 
-        // --- 2. Typewriter Effect ---
+        // --- TYPEWRITER ---
         let typeInterval;
         function initTypewriter(txt) {
-            const typeElem = document.getElementById('typewriter');
+            const el = document.getElementById('typewriter');
             clearInterval(typeInterval);
-            typeElem.innerHTML = "";
+            el.innerHTML = "";
             let idx = 0;
             typeInterval = setInterval(() => {
-                if (idx < txt.length) {
-                    typeElem.innerHTML += txt.charAt(idx);
-                    idx++;
-                } else {
-                    clearInterval(typeInterval);
-                }
-            }, 30);
+                if (idx < txt.length) { el.innerHTML += txt.charAt(idx); idx++; }
+                else clearInterval(typeInterval);
+            }, 40);
         }
 
-        // --- 3. Terminal Logic ---
+        // --- TERMINAL ---
         let termInterval;
         function restartTerminal(messages) {
-            const terminalContent = document.getElementById('terminal-content');
-            terminalContent.innerHTML = "";
+            const content = document.getElementById('terminal-content');
+            content.innerHTML = "";
             clearInterval(termInterval);
             
-            let logIndex = 0;
-            function addLog() {
-                if (logIndex < messages.length) {
-                    const p = document.createElement('div');
-                    p.classList.add('log-line');
-                    if(logIndex % 2 === 0) p.classList.add('gold');
-                    p.innerHTML = `> ${messages[logIndex]}`;
-                    terminalContent.appendChild(p);
-                    terminalContent.scrollTop = terminalContent.scrollHeight;
-                    logIndex++;
-                    termInterval = setTimeout(addLog, Math.random() * 600 + 200);
+            let i = 0;
+            function addLine() {
+                if (i < messages.length) {
+                    const div = document.createElement('div');
+                    div.style.marginBottom = "3px";
+                    // رنگ‌ها را متغیر کنیم تا واقعی‌تر شود
+                    let color = "#aaddff";
+                    if(messages[i].includes("Done") || messages[i].includes("Success")) color = "#0f0";
+                    if(messages[i].includes("Warning")) color = "orange";
+                    
+                    div.innerHTML = `<span style="color:${color}">></span> ${messages[i]}`;
+                    content.appendChild(div);
+                    content.scrollTop = content.scrollHeight;
+                    i++;
+                    termInterval = setTimeout(addLine, Math.random() * 800 + 300);
                 } else {
                     const blink = document.createElement('div');
                     blink.innerHTML = "> _ <span class='blink'>█</span>";
-                    terminalContent.appendChild(blink);
-                    terminalContent.scrollTop = terminalContent.scrollHeight;
+                    content.appendChild(blink);
                 }
             }
-            addLog();
+            addLine();
         }
 
-        // --- 4. Custom Cursor & Tilt ---
+        // --- MOUSE EFFECTS ---
         const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
+        document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
-        document.querySelectorAll('.hover-trigger, a, button, .card, .lang-btn').forEach(trigger => {
-            trigger.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            trigger.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        document.querySelectorAll('.hover-trigger, .timeline-card, .btn-dl, .lang-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
-        const cards = document.querySelectorAll('.js-tilt');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
+        // --- TILT EFFECT ---
+        document.querySelectorAll('.js-tilt').forEach(card => {
+            card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -5;
-                const rotateY = ((x - centerX) / centerX) * (currentLang === 'fa' ? 5 : 5); // Logic same for both
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                const x = e.clientX - rect.left - rect.width/2;
+                const y = e.clientY - rect.top - rect.height/2;
+                card.style.transform = `perspective(1000px) rotateX(${-y/20}deg) rotateY(${x/20}deg)`;
             });
             card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
             });
         });
 
-        // --- 5. Lightbox ---
-        const lightbox = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lightbox-img');
-        document.querySelectorAll('.gallery-item img').forEach(img => {
-            img.addEventListener('click', () => {
-                lbImg.src = img.src;
-                lightbox.classList.add('active');
-            });
+        // --- PARTICLES ---
+        const cvs = document.getElementById('canvas-bg');
+        const ctx = cvs.getContext('2d');
+        cvs.width = window.innerWidth; cvs.height = window.innerHeight;
+        
+        let parts = [];
+        for(let i=0; i<60; i++) parts.push({
+            x: Math.random()*cvs.width, y: Math.random()*cvs.height,
+            vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5
         });
-        document.querySelector('.close-lightbox').addEventListener('click', () => lightbox.classList.remove('active'));
 
-        // --- 6. Particles ---
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        let particles = [];
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-            }
-            update() {
-                this.x += this.speedX; this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(203, 161, 53, 0.3)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
-            }
+        function anim() {
+            ctx.clearRect(0,0,cvs.width,cvs.height);
+            ctx.fillStyle = 'rgba(255,255,255,0.03)'; // ذرات بسیار کمرنگ
+            parts.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x<0) p.x=cvs.width; if(p.x>cvs.width) p.x=0;
+                if(p.y<0) p.y=cvs.height; if(p.y>cvs.height) p.y=0;
+                ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2); ctx.fill();
+            });
+            requestAnimationFrame(anim);
         }
-        function initParticles() { for(let i=0; i<80; i++) particles.push(new Particle()); }
-        function animateParticles() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            for(let p of particles) {
-                p.update(); p.draw();
-            }
-            for(let a=0; a<particles.length; a++) {
-                for(let b=a; b<particles.length; b++) {
-                    let dx = particles[a].x - particles[b].x;
-                    let dy = particles[a].y - particles[b].y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
-                    if(dist < 100) {
-                        ctx.strokeStyle = `rgba(203, 161, 53, ${0.1 - dist/1000})`;
-                        ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(particles[a].x, particles[a].y); ctx.lineTo(particles[b].x, particles[b].y); ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animateParticles);
-        }
-        initParticles(); animateParticles();
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+        anim();
+        window.addEventListener('resize', ()=>{ cvs.width=window.innerWidth; cvs.height=window.innerHeight; });
 
-        // Init Default Language
+        // Init
         setLang('fa');
     </script>
 </body>
