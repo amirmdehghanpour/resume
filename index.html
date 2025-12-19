@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>امیرمحمد دهقان پور</title>
+    <meta name="description" content="رزومه و پورتفولیو امیرمحمد دهقان پور - مدیر سرور، توسعه دهنده و متخصص شبکه">
+    <meta name="keywords" content="امیرمحمد دهقان پور, برنامه نویس, شبکه, سرور, المپیاد کامپیوتر, رزومه">
+    <title>امیرمحمد دهقان پور | توسعه دهنده و مدیر شبکه</title>
+    
     <link rel="icon" href="img/favicon.png" type="image/x-icon">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -14,6 +17,32 @@
     <link href="css/aos.css" rel="stylesheet">
     <!-- main style -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom Inline Style for New Sections -->
+    <style>
+        body { font-family: 'Tahoma', 'Arial', sans-serif; } /* Fallback font */
+        .gold-medal {
+            border-right: 3px solid #ffd700 !important; /* Gold border */
+            background: linear-gradient(to left, #fffbf0, #fff);
+        }
+        .gold-text { color: #d4af37; font-weight: bold; }
+        
+        /* Skills Section Styles */
+        .skills-section { margin-top: 30px; margin-bottom: 50px; }
+        .skill-item { margin-bottom: 20px; }
+        .skill-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; display: block; text-align: right; }
+        .progress { height: 10px; background-color: #e9ecef; border-radius: 5px; box-shadow: none; overflow: hidden; }
+        .progress-bar { background-color: #333; transition: width 1.5s ease-in-out; }
+        
+        /* RTL Fixes for Bootstrap 3 if not present in main css */
+        .timeline-event-copy { text-align: right; }
+        h1, h2, h3, h4, p { text-align: right; }
+        .navbar-fixed-top ul { float: left; } 
+        .about-img-div { float: left !important; }
+        
+        /* Medal Icon styling */
+        .medal-icon { font-size: 20px; margin-left: 5px; }
+    </style>
 </head>
 
 <body>
@@ -21,10 +50,8 @@
     <!-- Preloader -->
     <div id="preloader">
         <div id="status">
-
             <div class="preloader" aria-busy="true" aria-label="Loading, please wait." role="progressbar">
             </div>
-
         </div>
     </div>
     <!-- ./Preloader -->
@@ -33,10 +60,10 @@
     <header class="navbar-fixed-top">
         <nav>
             <ul>
-                <li><a href="#about">درباره</a></li>
-                <li><a href="#experience">تجارب</a></li>
-                <li><a href="#projects">پروژه ها</a></li>
                 <li><a href="#contact">ارتباط</a></li>
+                <li><a href="#projects">پروژه ها</a></li>
+                <li><a href="#experience">سوابق & افتخارات</a></li>
+                <li><a href="#about">درباره من</a></li>
             </ul>
         </nav>
     </header>
@@ -48,7 +75,8 @@
             <div class="disply-table">
                 <div class="table-cell" data-aos="fade-up" data-aos-delay="0">
                     <h4>امیرمحمد دهقان پور</h4>
-                    <h1>SERVER MANAGER <br /> ICT MANAGER <br /> DEVELOPER</h1></div>
+                    <h1>SERVER MANAGER <br /> ICT MANAGER <br /> DEVELOPER</h1>
+                </div>
             </div>
         </div>
     </div>
@@ -57,21 +85,58 @@
     <!-- about -->
     <div class="section" id="about">
         <div class="container">
+            <div class="col-md-6 about-img-div">
+                <div class="about-border" data-aos="fade-up" data-aos-delay=".5"></div>
+                <img src="img/about-img.jpg" width="400" class="img-responsive" alt="Amirmohammad Dehghanpour" align="left" data-aos="fade-right" data-aos-delay="0" />
+            </div>
             <div class="col-md-6" data-aos="fade-up">
                 <h4>01</h4>
                 <h1 class="size-50"> آشنایی بیشتر با<br /> امیرمحمد دهقان پور</h1>
                 <div class="h-50"></div>
-                <p> امیر محمد دهقان پور ،زاده 7 مرداد سال 1383 خرم آباد توسعه دهنده و طراح سیستم های کامپیوتری  </p>
-                <p>از ابتدایی کودکی علاقه بی انتهایی نسبت به کامپیوتر در من ایجاد شد که تا کنون پشتیبان انگیزه من بوده </p>
-                <p>((آسمان نزدیک است))</p>
-                <div class="h-50"></div> <img src="img/Signature.svg" width="230" alt="" />
+                <p> امیر محمد دهقان پور، زاده 7 مرداد سال 1383 در خرم آباد؛ توسعه دهنده فول‌استک، مدیر سرور و طراح سیستم های کامپیوتری پیشرفته. </p>
+                <p>از دوران کودکی، علاقه بی انتهایی نسبت به دنیای صفر و یک در من شکل گرفت. این اشتیاق مرا به سمت یادگیری عمیق معماری کامپیوتر، شبکه و هوش مصنوعی سوق داد. امروز با کوله باری از تجربه در پیاده‌سازی زیرساخت‌های عظیم شبکه و کسب مدال‌های متعدد المپیاد، آماده خلق آینده‌ای هوشمندتر هستم.</p>
+                <p><strong>((آسمان نزدیک است))</strong></p>
+                <div class="h-50"></div> <img src="img/Signature.svg" width="230" alt="امضا" />
                 <div class="h-50"></div>
             </div>
-            <div class="col-md-6 about-img-div">
-                <div class="about-border" data-aos="fade-up" data-aos-delay=".5"></div>
-                <img src="img/about-img.jpg" width="400" class="img-responsive" alt="" align="right" data-aos="fade-right" data-aos-delay="0" />
+        </div>
+        
+        <!-- Skills Section Added -->
+        <div class="container skills-section" data-aos="fade-up">
+            <div class="col-md-12">
+                <h3 style="margin-bottom: 30px;">مهارت‌های تخصصی</h3>
+            </div>
+            <div class="col-md-6">
+                <div class="skill-item">
+                    <span class="skill-title">مدیریت سرور و دیتاسنتر (Cisco/Linux)</span>
+                    <div class="progress"><div class="progress-bar" role="progressbar" style="width: 95%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-title">برنامه نویسی پایتون و هوش مصنوعی</span>
+                    <div class="progress"><div class="progress-bar" role="progressbar" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-title">طراحی سخت افزار و IoT</span>
+                    <div class="progress"><div class="progress-bar" role="progressbar" style="width: 85%;"></div></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="skill-item">
+                    <span class="skill-title">توسعه وب (Full Stack)</span>
+                    <div class="progress"><div class="progress-bar" role="progressbar" style="width: 88%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-title">امنیت شبکه و تست نفوذ</span>
+                    <div class="progress"><div class="progress-bar" role="progressbar" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-title">الگوریتم و ساختمان داده</span>
+                    <div class="progress"><div class="progress-bar" role="progressbar" style="width: 98%;"></div></div>
+                </div>
             </div>
         </div>
+        <!-- ./Skills Section -->
+
     </div>
     <!-- ./about -->
     
@@ -80,80 +145,99 @@
         <div class="container">
             <div class="col-md-12">
                 <h4>02</h4>
-                <h1 class="size-50">سوابق کاری</h1>
-                <a href="amirmdehghanpour.ir" class="timeline-event-thumbnail">PDF دانلود نسخه کامل رزومه</a>
+                <h1 class="size-50">سوابق و افتخارات</h1>
+                <a href="amirmdehghanpour.ir" class="timeline-event-thumbnail">دانلود رزومه کامل (PDF)</a>
                 <div class="h-50"></div>
             </div>
             <div class="col-md-12">
                 <ul class="timeline">
-                    <li class="timeline-event" data-aos="fade-up">
+                    <!-- OLYMPIAD GOLD MEDALS SECTION -->
+                    <li class="timeline-event gold-medal" data-aos="fade-up">
                         <label class="timeline-event-icon"></label>
                         <div class="timeline-event-copy">
-                            <p class="timeline-event-thumbnail">تابستان 1398</p>
-                            <h3>مرحله کشوری المپیاد کدنویسی</h3>
-                            <h4>سعد السطنه-قزوین</h4>
-                            <p><strong>رتبه اول کد نویسی کشور</strong>
-                                <br>ساخت پلتفرم بومی برگزاری ازمون و کوئیز</p>
+                            <p class="timeline-event-thumbnail">1397 - 1400</p>
+                            <h3 class="gold-text"><i class="ion-trophy medal-icon"></i> دارنده 4 مدال طلای المپیاد کامپیوتر</h3>
+                            <h4>مراحل کشوری</h4>
+                            <p><strong>افتخار آفرینی پیاپی در 4 سال متوالی</strong>
+                                <br>کسب مدال طلای المپیاد کامپیوتر در سال های <strong>1397، 1398، 1399 و 1400</strong>.
+                                <br>تسلط کامل بر الگوریتم‌های پیشرفته، حل مسائل پیچیده ریاضی و برنامه‌نویسی رقابتی.</p>
                         </div>
                     </li>
+
                     <li class="timeline-event" data-aos="fade-up" data-aos-delay=".2">
                         <label class="timeline-event-icon"></label>
                         <div class="timeline-event-copy">
-                            <p class="timeline-event-thumbnail">بهار 1399</p>
-                            <h3>توسعه میان افزار پرینتر سه بعدی </h3>
-                            <h4>خانه فناور-اصفهان</h4>
-                            <p><strong>برنامه نویس ارشد</strong>
-                                <br>باز طراحی،ساخت و توسعه فریمور(میان افزار) پرینتر های سه بعدی برای افزایش ابعاد شیث و پشتیبانی از فلایمت های رنگی</p>
+                            <p class="timeline-event-thumbnail">تابستان و پاییز 1400</p>
+                            <h3>پیمانکار رسمی آموزش و پروش</h3>
+                            <h4>استان لرستان - خرم آباد</h4>
+                            <p><strong>توسعه دهنده و مشاور IT</strong>
+                                <br>ساخت سامانه‌های نظام‌مند مکانیزه جهت افزایش بهره‌وری، حذف کاغذبازی و افزایش چابکی اداری در سطح استان.</p>
                         </div>
                     </li>
+
                     <li class="timeline-event" data-aos="fade-up" data-aos-delay=".2">
                         <label class="timeline-event-icon"></label>
                         <div class="timeline-event-copy">
-                            <p class="timeline-event-thumbnail">زمستان 1399</p>
-                            <h3>ساخت نرم افزار نمایشگاه مجازی مدرسه انقلاب </h3>
-                            <h4>اتحادیه انجمن های اسلامی -لرستان</h4>
-                            <p><strong>توسعه دهنده فول استک</strong>
-                                <br>عکاسی و ساخت اولین نمایشگاه مجازی استان لرستان</p>
+                            <p class="timeline-event-thumbnail">تابستان 1400</p>
+                            <h3>تدریس برنامه نویسی</h3>
+                            <h4>لرستان</h4>
+                            <p><strong>مدرس دوره های تخصصی</strong>
+                                <br>تدریس مبانی و مقدمات برنامه نویسی، تفکر الگوریتمی و آماده سازی نوآموزان برای مسابقات.</p>
                         </div>
                     </li>
-                     <li class="timeline-event" data-aos="fade-up" data-aos-delay=".2">
-                        <label class="timeline-event-icon"></label>
-                        <div class="timeline-event-copy">
-                            <p class="timeline-event-thumbnail">پاییز 1399</p>
-                            <h3>طراحی سیستم ارتباطی و الکترونیک مرکز داده های اینترنتی</h3>
-                            <h4>داده پردازی سروین گستر-شیراز</h4>
-                            <p><strong>توسعه شبکه</strong>
-                                <br>ایجاد سیستم سوئیچینگ و افزایش پهنای باند با تچهیزات سیسکو</p>
-                        </div>
-                    </li>
+
                     <li class="timeline-event" data-aos="fade-up" data-aos-delay=".4">
                         <label class="timeline-event-icon"></label>
                         <div class="timeline-event-copy">
                             <p class="timeline-event-thumbnail">تابستان و پاییز 1399</p>
                             <h3>طراحی و ساخت اولین سرور روم استان لرستان</h3>
-                            <h4>خرم آباد-لرستان</h4>
-                            <p><strong>مدیر توسعه شبکه</strong>
-                                <br>طراحی و ساخت اولین سرور روم استان لرستان با 246 رک سرور و لینک ارتباط فیبر نوری و ماهواره</p>
+                            <h4>خرم آباد</h4>
+                            <p><strong>مدیر ارشد پروژه و توسعه شبکه</strong>
+                                <br>طراحی، کابل کشی و راه اندازی اولین سرور روم استاندارد استان با ظرفیت <strong>246 رک سرور</strong>، پیاده سازی لینک ارتباطی فیبر نوری و بکاپ ماهواره ای.</p>
                         </div>
                     </li>
+
                     <li class="timeline-event" data-aos="fade-up" data-aos-delay=".4">
                         <label class="timeline-event-icon"></label>
                         <div class="timeline-event-copy">
-                            <p class="timeline-event-thumbnail">تابستان 1400</p>
-                            <h3>تدریس برنامه نویسی مقدماتی</h3>
-                            <h4>لرستان</h4>
-                            <p><strong>مدرس</strong>
-                                <br>تدریس مبانی و مقدمات برنامه نویسی به نو آموزان برنامه نویسی در استان</p>
+                            <p class="timeline-event-thumbnail">پاییز 1399</p>
+                            <h3>طراحی سیستم ارتباطی و الکترونیک دیتاسنتر</h3>
+                            <h4>داده پردازی سروین گستر - شیراز</h4>
+                            <p><strong>مهندس شبکه</strong>
+                                <br>ایجاد سیستم سوئیچینگ لایه 3 و افزایش پهنای باند و پایداری شبکه با استفاده از تجهیزات انترپرایز سیسکو.</p>
                         </div>
                     </li>
+
                     <li class="timeline-event" data-aos="fade-up" data-aos-delay=".4">
                         <label class="timeline-event-icon"></label>
                         <div class="timeline-event-copy">
-                            <p class="timeline-event-thumbnail">تابستان و پاییز 1400</p>
-                            <h3>پیمان کار آموزش و پروش استان لرستان</h3>
-                            <h4>خرم آباد-لرستان</h4>
-                            <p><strong> توسعه دهنده</strong>
-                                <br>ساخت سامانه های نظام مند مکانیزه جهت افزایش بهره وری و افزایش کارامدی و چابکی اداری</p>
+                            <p class="timeline-event-thumbnail">زمستان 1399</p>
+                            <h3>پلتفرم نمایشگاه مجازی مدرسه انقلاب</h3>
+                            <h4>اتحادیه انجمن های اسلامی - لرستان</h4>
+                            <p><strong>توسعه دهنده فول استک</strong>
+                                <br>طراحی، عکاسی ۳۶۰ درجه و پیاده سازی اولین نمایشگاه کاملا مجازی و تعاملی در استان لرستان.</p>
+                        </div>
+                    </li>
+
+                    <li class="timeline-event" data-aos="fade-up" data-aos-delay=".4">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">بهار 1399</p>
+                            <h3>توسعه میان‌افزار (Firmware) پرینتر سه بعدی</h3>
+                            <h4>خانه فناور - اصفهان</h4>
+                            <p><strong>برنامه نویس امبدد (Embedded)</strong>
+                                <br>بازطراحی و توسعه کرنل پرینترهای سه بعدی صنعتی جهت افزایش ابعاد پرینت و پشتیبانی از فیلامنت‌های چند رنگ (Multi-Color).</p>
+                        </div>
+                    </li>
+
+                    <li class="timeline-event" data-aos="fade-up" data-aos-delay=".4">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">تابستان 1398</p>
+                            <h3>رتبه اول المپیاد کدنویسی کشور</h3>
+                            <h4>سعد السطنه - قزوین</h4>
+                            <p><strong>قهرمان کدنویسی</strong>
+                                <br>طراحی و پیاده سازی پلتفرم بومی و امن برگزاری آزمون آنلاین و کوئیز در رقابت‌های ملی.</p>
                         </div>
                     </li>
                 </ul>
@@ -167,7 +251,7 @@
         <div class="container">
             <div class="col-md-12">
                 <h4>03</h4>
-                <h1 class="size-50">گالری پروژه ها</h1> 
+                <h1 class="size-50">گالری پروژه‌ها</h1> 
             </div>
             <!-- main container -->
             <div class="main-container portfolio-inner clearfix">
@@ -179,6 +263,9 @@
                             <nav class="categories">
                                 <ul class="portfolio_filter">
                                     <li><a href="" class="active" data-filter="*">همه</a></li>
+                                    <li><a href="" data-filter=".network">شبکه</a></li>
+                                    <li><a href="" data-filter=".coding">برنامه نویسی</a></li>
+                                    <li><a href="" data-filter=".iot">سخت افزار</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -186,113 +273,73 @@
                         
                         <!-- portfolio_container -->
                         <div class="no-padding portfolio_container clearfix" data-aos="fade-up">
-                            <!-- single work -->
-                            <div class="col-md-4 col-sm-6  fashion logo">
-                                <a id="demo01" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/1.jpg" alt="image" class="img-responsive" />
-                                    <div class="portfolio_item_hover">
-                                        <div class="portfolio-border clearfix">
-                                            <div class="item_info"> <span>اناق کنترل سرور</span> <em>ایران / تهران</em> </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- end single work -->
                             
                             <!-- single work -->
-                            <div class="col-md-4 col-sm-6 ads graphics">
-                                <a id="demo02" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/3.jpg" alt="image" class="img-responsive" />
+                            <div class="col-md-4 col-sm-6 network">
+                                <a id="demo01" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/1.jpg" alt="Server Room" class="img-responsive" />
                                     <div class="portfolio_item_hover">
                                         <div class="portfolio-border clearfix">
-                                            <div class="item_info"> <span>پرینتر سه بعدی چند رنگی</span> <em>اصفهان</em> </div>
+                                            <div class="item_info"> <span>اتاق کنترل سرور</span> <em>تهران / پیاده سازی زیرساخت</em> </div>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <!-- end single work -->
                             
                             <!-- single work -->
-                            <div class="col-md-4 col-sm-6 photography">
-                                <a id="demo03" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/2.png" alt="image" class="img-responsive" />
+                            <div class="col-md-4 col-sm-6 iot">
+                                <a id="demo02" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/3.jpg" alt="3D Printer" class="img-responsive" />
                                     <div class="portfolio_item_hover">
                                         <div class="portfolio-border clearfix">
-                                            <div class="item_info"> <span>کنترل سلامت</span> <em>پیاده سازی شده با جاوا</em> </div>
+                                            <div class="item_info"> <span>پرینتر سه بعدی چند رنگ</span> <em>اصفهان / توسعه فرمور</em> </div>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <!-- end single work -->
                             
                             <!-- single work -->
-                            <div class="col-md-4 col-sm-6 fashion ads">
-                                <a id="demo04" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/4.jpg" alt="image" class="img-responsive" />
+                            <div class="col-md-4 col-sm-6 coding">
+                                <a id="demo03" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/2.png" alt="Health App" class="img-responsive" />
                                     <div class="portfolio_item_hover">
                                         <div class="portfolio-border clearfix">
-                                            <div class="item_info"> <span>جزوه اموزش مبانی کامپیوتر</span> <em>ویرایش نهم</em> </div>
+                                            <div class="item_info"> <span>سامانه کنترل سلامت</span> <em>جاوا / تحلیل داده</em> </div>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <!-- end single work -->
                             
                             <!-- single work -->
-                            <div class="col-md-4 col-sm-6 graphics ads">
-                                <a id="demo05" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/5.jpg" alt="image" class="img-responsive" />
+                            <div class="col-md-4 col-sm-6 coding">
+                                <a id="demo06" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/10.jpg" alt="Olympiad" class="img-responsive" />
                                     <div class="portfolio_item_hover">
                                         <div class="portfolio-border clearfix">
-                                            <div class="item_info"> <span>خروجی پرینتر سه بعدی با ترکیب فلامیتی</span> <em>اصفهان</em> </div>
+                                            <div class="item_info"> <span>طلا المپیاد کامپیوتر</span> <em>1397 تا 1400</em> </div>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <!-- end single work -->
                             
                             <!-- single work -->
-                            <div class="col-md-4 col-sm-6 photography">
-                                <a id="demo06" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/10.jpg" alt="image" class="img-responsive" />
+                            <div class="col-md-4 col-sm-6 network">
+                                <a id="demo07" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/6.jpg" alt="Network Dev" class="img-responsive" />
                                     <div class="portfolio_item_hover">
                                         <div class="portfolio-border clearfix">
-                                            <div class="item_info"> <span>نفر اول المپیاد برنامه نویسی کشور</span> <em>قزوین</em> </div>
+                                            <div class="item_info"> <span>توسعه شبکه فیبر</span> <em>تهران</em> </div>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <!-- end single work -->
                             
                             <!-- single work -->
-                            <div class="col-md-4 col-sm-6 graphics ads">
-                                <a id="demo07" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/6.jpg" alt="image" class="img-responsive" />
+                            <div class="col-md-4 col-sm-6 network">
+                                <a id="demo09" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/8.jpg" alt="Datacenter" class="img-responsive" />
                                     <div class="portfolio_item_hover">
                                         <div class="portfolio-border clearfix">
-                                            <div class="item_info"> <span>توسعه شبکه </span> <em>تهران</em> </div>
+                                            <div class="item_info"> <span>مرکز داده اینترنتی (IDC)</span> <em>اصفهان</em> </div>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <!-- end single work -->
                             
-                            <!-- single work -->
-                            <div class="col-md-4 col-sm-6 graphics ads">
-                                <a id="demo08" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/7.jpg" alt="image" class="img-responsive" />
-                                    <div class="portfolio_item_hover">
-                                        <div class="portfolio-border clearfix">
-                                            <div class="item_info"> <span>کنترل دیتا سرور </span> <em>شیراز </em> </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- end single work -->
-                            
-                            <!-- single work -->
-                            <div class="col-md-4 col-sm-6 graphics ads">
-                                <a id="demo09" href="#animatedModal" class="portfolio_item"> <img src="img/portfolio/8.jpg" alt="image" class="img-responsive" />
-                                    <div class="portfolio_item_hover">
-                                        <div class="portfolio-border clearfix">
-                                            <div class="item_info"> <span>مرکز داده اینترنتی</span> <em>اصفهان</em> </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- end single work -->
                         </div>
                         <!-- end portfolio_container -->
                     </div>
@@ -310,55 +357,53 @@
         <div class="container">
             <div class="col-md-12">
                 <h4>04</h4>
-                <h1 class="size-50">تماس</h1>
+                <h1 class="size-50">تماس با من</h1>
                 <div class="h-50"></div>
             </div>
             <div class="col-md-4" data-aos="fade-up">
 
-                <h3>شماره تلفن</h3>
+                <h3>اطلاعات تماس</h3>
                 <p>+98 998 167 8218</p>
                 <h3>ایمیل</h3>
-                <p>amirm.dehghanpour@gmail.com </p>
+                <p>amirm.dehghanpour@gmail.com</p>
 
-                <h3>Social Network</h3>
+                <h3>شبکه‌های اجتماعی</h3>
 
                 <ul class="social">
                     <li><a href="#"><i class="ion-social-twitter"></i></a></li>
                     <li><a href="https://www.instagram.com/amirm.dehghanpour/?hl=en"><i class="ion-social-instagram"></i></a></li>
+                    <li><a href="#"><i class="ion-social-linkedin"></i></a></li>
+                    <li><a href="#"><i class="ion-social-github"></i></a></li>
                 </ul>
                 <div class="clearfix"></div>
                 <div class="h-50"></div>
             </div>
             <div class="col-md-8" data-aos="fade-up">
                 <form class="contact-bg" id="contact-form" name="contact" method="post" novalidate="novalidate">
-                    <input type="text" name="name" class="form-control" placeholder="نام" />
-                    <input type="email" name="email" class="form-control" placeholder="ایمیل" />
-                    <input type="text" name="phone" class="form-control" placeholder="شماره تلفن" />
-                    <textarea name="message" class="form-control" placeholder="پیام شما" style="height:120px"></textarea>
-                    <button id="submit" type="submit" name="submit" class="btn btn-glance">ارسال</button>
+                    <input type="text" name="name" class="form-control" placeholder="نام شما" />
+                    <input type="email" name="email" class="form-control" placeholder="ایمیل شما" />
+                    <input type="text" name="phone" class="form-control" placeholder="شماره تماس" />
+                    <textarea name="message" class="form-control" placeholder="پیام خود را بنویسید..." style="height:120px"></textarea>
+                    <button id="submit" type="submit" name="submit" class="btn btn-glance">ارسال پیام</button>
                     <div id="success">
-                        <p class="green textcenter"> پیام شما موفقییت دریافت در اولین فرصت با شما تماس خواهم گرفت </p>
+                        <p class="green textcenter"> پیام شما با موفقیت دریافت شد. در اولین فرصت با شما تماس خواهم گرفت. </p>
                     </div>
                     <div id="error">
-                        <p>  مشکلی در ثبت پیام شما اتفاق افتاده لطفا دوباره امتحان کنید  </p>
+                        <p> مشکلی در ثبت پیام شما اتفاق افتاده است. لطفا دوباره امتحان کنید. </p>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <!-- ./contact -->
-<!-- Footer -->
-<footer class="page-footer font-small blue">
 
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© ۱۴۰۱ تمامی حقوق محقوظ است
-      <a href=""> امیرمحمد دهقان پور</a>
-    </div>
-    <!-- Copyright -->
-  
-  </footer>
-  <!-- Footer -->
-    <!--DEMO01-->
+    <!-- Footer -->
+    <footer class="page-footer font-small blue">
+        <div class="footer-copyright text-center py-3">© 1403 تمامی حقوق محفوظ است | طراحی و توسعه توسط 
+          <a href="#">امیرمحمد دهقان پور</a>
+        </div>
+    </footer>
+    <!-- Footer -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
