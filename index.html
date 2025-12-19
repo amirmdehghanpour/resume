@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>امیرمحمد دهقان پور | رزومه حرفه ای</title>
-    <!-- Font Awesome for Icons -->
+    <title>امیرمحمد دهقان پور | Senior ICT Architect</title>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Import Vazirmatn Font */
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn-font@v33.003/dist/font-face.css');
 
         :root {
-            --bg-dark: #0f1219;
-            --bg-card: #1a1f2b;
-            --bg-card-hover: #232938;
-            --gold: #d4af37;
-            --gold-light: #f3e5ab;
-            --text-main: #ffffff;
-            --text-muted: #a0a5b1;
-            --border-gold: 1px solid rgba(212, 175, 55, 0.3);
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --bg-dark: #0b0e14;
+            --bg-panel: rgba(26, 31, 43, 0.7);
+            --gold-primary: #d4af37;
+            --gold-glow: #f9d868;
+            --text-white: #ffffff;
+            --text-gray: #aab2c0;
+            --glass-border: 1px solid rgba(212, 175, 55, 0.15);
+            --neon-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
         * {
@@ -26,569 +26,927 @@
             margin: 0;
             padding: 0;
             outline: none;
+            cursor: default;
         }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-primary); border-radius: 4px; }
 
         body {
             font-family: 'Vazirmatn', sans-serif;
             background-color: var(--bg-dark);
-            background-image: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(21, 33, 62, 0.4) 0%, transparent 30%);
-            color: var(--text-main);
+            color: var(--text-white);
             line-height: 1.6;
+            overflow-x: hidden;
             min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
         }
 
-        /* Main Container - The Dashboard */
-        .dashboard-container {
+        /* Particle Canvas Background */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 1400px;
-            display: grid;
-            grid-template-columns: 300px 1fr 350px; /* Sidebar - Content - Status */
-            grid-template-rows: auto 1fr;
-            gap: 20px;
-            background: rgba(15, 18, 25, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #131824 0%, #000000 100%);
         }
 
-        /* Header Area */
-        .header-area {
-            grid-column: 1 / -1;
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Header Section --- */
+        header {
             text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 20px;
+            margin-bottom: 50px;
+            position: relative;
         }
 
-        .header-title {
-            font-size: 2.5rem;
-            color: var(--gold);
+        h1.main-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(to bottom, #fff 40%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
         }
 
-        .header-subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-top: 5px;
+        .typewriter {
+            font-size: 1.2rem;
+            color: var(--gold-primary);
+            font-family: 'Courier New', monospace; /* Monospace font for code feel */
+            min-height: 24px;
         }
 
-        /* Common Card Style */
+        /* --- Dashboard Grid Layout --- */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 320px 1fr 350px;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* --- Card Styles --- */
         .card {
-            background: var(--bg-card);
-            border: var(--border-gold);
-            border-radius: 15px;
-            padding: 20px;
-            transition: all 0.3s ease;
+            background: var(--bg-panel);
+            border: var(--glass-border);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.27), border-color 0.3s;
             position: relative;
             overflow: hidden;
         }
 
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            opacity: 0.5;
+        }
+
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            border-color: var(--gold);
+            border-color: var(--gold-primary);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
         }
 
         .card-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 12px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
+        }
+
+        .card-icon {
+            color: var(--gold-primary);
+            font-size: 1.4rem;
+            background: rgba(212, 175, 55, 0.1);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .card-title {
-            font-size: 1.2rem;
-            color: var(--gold-light);
+            font-size: 1.3rem;
             font-weight: 700;
-        }
-
-        .icon-box {
-            width: 35px;
-            height: 35px;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--gold);
-        }
-
-        /* --- LEFT COLUMN: Profile & Skills --- */
-        .left-col {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .profile-card {
-            text-align: center;
-        }
-
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 3px solid var(--gold);
-            padding: 5px;
-            object-fit: cover;
-            margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-        }
-
-        .skill-item {
-            margin-bottom: 15px;
-        }
-
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            color: var(--text-muted);
-        }
-
-        .progress-bar-bg {
-            width: 100%;
-            height: 6px;
-            background: #2a3142;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), #fff);
-            border-radius: 3px;
-            position: relative;
-        }
-        
-        .progress-bar-fill::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transform: translateX(-100%);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            100% { transform: translateX(100%); }
-        }
-
-        /* --- MIDDLE COLUMN: Experience & Projects --- */
-        .middle-col {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .timeline-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-        }
-
-        .timeline-item {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 15px;
-            border-radius: 10px;
-            border-right: 3px solid var(--gold);
-        }
-
-        .timeline-date {
-            font-size: 0.8rem;
-            color: var(--gold);
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .timeline-role {
-            font-weight: bold;
-            display: block;
-        }
-
-        .timeline-place {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* --- RIGHT COLUMN: Medals & Contact --- */
-        .right-col {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .medals-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 10px;
-            text-align: center;
-        }
-
-        .medal-badge {
-            flex: 1 1 40%;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            position: relative;
-        }
-        
-        .medal-badge:first-child {
-            flex: 1 1 100%; /* Make the main medal bigger */
-            border-color: var(--gold);
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), transparent);
-        }
-
-        .medal-icon-large {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 10px;
-            display: block;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
-        }
-
-        .medal-year {
-            font-size: 1.2rem;
-            font-weight: bold;
             color: #fff;
         }
 
-        .medal-desc {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        /* --- Profile Section --- */
+        .profile-img-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 20px;
+            position: relative;
         }
 
-        .contact-info div {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 0.9rem;
-        }
-
-        .contact-info i {
-            color: var(--gold);
-            width: 20px;
-        }
-        
-        .download-btn {
-            display: block;
+        .profile-img {
             width: 100%;
-            padding: 12px;
-            text-align: center;
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 15px;
-            transition: 0.3s;
-            font-weight: bold;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold-primary);
+            padding: 4px;
+            background: var(--bg-dark);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+            transition: 0.5s;
         }
         
-        .download-btn:hover {
-            background: var(--gold);
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .profile-status {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background: #00ff88;
+            border-radius: 50%;
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 10px #00ff88;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+        }
+
+        /* --- Skills & Stats --- */
+        .skill-group {
+            margin-bottom: 20px;
+        }
+        
+        .skill-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+        }
+
+        .progress-rail {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-primary), #fff);
+            border-radius: 4px;
+            width: 0; /* JS will animate this */
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: 0.3s;
+        }
+        
+        .tag:hover {
+            background: var(--gold-primary);
             color: #000;
         }
-        
-        /* Portfolio Grid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+
+        /* --- Timeline (Experience) --- */
+        .timeline-wrapper {
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .timeline-wrapper::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .timeline-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            border-right: 3px solid transparent;
+            transition: 0.3s;
+        }
+
+        .timeline-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-right-color: var(--gold-primary);
+            transform: translateX(-5px);
+        }
+
+        .timeline-card::after {
+            content: '';
+            position: absolute;
+            right: -26px;
+            top: 20px;
+            width: 10px;
+            height: 10px;
+            background: var(--bg-dark);
+            border: 2px solid var(--gold-primary);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .t-year {
+            color: var(--gold-primary);
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .t-role {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .t-place {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            font-style: italic;
         }
         
-        .project-item {
+        .t-desc {
+            font-size: 0.85rem;
+            color: #ccc;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        /* --- Gallery Grid --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
             position: relative;
-            aspect-ratio: 16/9;
-            border-radius: 8px;
+            aspect-ratio: 1;
+            border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        
-        .project-item img {
+
+        .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.6s;
         }
-        
-        .project-item:hover img {
-            transform: scale(1.1);
+
+        .gallery-item:hover img {
+            transform: scale(1.15);
         }
-        
-        .project-overlay {
+
+        .gallery-overlay {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 10px;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             transition: 0.3s;
         }
         
-        .project-item:hover .project-overlay {
+        .gallery-item:hover .gallery-overlay {
             opacity: 1;
         }
+
+        .gallery-overlay i {
+            color: var(--gold-primary);
+            font-size: 1.5rem;
+        }
+
+        /* --- Right Column (Awards & Contact) --- */
+        .gold-badge-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .gold-badge {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(0,0,0,0) 100%);
+            border: 1px solid var(--gold-primary);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
         
-        .project-title {
-            font-size: 0.8rem;
+        .gold-badge::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+            transform: rotate(45deg);
+            animation: shine 6s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translate(-50%, -50%) rotate(45deg); }
+            100% { transform: translate(50%, 50%) rotate(45deg); }
+        }
+
+        .badge-icon {
+            font-size: 3rem;
+            background: linear-gradient(to bottom, #ffd700, #b8860b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(212,175,55,0.5));
+        }
+
+        .contact-list li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #ddd;
+            font-size: 0.95rem;
+        }
+
+        .contact-list i {
+            color: var(--gold-primary);
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        .btn-glow {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            background: transparent;
+            color: var(--gold-primary);
+            border: 2px solid var(--gold-primary);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--gold-primary);
+            transition: 0.3s;
+            z-index: -1;
+        }
+
+        .btn-glow:hover {
+            color: #000;
+        }
+        
+        .btn-glow:hover::before {
+            width: 100%;
+        }
+
+        /* --- Lightbox Modal --- */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        .lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border: 2px solid var(--gold-primary);
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(212,175,55,0.2);
+        }
+        
+        .lightbox-caption {
+            color: var(--gold-primary);
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 3rem;
             color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 1200px) {
-            .dashboard-container {
-                grid-template-columns: 300px 1fr;
-            }
-            .right-col {
-                grid-column: 1 / -1;
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            .right-col > .card {
-                flex: 1;
-            }
+        .close-lightbox:hover {
+            color: var(--gold-primary);
         }
 
-        @media (max-width: 992px) {
-            .dashboard-container {
-                display: flex;
-                flex-direction: column;
-            }
-            .project-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* --- Utilities --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
         
-        @media (max-width: 480px) {
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-            .header-title {
-                font-size: 1.8rem;
-            }
-            .timeline-grid {
-                 grid-template-columns: 1fr;
-            }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .dashboard { grid-template-columns: 300px 1fr; }
+            .right-column { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        }
+        @media (max-width: 900px) {
+            .dashboard { display: flex; flex-direction: column; }
+            .right-column { display: flex; flex-direction: column; }
+            h1.main-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="dashboard-container">
-        <!-- Header -->
-        <div class="header-area">
-            <h1 class="header-title">امیرمحمد دهقان پور</h1>
-            <p class="header-subtitle">Server Manager | ICT Manager | Developer</p>
-        </div>
+    <!-- Dynamic Background -->
+    <canvas id="canvas-bg"></canvas>
 
-        <!-- LEFT COLUMN -->
-        <div class="left-col">
-            <!-- Profile Card -->
-            <div class="card profile-card">
-                <img src="img/about-img.jpg" alt="Amirmohammad" class="profile-img">
-                <h3 style="color: var(--gold);">توسعه دهنده و مدیر شبکه</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">
-                    زاده 7 مرداد 1383، خرم‌آباد. علاقه بی‌پایان به دنیای صفر و یک.
-                </p>
-                <img src="img/Signature.svg" width="150" alt="Signature" style="margin-top: 15px; filter: invert(1);">
-            </div>
+    <div class="container">
+        
+        <header class="reveal">
+            <h1 class="main-title">امیرمحمد دهقان پور</h1>
+            <div class="typewriter" id="typewriter"></div>
+        </header>
 
-            <!-- Skills Card -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="icon-box"><i class="fas fa-code"></i></div>
-                    <span class="card-title">تخصص‌های فنی</span>
-                </div>
+        <div class="dashboard">
+            
+            <!-- LEFT COLUMN: Profile & Skills -->
+            <div class="left-column" style="display: flex; flex-direction: column; gap: 25px;">
                 
-                <div class="skill-item">
-                    <div class="skill-info"><span>مدیریت سرور و شبکه (Cisco)</span><span>95%</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 95%"></div></div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-info"><span>برنامه‌نویسی Python & AI</span><span>90%</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 90%"></div></div>
+                <!-- Profile Card -->
+                <div class="card reveal" style="text-align: center;">
+                    <div class="profile-img-container">
+                        <img src="img/about-img.jpg" alt="Profile" class="profile-img">
+                        <div class="profile-status" title="Available for hire"></div>
+                    </div>
+                    <h2 style="color: #fff; margin-bottom: 5px;">توسعه دهنده ارشد</h2>
+                    <p style="color: var(--gold-primary); font-size: 0.9rem;">Server & Network Architect</p>
+                    
+                    <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                        <img src="img/Signature.svg" alt="Signature" style="width: 140px; filter: invert(1) brightness(2);">
+                    </div>
                 </div>
 
-                <div class="skill-item">
-                    <div class="skill-info"><span>اینترنت اشیا (IoT)</span><span>85%</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%"></div></div>
+                <!-- Technical Skills -->
+                <div class="card reveal">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                        <span class="card-title">هسته تخصصی</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-label"><span>Linux Kernel & Server Management</span><span class="counter" data-target="98">0</span>%</div>
+                        <div class="progress-rail"><div class="progress-bar" data-width="98%"></div></div>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-label"><span>Python / AI / Machine Learning</span><span class="counter" data-target="92">0</span>%</div>
+                        <div class="progress-rail"><div class="progress-bar" data-width="92%"></div></div>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-label"><span>Cisco Network Infrastructure</span><span class="counter" data-target="95">0</span>%</div>
+                        <div class="progress-rail"><div class="progress-bar" data-width="95%"></div></div>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-label"><span>Full-Stack Web (React/Node)</span><span class="counter" data-target="88">0</span>%</div>
+                        <div class="progress-rail"><div class="progress-bar" data-width="88%"></div></div>
+                    </div>
+                    
+                    <div class="skill-group">
+                        <div class="skill-label"><span>Cyber Security & Pentest</span><span class="counter" data-target="85">0</span>%</div>
+                        <div class="progress-rail"><div class="progress-bar" data-width="85%"></div></div>
+                    </div>
+
+                    <div class="tech-tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">IoT</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">GitOps</span>
+                        <span class="tag">Virtualization</span>
+                        <span class="tag">Hardware</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIDDLE COLUMN: Experience & Projects -->
+            <div class="middle-column" style="display: flex; flex-direction: column; gap: 25px;">
+                
+                <!-- Experience Timeline -->
+                <div class="card reveal">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-history"></i></div>
+                        <span class="card-title">نقشه راه حرفه‌ای</span>
+                    </div>
+
+                    <div class="timeline-wrapper">
+                        
+                        <div class="timeline-card">
+                            <span class="t-year">۱۴۰۰ - اکنون</span>
+                            <span class="t-role">پیمانکار ارشد فناوری اطلاعات (Senior IT Contractor)</span>
+                            <span class="t-place">وزارت آموزش و پرورش | لرستان</span>
+                            <p class="t-desc">مدیریت، طراحی و پیاده‌سازی سامانه‌های مکانیزه اداری و زیرساخت شبکه مدارس استان.</p>
+                        </div>
+
+                        <div class="timeline-card">
+                            <span class="t-year">تابستان ۱۴۰۰</span>
+                            <span class="t-role">مدرس ارشد تفکر رایانشی</span>
+                            <span class="t-place">موسسات آموزشی برتر</span>
+                            <p class="t-desc">تدریس الگوریتم و برنامه‌نویسی پیشرفته به استعدادهای درخشان.</p>
+                        </div>
+
+                        <div class="timeline-card" style="border-right-color: var(--gold-primary); background: rgba(212,175,55,0.05);">
+                            <span class="t-year">۱۳۹۹</span>
+                            <span class="t-role">معمار ارشد سیستم عامل بومی</span>
+                            <span class="t-place">ایران، تهران (پروژه ملی)</span>
+                            <p class="t-desc">طراحی کرنل و شخصی‌سازی سیستم عامل لینوکس برای مصارف امنیتی و سازمانی.</p>
+                        </div>
+
+                        <div class="timeline-card">
+                            <span class="t-year">۱۳۹۹</span>
+                            <span class="t-role">طراح دیتاسنتر و اتاق سرور مرکزی (Data Center Architect)</span>
+                            <span class="t-place">پروژه استانی</span>
+                            <p class="t-desc">راه‌اندازی و کانفیگ ۲۴۶ رک سرور، اجرای فیبر نوری و پیاده‌سازی امنیت لایه فیزیکی و نرم‌افزاری.</p>
+                        </div>
+
+                        <div class="timeline-card">
+                            <span class="t-year">پاییز ۱۳۹۹</span>
+                            <span class="t-role">توسعه‌دهنده نرم‌افزار تعاملی (VR/AR)</span>
+                            <span class="t-place">نمایشگاه مجازی انقلاب</span>
+                            <p class="t-desc">توسعه پلتفرم تور مجازی و نمایشگاه آنلاین با قابلیت تعامل کاربر.</p>
+                        </div>
+                        
+                        <div class="timeline-card">
+                            <span class="t-year">بهار ۱۳۹۹</span>
+                            <span class="t-role">توسعه‌دهنده Firmware سخت‌افزار</span>
+                            <span class="t-place">پروژه پرینترهای سه‌بعدی صنعتی</span>
+                            <p class="t-desc">مهندسی معکوس و بازنویسی فریمور برای پشتیبانی از فیلامنت‌های مولتی‌کالر.</p>
+                        </div>
+
+                        <div class="timeline-card">
+                            <span class="t-year">۱۳۹۸</span>
+                            <span class="t-role">قهرمان المپیاد کدنویسی</span>
+                            <span class="t-place">سطح ملی</span>
+                            <p class="t-desc">کسب رتبه اول کشور در مسابقات الگوریتم و حل مسئله.</p>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="skill-item">
-                    <div class="skill-info"><span>توسعه وب (Full Stack)</span><span>88%</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 88%"></div></div>
+                <!-- Gallery -->
+                <div class="card reveal">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+                        <span class="card-title">ویترین پروژه‌ها</span>
+                    </div>
+                    <p style="color:#aaa; margin-bottom:15px; font-size:0.85rem;">برای مشاهده تصاویر در سایز اصلی کلیک کنید</p>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="img/portfolio/1.jpg" alt="Server Room Implementation">
+                            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="img/portfolio/2.png" alt="Health Application UI">
+                            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="img/portfolio/3.jpg" alt="3D Printer Hardware">
+                            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="img/portfolio/5.jpg" alt="Circuit Design">
+                            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="img/portfolio/6.jpg" alt="Network Cabling">
+                            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="img/portfolio/8.jpg" alt="Data Center Racks">
+                            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
                 </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Awards & Contact -->
+            <div class="right-column" style="display: flex; flex-direction: column; gap: 25px;">
                 
-                <div class="skill-item">
-                    <div class="skill-info"><span>امنیت و تست نفوذ</span><span>80%</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 80%"></div></div>
+                <!-- Awards -->
+                <div class="card reveal">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                        <span class="card-title">تالار افتخارات</span>
+                    </div>
+                    
+                    <div class="gold-badge-container">
+                        <div class="gold-badge">
+                            <i class="fas fa-medal badge-icon"></i>
+                            <h3 style="color: #fff; margin-bottom: 5px;">4 مدال طلا</h3>
+                            <p style="color: var(--gold-primary); font-weight: bold;">المپیاد کامپیوتر</p>
+                            <p style="color: #aaa; font-size: 0.8rem; margin-top: 5px;">سال‌های ۱۳۹۷، ۱۳۹۸، ۱۳۹۹، ۱۴۰۰</p>
+                        </div>
+
+                        <div class="gold-badge" style="border-color: rgba(255,255,255,0.2);">
+                            <i class="fas fa-code-branch badge-icon" style="font-size: 2rem;"></i>
+                            <h4 style="color: #fff;">رتبه اول کدنویسی کشور</h4>
+                            <p style="color: #aaa; font-size: 0.8rem;">سال ۱۳۹۸</p>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Contact Info -->
+                <div class="card reveal">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="far fa-address-card"></i></div>
+                        <span class="card-title">ارتباط مستقیم</span>
+                    </div>
+
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>0998 167 8218 +98</span>
+                        </li>
+                        <li>
+                            <i class="far fa-envelope"></i>
+                            <span style="font-size: 0.85rem;">amirm.dehghanpour@gmail.com</span>
+                        </li>
+                        <li>
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>linkedin.com/in/amirm</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>ایران، تهران</span>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="btn-glow">
+                        <i class="fas fa-download" style="margin-left: 10px;"></i> دانلود نسخه PDF
+                    </a>
+                </div>
+
             </div>
         </div>
-
-        <!-- MIDDLE COLUMN -->
-        <div class="middle-col">
-            <!-- Experience Card -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="icon-box"><i class="fas fa-briefcase"></i></div>
-                    <span class="card-title">سوابق اجرایی و پروژه‌ها</span>
-                </div>
-                
-                <div class="timeline-grid">
-                    <div class="timeline-item">
-                        <span class="timeline-date">تابستان و پاییز 1400</span>
-                        <span class="timeline-role">پیمانکار آموزش و پرورش</span>
-                        <span class="timeline-place">لرستان</span>
-                        <p style="font-size: 0.8rem; margin-top: 5px; color: #bbb;">ساخت سامانه‌های مکانیزه اداری</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <span class="timeline-date">تابستان 1400</span>
-                        <span class="timeline-role">مدرس برنامه‌نویسی</span>
-                        <span class="timeline-place">لرستان</span>
-                        <p style="font-size: 0.8rem; margin-top: 5px; color: #bbb;">تدریس مبانی به نوآموزان</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <span class="timeline-date">1399 - 1400</span>
-                        <span class="timeline-role">طراحی اولین سرور روم استان</span>
-                        <span class="timeline-place">خرم آباد</span>
-                        <p style="font-size: 0.8rem; margin-top: 5px; color: #bbb;">راه اندازی 246 رک سرور و فیبر نوری</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <span class="timeline-date">پاییز 1399</span>
-                        <span class="timeline-role">طراح سیستم دیتاسنتر</span>
-                        <span class="timeline-place">شیراز - سروین گستر</span>
-                        <p style="font-size: 0.8rem; margin-top: 5px; color: #bbb;">سوئیچینگ سیسکو و پهنای باند</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <span class="timeline-date">زمستان 1399</span>
-                        <span class="timeline-role">توسعه دهنده نمایشگاه مجازی</span>
-                        <span class="timeline-place">مدرسه انقلاب</span>
-                        <p style="font-size: 0.8rem; margin-top: 5px; color: #bbb;">عکاسی و ساخت تور مجازی</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <span class="timeline-date">بهار 1399</span>
-                        <span class="timeline-role">توسعه فرمور پرینتر 3D</span>
-                        <span class="timeline-place">اصفهان - خانه فناور</span>
-                        <p style="font-size: 0.8rem; margin-top: 5px; color: #bbb;">پشتیبانی از فیلامنت رنگی</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Portfolio Gallery -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="icon-box"><i class="fas fa-images"></i></div>
-                    <span class="card-title">گالری بصری</span>
-                </div>
-                <div class="project-grid">
-                    <div class="project-item">
-                        <img src="img/portfolio/1.jpg" alt="Project">
-                        <div class="project-overlay"><span class="project-title">اتاق سرور</span></div>
-                    </div>
-                    <div class="project-item">
-                        <img src="img/portfolio/3.jpg" alt="Project">
-                        <div class="project-overlay"><span class="project-title">پرینتر سه بعدی</span></div>
-                    </div>
-                    <div class="project-item">
-                        <img src="img/portfolio/2.png" alt="Project">
-                        <div class="project-overlay"><span class="project-title">اپلیکیشن سلامت</span></div>
-                    </div>
-                    <div class="project-item">
-                        <img src="img/portfolio/5.jpg" alt="Project">
-                        <div class="project-overlay"><span class="project-title">قطعات پرینتر</span></div>
-                    </div>
-                    <div class="project-item">
-                        <img src="img/portfolio/6.jpg" alt="Project">
-                        <div class="project-overlay"><span class="project-title">زیرساخت شبکه</span></div>
-                    </div>
-                    <div class="project-item">
-                        <img src="img/portfolio/8.jpg" alt="Project">
-                        <div class="project-overlay"><span class="project-title">دیتاسنتر</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="right-col">
-            <!-- Honors / Medals -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="icon-box"><i class="fas fa-medal"></i></div>
-                    <span class="card-title">افتخارات ملی</span>
-                </div>
-                <div class="medals-container">
-                    <div class="medal-badge">
-                        <i class="fas fa-trophy medal-icon-large"></i>
-                        <div class="medal-year">1397 - 1400</div>
-                        <div class="medal-desc">4 مدال طلای المپیاد کامپیوتر</div>
-                    </div>
-                    <div class="medal-badge">
-                        <i class="fas fa-award medal-icon-large" style="font-size: 1.5rem;"></i>
-                        <div class="medal-year">1398</div>
-                        <div class="medal-desc">رتبه اول کدنویسی کشور</div>
-                    </div>
-                    <div class="medal-badge">
-                        <i class="fas fa-star medal-icon-large" style="font-size: 1.5rem;"></i>
-                        <div class="medal-year">1399</div>
-                        <div class="medal-desc">برترین طراح دیتاسنتر</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="icon-box"><i class="fas fa-address-card"></i></div>
-                    <span class="card-title">اطلاعات تماس</span>
-                </div>
-                <div class="contact-info">
-                    <div>
-                        <i class="fas fa-phone-alt"></i>
-                        <span>+98 998 167 8218</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-envelope"></i>
-                        <span>amirm.dehghanpour@gmail.com</span>
-                    </div>
-                    <div>
-                        <i class="fab fa-instagram"></i>
-                        <span>@amirm.dehghanpour</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>ایران، خرم آباد</span>
-                    </div>
-                </div>
-                <a href="amirmdehghanpour.ir" class="download-btn">
-                    <i class="fas fa-file-pdf"></i> دانلود رزومه کامل
-                </a>
-            </div>
-        </div>
-
     </div>
 
+    <!-- Lightbox Element -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img src="" alt="Full Size" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <!-- JavaScript Scripts -->
+    <script>
+        // --- 1. Typing Effect ---
+        const textToType = "توسعه دهنده نرم‌افزار | مدیر زیرساخت شبکه | متخصص اینترنت اشیا";
+        const typeWriterElement = document.getElementById('typewriter');
+        let i = 0;
+        function typeWriter() {
+            if (i < textToType.length) {
+                typeWriterElement.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        window.onload = typeWriter;
+
+        // --- 2. Scroll Reveal & Skill Counters ---
+        const observerOptions = { threshold: 0.1 };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger Skill Bars if inside the card
+                    const bars = entry.target.querySelectorAll('.progress-bar');
+                    bars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+
+                    // Trigger Counters
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const speed = 20; 
+                        const updateCount = () => {
+                            const current = +counter.innerText;
+                            const inc = target / speed;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current + inc);
+                                setTimeout(updateCount, 40);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCount();
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- 3. Lightbox Logic ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const closeBtn = document.querySelector('.close-lightbox');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const altText = img.getAttribute('alt');
+                lightboxImg.src = img.src;
+                lightboxCaption.innerText = altText;
+                lightbox.classList.add('active');
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") lightbox.classList.remove('active');
+        });
+
+        // --- 4. Particle Background (Canvas) ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray;
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 0.4) - 0.2;
+                let directionY = (Math.random() * 0.4) - 0.2;
+                let color = 'rgba(212, 175, 55, 0.4)'; // Gold-ish particles
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(212, 175, 55,' + opacityValue * 0.15 + ')'; // Line color
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+
+    </script>
 </body>
 </html>
