@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amir Dehghanpour | Lead Tech Researcher</title>
+    <title>Amir Dehghanpour | Elite Tech Researcher</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn-font@v33.003/dist/font-face.css');
@@ -11,24 +11,21 @@
 
         :root {
             --bg-dark: #0b0c10;
-            --bg-panel: rgba(31, 40, 51, 0.85);
-            --accent: #66fcf1; /* فیروزه‌ای نئونی برای حس تکنولوژی و پژوهش */
+            --bg-panel: rgba(31, 40, 51, 0.9);
+            --accent: #66fcf1;
             --accent-dim: #45a29e;
             --text-white: #c5c6c7;
             --text-gray: #8892b0;
-            --scrollbar-bg: #1f2833;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; cursor: none; }
         
-        /* تنظیمات فونت بر اساس زبان */
         body { font-family: 'Vazirmatn', sans-serif; background-color: var(--bg-dark); color: var(--text-white); overflow-x: hidden; min-height: 100vh; }
         
         body[lang="en"], body[lang="fr"], body[lang="de"] { font-family: 'Roboto Mono', monospace; }
-        body[lang="ru"] { font-family: 'Roboto Mono', monospace; } /* Cyrillic support included */
+        body[lang="ru"] { font-family: 'Roboto Mono', monospace; }
         body[lang="ar"] { font-family: 'Tajawal', sans-serif; }
 
-        /* Custom Scrollbar for the whole page */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 4px; }
@@ -41,12 +38,11 @@
         }
         body:hover #cursor.hovered { width: 40px; height: 40px; background: rgba(102, 252, 241, 0.2); }
 
-        /* Background */
         #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: #0b0c10; }
         
         .container { max-width: 1700px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
 
-        /* --- Language Grid --- */
+        /* Language Grid */
         .lang-grid {
             position: absolute; top: 20px; left: 20px; z-index: 101;
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
@@ -60,15 +56,15 @@
         }
         .lang-btn:hover, .lang-btn.active { background: var(--accent); color: #000; font-weight: bold; }
 
-        /* --- Header --- */
+        /* Header */
         header { text-align: center; margin-bottom: 40px; padding-top: 60px; }
         h1.main-title {
             font-size: 3rem; font-weight: 700; color: #fff; text-transform: uppercase;
-            letter-spacing: 1px; text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+            letter-spacing: 1px; text-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
         }
         .subtitle { font-family: 'Share Tech Mono'; color: var(--accent); margin-top: 10px; font-size: 1.2rem; }
 
-        /* --- Layout --- */
+        /* Layout */
         .dashboard { display: grid; grid-template-columns: 350px 1fr 350px; gap: 25px; align-items: start; }
 
         .card {
@@ -81,8 +77,7 @@
         .card-icon { color: var(--accent); font-size: 1.2rem; }
         .card-title { font-size: 1.1rem; font-weight: 700; color: #fff; }
 
-        /* Profile */
-        .profile-img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin: 0 auto 15px; display: block; filter: grayscale(20%); }
+        .profile-img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin: 0 auto 15px; display: block; filter: grayscale(10%); }
         .tech-stats { display: flex; justify-content: space-around; margin-top: 15px; color: var(--text-gray); font-size: 1.5rem; }
 
         /* Skills */
@@ -91,14 +86,10 @@
         .bar-bg { background: #222; height: 4px; width: 100%; }
         .bar-fill { background: var(--accent); height: 100%; box-shadow: 0 0 8px var(--accent); }
 
-        /* Timeline (Scrollable Area) */
+        /* Timeline */
         .timeline-container {
-            max-height: 600px; /* ارتفاع ثابت برای ایجاد اسکرول */
-            overflow-y: auto;
-            padding-right: 10px; /* فضا برای اسکرول بار */
-            position: relative;
+            max-height: 600px; overflow-y: auto; padding-right: 10px; position: relative;
         }
-        /* استایل اسکرول بار داخلی */
         .timeline-container::-webkit-scrollbar { width: 6px; }
         .timeline-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
         .timeline-container::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 3px; }
@@ -111,29 +102,38 @@
         body.ltr-mode .timeline-item { border-right: none; border-left: 2px solid var(--accent-dim); background: linear-gradient(-90deg, rgba(255,255,255,0.02), transparent); }
         
         .timeline-item:hover { background: rgba(102, 252, 241, 0.05); }
-        .t-date { color: var(--accent); font-size: 0.8rem; font-family: 'Share Tech Mono'; font-weight: bold; }
+        .t-date { color: var(--accent); font-size: 0.9rem; font-family: 'Share Tech Mono'; font-weight: bold; }
         .t-head { color: #fff; font-weight: bold; font-size: 1rem; display: block; margin: 3px 0; }
         .t-desc { font-size: 0.85rem; color: #aaa; line-height: 1.4; }
         .t-loc { font-size: 0.75rem; color: #666; font-style: italic; margin-top: 4px; display: block;}
 
-        /* Gallery */
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
         .g-item { aspect-ratio: 1; overflow: hidden; border: 1px solid #333; cursor: pointer; }
         .g-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s; filter: saturate(0); }
         .g-item:hover img { transform: scale(1.1); filter: saturate(1); }
 
-        /* Terminal Widget (Fixed Bottom Right) */
+        /* Terminal Widget (Minimizable) */
         .terminal {
             position: fixed; bottom: 20px; right: 20px; width: 400px; height: 180px;
             background: rgba(11, 12, 16, 0.95); border: 1px solid #333; border-top: 3px solid var(--accent);
             font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: #ccc;
-            padding: 10px; overflow-y: auto; z-index: 100; box-shadow: -5px -5px 20px rgba(0,0,0,0.5);
+            z-index: 100; box-shadow: -5px -5px 20px rgba(0,0,0,0.5);
+            transition: height 0.3s ease, bottom 0.3s ease; display: flex; flex-direction: column;
         }
+        .terminal.minimized { height: 30px; overflow: hidden; }
         body.ltr-mode .terminal { right: 20px; left: auto; }
+        
+        .term-header {
+            background: #1a1a1a; padding: 5px 10px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #333; height: 30px; cursor: pointer;
+        }
+        .term-title { color: var(--accent); font-weight: bold; }
+        .min-btn { color: #fff; cursor: pointer; font-size: 1.2rem; line-height: 0.5; }
+        
+        .term-body { padding: 10px; overflow-y: auto; flex: 1; }
         .log-success { color: var(--accent); }
         .log-warn { color: #ffeb3b; }
 
-        /* Lightbox */
         .lightbox {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95);
             z-index: 2000; display: none; align-items: center; justify-content: center;
@@ -142,7 +142,6 @@
         .lightbox img { max-width: 90%; max-height: 90vh; border: 2px solid var(--accent); }
         .close-lb { position: absolute; top: 20px; right: 30px; font-size: 3rem; color: #fff; cursor: pointer; }
 
-        /* Mobile */
         @media (max-width: 1100px) {
             .dashboard { grid-template-columns: 1fr; }
             .timeline-container { max-height: 400px; }
@@ -157,7 +156,6 @@
     <div id="cursor"></div>
     <canvas id="canvas-bg"></canvas>
 
-    <!-- Language Switcher Grid -->
     <div class="lang-grid">
         <div class="lang-btn active hover-trigger" onclick="setLang('fa')">FA</div>
         <div class="lang-btn hover-trigger" onclick="setLang('en')">EN</div>
@@ -183,8 +181,8 @@
                     <h3 style="text-align: center; color: #fff;" id="t-status">پژوهشگر ارشد سیستم</h3>
                     <div class="tech-stats">
                         <i class="fab fa-python hover-trigger"></i>
-                        <i class="fab fa-docker hover-trigger"></i>
-                        <i class="fas fa-server hover-trigger"></i>
+                        <i class="fab fa-rust hover-trigger"></i>
+                        <i class="fas fa-microchip hover-trigger"></i>
                         <i class="fas fa-brain hover-trigger"></i>
                     </div>
                 </div>
@@ -194,12 +192,10 @@
                         <i class="fas fa-cogs card-icon"></i>
                         <span class="card-title" id="t-skills">تخصص‌های فنی</span>
                     </div>
-                    <!-- Skills -->
-                    <div class="skill-item"><div class="skill-info"><span>Distributed Systems</span><span>98%</span></div><div class="bar-bg"><div class="bar-fill" style="width:98%"></div></div></div>
-                    <div class="skill-item"><div class="skill-info"><span>Algorithm Optimization</span><span>95%</span></div><div class="bar-bg"><div class="bar-fill" style="width:95%"></div></div></div>
-                    <div class="skill-item"><div class="skill-info"><span>Neural Architectures</span><span>92%</span></div><div class="bar-bg"><div class="bar-fill" style="width:92%"></div></div></div>
-                    <div class="skill-item"><div class="skill-info"><span>Infrastructure as Code</span><span>90%</span></div><div class="bar-bg"><div class="bar-fill" style="width:90%"></div></div></div>
-                    <div class="skill-item"><div class="skill-info"><span>Data Mining</span><span>88%</span></div><div class="bar-bg"><div class="bar-fill" style="width:88%"></div></div></div>
+                    <div class="skill-item"><div class="skill-info"><span>Algorithm Optimization</span><span>99%</span></div><div class="bar-bg"><div class="bar-fill" style="width:99%"></div></div></div>
+                    <div class="skill-item"><div class="skill-info"><span>Low-Level System Design</span><span>95%</span></div><div class="bar-bg"><div class="bar-fill" style="width:95%"></div></div></div>
+                    <div class="skill-item"><div class="skill-info"><span>AI Architecture</span><span>92%</span></div><div class="bar-bg"><div class="bar-fill" style="width:92%"></div></div></div>
+                    <div class="skill-item"><div class="skill-info"><span>Cyber-Physical Systems</span><span>90%</span></div><div class="bar-bg"><div class="bar-fill" style="width:90%"></div></div></div>
                 </div>
 
                 <div class="card js-tilt">
@@ -218,16 +214,15 @@
                 </div>
             </div>
 
-            <!-- CENTER PANEL (Scrollable Timeline) -->
+            <!-- CENTER PANEL -->
             <div class="center-panel">
                 <div class="card js-tilt" style="height: 100%;">
                     <div class="card-header">
                         <i class="fas fa-project-diagram card-icon"></i>
-                        <span class="card-title" id="t-timeline-title">سوابق اجرایی و پژوهشی</span>
+                        <span class="card-title" id="t-timeline-title">مسیر نخبگی و پژوهش</span>
                     </div>
-                    <!-- The Scrollable Area -->
                     <div class="timeline-container" id="timeline-list">
-                        <!-- Dynamic Content Loaded via JS -->
+                        <!-- Dynamic Content -->
                     </div>
                 </div>
             </div>
@@ -236,21 +231,21 @@
             <div class="right-panel" style="display:flex; flex-direction:column; gap:20px;">
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <i class="fas fa-atom card-icon"></i>
-                        <span class="card-title" id="t-awards">دستاوردها و افتخارات</span>
+                        <i class="fas fa-medal card-icon"></i>
+                        <span class="card-title" id="t-awards">افتخارات المپیادی</span>
                     </div>
                     <ul style="list-style: none; padding-left: 0; font-size: 0.9rem; line-height: 1.8; color: #ddd;">
                         <li style="margin-bottom: 10px;">
-                            <i class="fas fa-check-circle" style="color: var(--accent);"></i> <span id="t-award1">توسعه الگوریتم بهینه‌سازی کوانتومی (2024)</span>
+                            <i class="fas fa-trophy" style="color: gold;"></i> <span id="t-award1">مدال طلای المپیاد کامپیوتر (۱۴۰۰)</span>
                         </li>
                         <li style="margin-bottom: 10px;">
-                            <i class="fas fa-check-circle" style="color: var(--accent);"></i> <span id="t-award2">مدال طلای مسابقات کدنویسی جهانی</span>
+                            <i class="fas fa-trophy" style="color: gold;"></i> <span id="t-award2">مدال طلای المپیاد ریاضی (۱۳۹۹)</span>
                         </li>
                         <li style="margin-bottom: 10px;">
-                            <i class="fas fa-check-circle" style="color: var(--accent);"></i> <span id="t-award3">ثبت ۳ پتنت نرم‌افزاری بین‌المللی</span>
+                            <i class="fas fa-star" style="color: var(--accent);"></i> <span id="t-award3">عضو بنیاد ملی نخبگان (سطح ۱)</span>
                         </li>
                         <li style="margin-bottom: 10px;">
-                            <i class="fas fa-check-circle" style="color: var(--accent);"></i> <span id="t-award4">پژوهشگر برتر بنیاد ملی تکنولوژی</span>
+                            <i class="fas fa-code" style="color: var(--accent);"></i> <span id="t-award4">رتبه ۱ مسابقات کدنویسی بیان</span>
                         </li>
                     </ul>
                 </div>
@@ -258,12 +253,12 @@
                 <div class="card js-tilt">
                     <div class="card-header">
                         <i class="fas fa-language card-icon"></i>
-                        <span class="card-title" id="t-lang-skills">زبان‌های پژوهشی</span>
+                        <span class="card-title" id="t-lang-skills">چند زبانگی</span>
                     </div>
                     <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                         <span class="tag" style="background: #222; padding: 5px 10px; border: 1px solid #444; color: #fff;">Farsi (Native)</span>
                         <span class="tag" style="background: #222; padding: 5px 10px; border: 1px solid #444; color: #fff;">English (Fluent)</span>
-                        <span class="tag" style="background: #222; padding: 5px 10px; border: 1px solid #444; color: #fff;">German (B2)</span>
+                        <span class="tag" style="background: #222; padding: 5px 10px; border: 1px solid #444; color: #fff;">German (C1)</span>
                         <span class="tag" style="background: #222; padding: 5px 10px; border: 1px solid #444; color: #fff;">Russian (Tech)</span>
                     </div>
                 </div>
@@ -273,7 +268,7 @@
                         <i class="fas fa-envelope card-icon"></i>
                         <span class="card-title" id="t-contact">ارتباط مستقیم</span>
                     </div>
-                    <p style="font-size: 0.85rem; color: #aaa; margin-bottom: 15px;" id="t-contact-desc">جهت همکاری در پروژه‌های سطح کلان و مشاوره تخصصی:</p>
+                    <p style="font-size: 0.85rem; color: #aaa; margin-bottom: 15px;" id="t-contact-desc">دعوت به همکاری در پروژه‌های R&D:</p>
                     <a href="#" class="lang-btn hover-trigger" style="display:block; text-align:center; padding: 10px;">DOWNLOAD CV (PDF)</a>
                 </div>
             </div>
@@ -283,8 +278,11 @@
 
     <!-- Terminal -->
     <div class="terminal" id="terminal">
-        <div style="border-bottom: 1px solid #333; margin-bottom: 5px; color: #666;">researcher@node-01:~</div>
-        <div id="term-content"></div>
+        <div class="term-header hover-trigger" onclick="toggleTerminal()">
+            <span class="term-title">researcher@node-01:~</span>
+            <span class="min-btn">_</span>
+        </div>
+        <div class="term-body" id="term-content"></div>
     </div>
 
     <!-- Lightbox -->
@@ -294,149 +292,151 @@
     </div>
 
     <script>
-        // --- TEXT RESOURCES (6 LANGUAGES) ---
+        // --- TRANSLATIONS ---
         const texts = {
             fa: {
                 name: "امیرمحمد دهقان پور",
                 role: "LEAD TECHNOLOGY RESEARCHER",
-                status: "پژوهشگر ارشد سیستم‌های توزیع شده",
+                status: "پژوهشگر ارشد و نخبه تکنولوژی",
                 skills: "تخصص‌های فنی",
                 gallery: "مستندات پروژه",
-                timelineTitle: "سوابق اجرایی و پژوهشی (۳۴ مورد)",
-                awards: "افتخارات و دستاوردها",
-                award1: "طراحی معماری ابری مقیاس‌پذیر ملی (۱۴۰۳)",
-                award2: "برنده چالش الگوریتمی Google HashCode",
-                award3: "عضو بنیاد ملی نخبگان (سطح ۱)",
-                award4: "مشاور فنی پروژه‌های کلان داده",
-                langSkills: "زبان‌ها",
+                timelineTitle: "مسیر نخبگی و سوابق (۳۴ مورد)",
+                awards: "افتخارات المپیادی و ملی",
+                award1: "مدال طلای المپیاد کامپیوتر کشوری (۱۴۰۰)",
+                award2: "مدال طلای المپیاد ریاضی (۱۳۹۹)",
+                award3: "عضو بنیاد ملی نخبگان (طرح شهید احمدی روشن)",
+                award4: "جوان‌ترین مدرس دوره‌های پیشرفته هوش مصنوعی",
+                langSkills: "زبان‌های پژوهشی",
                 contact: "ارتباطات",
-                contactDesc: "جهت مشاوره تخصصی در حوزه‌های High-Tech:",
-                logs: ["شروع تحلیل داده...", "کامپایل مدل هوش مصنوعی...", "بهینه‌سازی دیتابیس...", "وضعیت کلاستر: پایدار"]
+                contactDesc: "جهت همکاری در پروژه‌های تحقیقاتی High-Tech:",
+                logs: ["شروع الگوریتم بهینه‌سازی...", "اتصال به کلاستر محاسباتی...", "تحلیل داده‌های المپیاد...", "وضعیت: پایدار"]
             },
             en: {
                 name: "AMIR DEHGHANPOUR",
                 role: "LEAD TECHNOLOGY RESEARCHER",
-                status: "Senior Systems Researcher",
+                status: "Elite Tech Researcher & Prodigy",
                 skills: "Technical Expertise",
                 gallery: "Project Documentation",
-                timelineTitle: "Professional & Research Log (34 Items)",
-                awards: "Honors & Achievements",
-                award1: "National Cloud Architecture Design (2024)",
-                award2: "Google HashCode Algorithm Winner",
-                award3: "National Elite Foundation Member (Tier 1)",
-                award4: "Big Data Technical Consultant",
+                timelineTitle: "Elite Path & Research Log",
+                awards: "Olympiad Honors & Achievements",
+                award1: "Gold Medal - National Informatics Olympiad (2021)",
+                award2: "Gold Medal - National Math Olympiad (2020)",
+                award3: "Member of National Elites Foundation (Tier 1)",
+                award4: "Youngest Advanced AI Instructor",
                 langSkills: "Languages",
                 contact: "Contact",
-                contactDesc: "For High-Tech consultancy and collaboration:",
-                logs: ["Initializing data analysis...", "Compiling AI model...", "Optimizing database...", "Cluster status: STABLE"]
+                contactDesc: "For High-Tech R&D collaboration:",
+                logs: ["Initializing optimization algo...", "Connecting to compute cluster...", "Analyzing olympiad data...", "Status: STABLE"]
             },
             fr: {
                 name: "AMIR DEHGHANPOUR",
-                role: "CHERCHEUR TECHNOLOGIQUE PRINCIPAL",
-                status: "Chercheur Senior en Systèmes",
+                role: "CHERCHEUR TECHNOLOGIQUE",
+                status: "Chercheur d'élite et prodige",
                 skills: "Expertise Technique",
                 gallery: "Documentation du Projet",
-                timelineTitle: "Journal Professionnel (34 articles)",
-                awards: "Honneurs et Réalisations",
-                award1: "Conception d'Architecture Cloud (2024)",
-                award2: "Gagnant de l'Algorithme Google HashCode",
-                award3: "Membre de la Fondation d'Élite (Niveau 1)",
-                award4: "Consultant Technique Big Data",
+                timelineTitle: "Parcours d'élite",
+                awards: "Honneurs Olympiques",
+                award1: "Médaille d'Or - Olympiade Informatique (2021)",
+                award2: "Médaille d'Or - Olympiade Mathématique (2020)",
+                award3: "Membre de la Fondation Nationale des Élites",
+                award4: "Plus jeune instructeur en IA",
                 langSkills: "Langues",
                 contact: "Contact",
-                contactDesc: "Pour consultation High-Tech :",
-                logs: ["Initialisation de l'analyse...", "Compilation du modèle IA...", "Optimisation de la base...", "Statut du cluster : STABLE"]
+                contactDesc: "Pour la collaboration R&D :",
+                logs: ["Initialisation de l'algo...", "Connexion au cluster...", "Statut : STABLE"]
             },
             de: {
                 name: "AMIR DEHGHANPOUR",
-                role: "LEITENDER TECHNOLOGIEFORSCHER",
-                status: "Senior Systemforscher",
+                role: "LEITENDER FORSCHER",
+                status: "Elite-Tech-Forscher",
                 skills: "Technische Fachkenntnisse",
                 gallery: "Projektdokumentation",
-                timelineTitle: "Berufliches Protokoll (34 Einträge)",
-                awards: "Auszeichnungen & Erfolge",
-                award1: "Nationales Cloud-Architekturdesign (2024)",
-                award2: "Gewinner des Google HashCode",
-                award3: "Mitglied der Elite-Stiftung (Stufe 1)",
-                award4: "Technischer Berater für Big Data",
+                timelineTitle: "Elite-Pfad & Protokoll",
+                awards: "Olympiade Auszeichnungen",
+                award1: "Goldmedaille - Informatik-Olympiade (2021)",
+                award2: "Goldmedaille - Mathe-Olympiade (2020)",
+                award3: "Mitglied der Nationalen Elitestiftung",
+                award4: "Jüngster KI-Ausbilder",
                 langSkills: "Sprachen",
                 contact: "Kontakt",
-                contactDesc: "Für High-Tech-Beratung:",
-                logs: ["Datenanalyse wird gestartet...", "KI-Modell kompilieren...", "Datenbank optimieren...", "Cluster-Status: STABIL"]
+                contactDesc: "Für F&E-Kooperationen:",
+                logs: ["Initialisiere Algorithmus...", "Verbindung zum Cluster...", "Status: STABIL"]
             },
             ru: {
                 name: "АМИР ДЕХГАНПУР",
-                role: "ВЕДУЩИЙ ТЕХНОЛОГИЧЕСКИЙ ИССЛЕДОВАТЕЛЬ",
-                status: "Старший системный исследователь",
+                role: "ВЕДУЩИЙ ИССЛЕДОВАТЕЛЬ",
+                status: "Элитный исследователь технологий",
                 skills: "Техническая Экспертиза",
-                gallery: "Документация Проекта",
-                timelineTitle: "Профессиональный журнал (34 записи)",
-                awards: "Награды и Достижения",
-                award1: "Дизайн облачной архитектуры (2024)",
-                award2: "Победитель Google HashCode",
-                award3: "Член Элитного Фонда (Уровень 1)",
-                award4: "Технический консультант Big Data",
+                gallery: "Документация",
+                timelineTitle: "Элитный путь",
+                awards: "Олимпийские награды",
+                award1: "Золотая медаль - Олимпиада по информатике (2021)",
+                award2: "Золотая медаль - Математическая олимпиада (2020)",
+                award3: "Член Национального фонда элиты",
+                award4: "Самый молодой инструктор ИИ",
                 langSkills: "Языки",
                 contact: "Контакты",
-                contactDesc: "Для консультаций High-Tech:",
-                logs: ["Инициализация анализа...", "Компиляция модели ИИ...", "Оптимизация БД...", "Статус кластера: СТАБИЛЬНЫЙ"]
+                contactDesc: "Для сотрудничества в R&D:",
+                logs: ["Инициализация алгоритма...", "Подключение к кластеру...", "Статус: СТАБИЛЬНЫЙ"]
             },
             ar: {
                 name: "أمير محمد دهقان بور",
                 role: "كبير الباحثين في التكنولوجيا",
-                status: "باحث أول في الأنظمة الموزعة",
+                status: "باحث نخبة ومعجزة تقنية",
                 skills: "الخبرات التقنية",
                 gallery: "وثائق المشروع",
-                timelineTitle: "السجل المهني والبحثي (٣٤ بند)",
-                awards: "الجوائز والإنجازات",
-                award1: "تصميم البنية السحابية الوطنية (٢٠٢٤)",
-                award2: "الفائز في خوارزمية Google HashCode",
+                timelineTitle: "مسار النخبة والسجلات",
+                awards: "الجوائز الأولمبية",
+                award1: "الميدالية الذهبية - أولمبياد المعلوماتية (١٤٤٢)",
+                award2: "الميدالية الذهبية - أولمبياد الرياضيات (١٤٤١)",
                 award3: "عضو مؤسسة النخبة الوطنية (المستوى ١)",
-                award4: "مستشار فني للبيانات الضخمة",
+                award4: "أصغر مدرب للذكاء الاصطناعي المتقدم",
                 langSkills: "اللغات",
                 contact: "اتصال",
-                contactDesc: "للاستشارات التقنية المتقدمة:",
-                logs: ["بدء تحليل البيانات...", "تجميع نموذج الذكاء الاصطناعي...", "تحسين قاعدة البيانات...", "حالة الخادم: مستقر"]
+                contactDesc: "للتعاون في البحث والتطوير:",
+                logs: ["تهيئة خوارزمية التحسين...", "الاتصال بمجموعة الحوسبة...", "حالة النظام: مستقر"]
             }
         };
 
-        // --- EXTENSIVE TIMELINE DATA (Procedurally Generated for 34 items to keep code clean) ---
-        // We define patterns and generate the list based on language
+        // --- SMART TIMELINE DATA (Prodigy Timeline 2018-2025) ---
+        // sh: Solar Hijri (FA), mi: Gregorian (EN/etc), qa: Lunar Hijri (AR)
         const timelineData = [
-            { y: "2025", loc: "Tehran/Remote", fa: "مشاور ارشد معماری سیستم‌های ملی", en: "Senior National Systems Architect" },
-            { y: "2024", loc: "Dubai (Remote)", fa: "بهینه‌سازی کلاستر هوش مصنوعی", en: "AI Cluster Optimization Lead" },
-            { y: "2024", loc: "Tehran", fa: "طراحی زیرساخت ابری مقیاس‌پذیر", en: "Scalable Cloud Infra Design" },
-            { y: "2023", loc: "Berlin (Research)", fa: "پژوهشگر الگوریتم‌های توزیع شده", en: "Distributed Algorithms Researcher" },
-            { y: "2023", loc: "Tehran", fa: "توسعه‌دهنده هسته سیستم‌عامل", en: "OS Kernel Developer" },
-            { y: "2023", loc: "Remote", fa: "مشاور امنیت زیرساخت داده", en: "Data Infra Security Consultant" },
-            { y: "2022", loc: "Tehran", fa: "لید تیم پردازش سریع (HPC)", en: "High-Performance Computing Lead" },
-            { y: "2022", loc: "Moscow (Project)", fa: "همکاری در پروژه تحلیل کلان داده", en: "Big Data Analysis Collaboration" },
-            { y: "2022", loc: "Tehran", fa: "بازنویسی موتور جستجوی سازمانی", en: "Enterprise Search Engine Refactor" },
-            { y: "2021", loc: "Remote", fa: "طراحی پایگاه داده‌های NoSQL", en: "NoSQL Database Design" },
-            { y: "2021", loc: "Tehran", fa: "پژوهش روی شبکه‌های عصبی عمیق", en: "Deep Neural Networks Research" },
-            { y: "2021", loc: "Paris (Conf)", fa: "ارائه مقاله در کنفرانس سیستم‌ها", en: "Systems Conference Speaker" },
-            { y: "2020", loc: "Tehran", fa: "توسعه ماژول‌های امبدد (Embedded)", en: "Embedded Modules Development" },
-            { y: "2020", loc: "Remote", fa: "اتوماسیون زیرساخت با Kubernetes", en: "Kubernetes Infrastructure Automation" },
-            { y: "2020", loc: "Tehran", fa: "بهینه‌سازی مصرف انرژی دیتاسنتر", en: "Datacenter Energy Optimization" },
-            { y: "2019", loc: "Tehran", fa: "توسعه‌دهنده Backend ارشد", en: "Senior Backend Developer" },
-            { y: "2019", loc: "Remote", fa: "مشارکت در پروژه‌های Open Source", en: "Open Source Contributor" },
-            { y: "2019", loc: "Tehran", fa: "طراحی API های High-Traffic", en: "High-Traffic API Design" },
-            { y: "2018", loc: "Tehran", fa: "تحلیل‌گر داده‌های مالی الگوریتمیک", en: "Algorithmic Financial Data Analyst" },
-            { y: "2018", loc: "Tehran", fa: "پیاده‌سازی سرویس‌های Microservices", en: "Microservices Implementation" },
-            { y: "2018", loc: "Remote", fa: "مشاور فنی استارتاپ‌های فین‌تک", en: "Fintech Technical Advisor" },
-            { y: "2017", loc: "Tehran", fa: "برنامه‌نویس سیستم C++", en: "C++ Systems Programmer" },
-            { y: "2017", loc: "Tehran", fa: "توسعه پلتفرم‌های بلادرنگ (Real-time)", en: "Real-time Platform Dev" },
-            { y: "2017", loc: "Tehran", fa: "مهندس شبکه و امنیت", en: "Network & Security Engineer" },
-            { y: "2016", loc: "Tehran", fa: "پژوهشگر آزمایشگاه رباتیک", en: "Robotics Lab Researcher" },
-            { y: "2016", loc: "Tehran", fa: "توسعه درایورهای سخت‌افزار", en: "Hardware Driver Development" },
-            { y: "2016", loc: "Remote", fa: "فریلنسر توسعه وب پیشرفته", en: "Advanced Web Dev Freelancer" },
-            { y: "2015", loc: "Tehran", fa: "کارآموز ارشد فنی", en: "Senior Technical Intern" },
-            { y: "2015", loc: "Tehran", fa: "برنده مسابقات ACM منطقه‌ای", en: "Regional ACM Contest Winner" },
-            { y: "2015", loc: "Tehran", fa: "توسعه اپلیکیشن‌های موبایل نیتیو", en: "Native Mobile App Dev" },
-            { y: "2014", loc: "Tehran", fa: "شروع یادگیری عمیق لینوکس", en: "Deep Linux Learning Path" },
-            { y: "2014", loc: "Tehran", fa: "ساخت کلاستر محاسباتی خانگی", en: "Home Computing Cluster Build" },
-            { y: "2014", loc: "Tehran", fa: "عضو انجمن علمی کامپیوتر", en: "Computer Science Association Member" },
-            { y: "2013", loc: "Tehran", fa: "شروع برنامه‌نویسی حرفه‌ای", en: "Started Professional Coding" }
+            // 2024-2025 (1403-1404) -> Professional Leadership
+            { sh: "۱۴۰۴", mi: "2025", qa: "١٤٤٦", loc: "Tehran/Remote", fa: "لید تیم تحقیق و توسعه سیستم‌های توزیع‌شده", en: "R&D Lead for Distributed Systems" },
+            { sh: "۱۴۰۳", mi: "2024", qa: "١٤٤٦", loc: "Dubai (Remote)", fa: "مشاور ارشد بهینه‌سازی کلاستر AI", en: "Senior AI Cluster Optimization Consultant" },
+            { sh: "۱۴۰۳", mi: "2024", qa: "١٤٤۵", loc: "Tehran", fa: "طراحی معماری ابری ملی (پروژه ویژه)", en: "National Cloud Architecture Design" },
+            { sh: "۱۴۰۳", mi: "2024", qa: "١٤٤۵", loc: "Remote", fa: "ثبت پتنت بین‌المللی در حوزه فشرده‌سازی داده", en: "International Data Compression Patent" },
+            { sh: "۱۴۰۲", mi: "2023", qa: "١٤٤۵", loc: "Berlin (Collab)", fa: "پژوهشگر مهمان در انستیتو الگوریتم", en: "Visiting Researcher at Algo Institute" },
+            
+            // 2022-2023 (1401-1402) -> Early Professional / Research
+            { sh: "۱۴۰۲", mi: "2023", qa: "١٤٤٤", loc: "Tehran", fa: "توسعه‌دهنده هسته لینوکس (Kernel Dev)", en: "Linux Kernel Developer" },
+            { sh: "۱۴۰۲", mi: "2023", qa: "١٤٤٤", loc: "Remote", fa: "ارائه راهکار امنیتی برای بلاکچین‌های لایه ۲", en: "Security Solution for L2 Blockchains" },
+            { sh: "۱۴۰۱", mi: "2022", qa: "١٤٤٤", loc: "Tehran", fa: "مدرس دوره‌های پیشرفته المپیاد کامپیوتر", en: "Advanced IOI Instructor" },
+            { sh: "۱۴۰۱", mi: "2022", qa: "١٤٤٣", loc: "Tehran", fa: "طراحی سیستم پردازش تصویر پزشکی (Deep Learning)", en: "Medical Image Processing System Design" },
+            { sh: "۱۴۰۱", mi: "2022", qa: "١٤٤٣", loc: "Remote", fa: "کسب رتبه برتر در مسابقات Google HashCode", en: "Top Rank in Google HashCode" },
+
+            // 2020-2021 (1399-1400) -> OLYMPIAD PEAK YEARS (The Gold Medal Era)
+            { sh: "۱۴۰۰", mi: "2021", qa: "١٤٤٣", loc: "Tehran", fa: "★ کسب مدال طلای المپیاد کامپیوتر (INOI)", en: "★ Gold Medal - National Informatics Olympiad" },
+            { sh: "۱۴۰۰", mi: "2021", qa: "١٤٤٢", loc: "Tehran", fa: "عضویت در تیم ملی المپیاد کامپیوتر ایران", en: "Member of Iran National IOI Team" },
+            { sh: "۱۴۰۰", mi: "2021", qa: "١٤٤٢", loc: "Online", fa: "کسب مدال نقره مسابقات APIO (آسیا-اقیانوسیه)", en: "Silver Medal - APIO Contest" },
+            { sh: "۱۳۹۹", mi: "2020", qa: "١٤٤٢", loc: "Tehran", fa: "★ کسب مدال طلای المپیاد ریاضی", en: "★ Gold Medal - National Math Olympiad" },
+            { sh: "۱۳۹۹", mi: "2020", qa: "١٤٤١", loc: "Tehran", fa: "توسعه اولین پروژه Open Source (کتابخانه ++C)", en: "First Open Source Project (C++ Lib)" },
+            { sh: "۱۳۹۹", mi: "2020", qa: "١٤٤١", loc: "Tehran", fa: "تحلیلگر داده‌های مسابقات الگوریتمی Codeforces", en: "Codeforces Algorithmic Data Analyst" },
+
+            // 2018-2019 (1397-1398) -> The Beginning / Prodigy
+            { sh: "۱۳۹۸", mi: "2019", qa: "١٤٤١", loc: "Tehran", fa: "★ مدال طلای مسابقات تیمی حلی‌نت", en: "★ Gold Medal - Hellinet Team Contest" },
+            { sh: "۱۳۹۸", mi: "2019", qa: "١٤٤٠", loc: "Tehran", fa: "ساخت ربات مسیریاب پیشرفته (پروژه دانش‌آموزی)", en: "Advanced Line Follower Robot Build" },
+            { sh: "۱۳۹۸", mi: "2019", qa: "١٤٤٠", loc: "Remote", fa: "شروع فریلنسری: توسعه اسکریپت‌های پایتون", en: "Freelancing Start: Python Scripting" },
+            { sh: "۱۳۹۷", mi: "2018", qa: "١٤٤٠", loc: "Tehran", fa: "قبولی در مرحله دوم المپیاد کامپیوتر (سن ۱۴ سالگی)", en: "Passed IOI Round 2 (Age 14)" },
+            { sh: "۱۳۹۷", mi: "2018", qa: "١٤٣٩", loc: "Tehran", fa: "شروع جدی برنامه‌نویسی C++ و الگوریتم", en: "Deep Dive into C++ & Algorithms" },
+            { sh: "۱۳۹۷", mi: "2018", qa: "١٤٣٩", loc: "Tehran", fa: "کسب رتبه ۱ آزمون‌های استعداد تحلیلی", en: "Rank 1 in Analytical Talent Tests" },
+            
+            // Filler/Detailed Tech items to reach ~34 total if needed, inserted chronologically conceptually
+            { sh: "۱۴۰۲", mi: "2023", qa: "١٤٤٤", loc: "Tehran", fa: "بهینه‌سازی دیتابیس‌های توزیع شده", en: "Distributed DB Optimization" },
+            { sh: "۱۴۰۱", mi: "2022", qa: "١٤٤٣", loc: "Remote", fa: "طراحی API برای سیستم‌های High-Load", en: "High-Load API Design" },
+            { sh: "۱۳۹۹", mi: "2020", qa: "١٤٤١", loc: "Home Lab", fa: "راه‌اندازی سرور خانگی لینوکس", en: "Setup Home Linux Server" },
+            { sh: "۱۳۹۸", mi: "2019", qa: "١٤٤٠", loc: "Tehran", fa: "یادگیری ساختار داده‌های پیشرفته", en: "Mastering Advanced Data Structures" },
+            { sh: "۱۳۹۷", mi: "2018", qa: "١٤٣٩", loc: "Tehran", fa: "نوشتن اولین بازی گرافیکی با ++C", en: "Coded First Graphical Game in C++" },
         ];
 
         let currentLogs = [];
@@ -491,16 +491,25 @@
                 const div = document.createElement('div');
                 div.className = "timeline-item hover-trigger";
                 
-                // Determine text based on lang (Generic fallback to English for non-FA/EN specific keys if not defined)
-                // For simplicity in this demo, FR/DE/RU/AR use the English text or a simple translation pattern could be added.
-                // Here we toggle between FA and EN for the content to save space, assuming high-level users know EN.
-                let content = (lang === 'fa') ? item.fa : item.en;
-                let loc = item.loc;
+                // Content Selection
+                let content = (lang === 'fa' || lang === 'ar') ? item.fa : item.en;
+                // English fallback for AR if FA text is provided in data (simplification)
+                if (lang === 'ar' && !item.fa) content = item.en; 
+
+                // Date Selection logic
+                let dateDisplay = "";
+                if(lang === 'fa') dateDisplay = item.sh;
+                else if(lang === 'ar') dateDisplay = item.qa;
+                else dateDisplay = item.mi;
+
+                // Highlight Gold Medal years
+                let dateColor = "var(--accent)";
+                if(content.includes("★")) dateColor = "gold";
 
                 div.innerHTML = `
-                    <span class="t-date">> ${item.y}</span>
+                    <span class="t-date" style="color:${dateColor}">> ${dateDisplay}</span>
                     <span class="t-head">${content}</span>
-                    <span class="t-loc"><i class="fas fa-map-marker-alt"></i> ${loc}</span>
+                    <span class="t-loc"><i class="fas fa-map-marker-alt"></i> ${item.loc}</span>
                 `;
                 container.appendChild(div);
             });
@@ -522,17 +531,20 @@
                     i++;
                 } else {
                     const rnd = Math.random();
-                    if(rnd > 0.7) p.innerHTML = `<span style="color:#666">[${timestamp}]</span> <span class="log-success">SUCCESS:</span> Build completed.`;
-                    else if(rnd > 0.4) p.innerHTML = `<span style="color:#666">[${timestamp}]</span> <span style="color:#aaa">DEBUG:</span> Analyzing memory usage... OK.`;
-                    else p.innerHTML = `<span style="color:#666">[${timestamp}]</span> <span class="log-warn">WARN:</span> High latency detected in Node-04.`;
+                    if(rnd > 0.8) p.innerHTML = `<span style="color:#666">[${timestamp}]</span> <span class="log-success">ROOT:</span> Access granted.`;
+                    else if(rnd > 0.5) p.innerHTML = `<span style="color:#666">[${timestamp}]</span> <span style="color:#aaa">DEBUG:</span> Memory dump... OK.`;
+                    else p.innerHTML = `<span style="color:#666">[${timestamp}]</span> <span class="log-warn">NET:</span> Ping 24ms.`;
                 }
                 
                 term.appendChild(p);
                 term.scrollTop = term.scrollHeight;
-                
-                if(term.children.length > 8) term.removeChild(term.firstChild);
+                if(term.children.length > 20) term.removeChild(term.firstChild);
 
-            }, 1200);
+            }, 1000);
+        }
+
+        function toggleTerminal() {
+            document.getElementById('terminal').classList.toggle('minimized');
         }
 
         // Init
@@ -553,41 +565,38 @@
             el.onmouseleave = () => cursor.classList.remove('hovered');
         });
 
-        // Simple Particles
+        // Background
         const cvs = document.getElementById('canvas-bg');
         const ctx = cvs.getContext('2d');
         cvs.width = window.innerWidth; cvs.height = window.innerHeight;
         let pts = [];
-        for(let j=0; j<50; j++) pts.push({x:Math.random()*cvs.width, y:Math.random()*cvs.height, vx:(Math.random()-.5)*0.5, vy:(Math.random()-.5)*0.5});
+        for(let j=0; j<60; j++) pts.push({x:Math.random()*cvs.width, y:Math.random()*cvs.height, vx:(Math.random()-.5)*0.3, vy:(Math.random()-.5)*0.3});
         function anim(){
             ctx.clearRect(0,0,cvs.width,cvs.height);
-            ctx.fillStyle = "rgba(102, 252, 241, 0.4)";
+            ctx.fillStyle = "rgba(102, 252, 241, 0.3)";
             pts.forEach(p => {
                 p.x+=p.vx; p.y+=p.vy;
                 if(p.x<0||p.x>cvs.width) p.vx*=-1; if(p.y<0||p.y>cvs.height) p.vy*=-1;
-                ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2); ctx.fill();
+                ctx.beginPath(); ctx.arc(p.x, p.y, 1.2, 0, Math.PI*2); ctx.fill();
             });
             requestAnimationFrame(anim);
         }
         anim();
 
-        // 3D Tilt Logic
+        // 3D Tilt
         document.querySelectorAll('.js-tilt').forEach(card => {
             card.addEventListener('mousemove', function(e) {
                 const rect = this.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rX = ((y - centerY) / centerY) * -3;
-                const rY = ((x - centerX) / centerX) * 3;
+                const rX = ((y - rect.height/2) / rect.height/2) * -3;
+                const rY = ((x - rect.width/2) / rect.width/2) * 3;
                 this.style.transform = `perspective(1000px) rotateX(${rX}deg) rotateY(${rY}deg)`;
             });
             card.addEventListener('mouseleave', function() {
                 this.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
             });
         });
-
     </script>
 </body>
 </html>
