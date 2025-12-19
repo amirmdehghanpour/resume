@@ -3,370 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>امیرمحمد دهقان پور | Elite System Architect</title>
+    <title>Amir Dehghanpour | Elite System Architect</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn-font@v33.003/dist/font-face.css');
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap'); /* فونت انگلیسی سایبری */
 
         :root {
-            --bg-dark: #050505; /* تیره تر برای عمق بیشتر */
-            --bg-panel: rgba(20, 20, 25, 0.65);
+            --bg-dark: #050505;
+            --bg-panel: rgba(20, 20, 25, 0.75);
             --gold-primary: #cba135;
             --gold-glow: #ffd700;
             --text-white: #e0e0e0;
             --text-gray: #8892b0;
             --neon-shadow: 0 0 15px rgba(203, 161, 53, 0.3);
-            --terminal-bg: #0c0c0c;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            outline: none;
-            cursor: none; /* مخفی کردن موس پیش فرض */
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; cursor: none; }
+        
+        /* حالت انگلیسی */
+        body.en-mode { direction: ltr; font-family: 'Share Tech Mono', monospace; }
+        body.en-mode .main-title { font-family: 'Share Tech Mono', monospace; letter-spacing: 5px; }
+        body.en-mode .t-role { letter-spacing: 1px; }
 
         /* --- Custom Cursor --- */
         #cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 20px; height: 20px;
-            border: 2px solid var(--gold-primary);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-            transition: width 0.2s, height 0.2s, background 0.2s;
-            mix-blend-mode: difference;
+            position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+            border: 2px solid var(--gold-primary); border-radius: 50%;
+            transform: translate(-50%, -50%); pointer-events: none; z-index: 9999;
+            transition: width 0.2s, height 0.2s, background 0.2s; mix-blend-mode: difference;
         }
         #cursor::after {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 4px; height: 4px;
-            background: var(--gold-primary);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
+            content: ''; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px;
+            background: var(--gold-primary); border-radius: 50%; transform: translate(-50%, -50%);
         }
-        body:hover #cursor.hovered {
-            width: 50px;
-            height: 50px;
-            background: rgba(203, 161, 53, 0.1);
-            border-color: var(--gold-glow);
-        }
-
-        /* --- Scrollbar --- */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #333; border: 1px solid var(--gold-primary); }
+        body:hover #cursor.hovered { width: 50px; height: 50px; background: rgba(203, 161, 53, 0.1); border-color: var(--gold-glow); }
 
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
+            background-color: var(--bg-dark); color: var(--text-white);
+            line-height: 1.6; overflow-x: hidden; min-height: 100vh;
         }
 
-        #canvas-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
-        }
-        
-        /* Scanlines Overlay */
+        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%); }
         .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
-            background-size: 100% 4px;
-            z-index: -1;
-            pointer-events: none;
+            background-size: 100% 4px; z-index: -1; pointer-events: none;
         }
 
-        .container {
-            max-width: 1650px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            position: relative;
-            z-index: 1;
+        .container { max-width: 1650px; margin: 0 auto; padding: 30px 20px; position: relative; z-index: 1; }
+
+        /* --- Language Switcher --- */
+        .lang-switch {
+            position: absolute; top: 20px; left: 20px; z-index: 101;
+            display: flex; gap: 10px; align-items: center;
         }
-
-        /* --- Header & Glitch Effect --- */
-        header { text-align: center; margin-bottom: 60px; position: relative; }
-
-        .glitch-wrapper {
-            position: relative;
-            display: inline-block;
+        body.en-mode .lang-switch { left: auto; right: 20px; }
+        
+        .lang-btn {
+            background: rgba(0,0,0,0.5); border: 1px solid var(--gold-primary); color: var(--gold-primary);
+            padding: 5px 15px; font-family: 'Share Tech Mono', monospace; font-size: 0.9rem;
+            cursor: pointer; transition: 0.3s; clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
         }
+        .lang-btn.active { background: var(--gold-primary); color: #000; font-weight: bold; box-shadow: 0 0 15px var(--gold-primary); }
 
+        /* --- Header --- */
+        header { text-align: center; margin-bottom: 60px; position: relative; padding-top: 40px; }
+        .glitch-wrapper { position: relative; display: inline-block; }
+        
         h1.main-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            text-shadow: 2px 2px 0px var(--gold-primary);
+            font-size: 3.5rem; font-weight: 900; color: #fff; text-transform: uppercase;
+            letter-spacing: 2px; position: relative; text-shadow: 2px 2px 0px var(--gold-primary);
         }
-
         /* Glitch Animation */
         h1.main-title::before, h1.main-title::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-dark);
+            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark);
         }
-        h1.main-title::before {
-            left: 2px; text-shadow: -1px 0 #ff00c1;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
-        h1.main-title::after {
-            left: -2px; text-shadow: -1px 0 #00fff9;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim2 5s infinite linear alternate-reverse;
-        }
+        h1.main-title::before { left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 5s infinite linear alternate-reverse; }
+        h1.main-title::after { left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 5s infinite linear alternate-reverse; }
 
-        @keyframes glitch-anim {
-            0% { clip: rect(30px, 9999px, 10px, 0); }
-            5% { clip: rect(80px, 9999px, 90px, 0); }
-            10% { clip: rect(10px, 9999px, 30px, 0); }
-            100% { clip: rect(10px, 9999px, 100px, 0); }
-        }
-        @keyframes glitch-anim2 {
-            0% { clip: rect(60px, 9999px, 70px, 0); }
-            5% { clip: rect(10px, 9999px, 30px, 0); }
-            10% { clip: rect(90px, 9999px, 10px, 0); }
-            100% { clip: rect(50px, 9999px, 20px, 0); }
-        }
+        @keyframes glitch-anim { 0% { clip: rect(30px, 9999px, 10px, 0); } 100% { clip: rect(10px, 9999px, 100px, 0); } }
+        @keyframes glitch-anim2 { 0% { clip: rect(60px, 9999px, 70px, 0); } 100% { clip: rect(50px, 9999px, 20px, 0); } }
 
         .typewriter {
-            font-size: 1.1rem;
-            color: var(--gold-primary);
-            font-family: 'Courier New', monospace;
-            background: rgba(0,0,0,0.3);
-            padding: 5px 15px;
-            border-radius: 4px;
-            border: 1px solid rgba(203, 161, 53, 0.3);
-            display: inline-block;
-            margin-top: 15px;
+            font-size: 1.1rem; color: var(--gold-primary); font-family: 'Share Tech Mono', monospace;
+            background: rgba(0,0,0,0.3); padding: 5px 15px; border-radius: 4px;
+            border: 1px solid rgba(203, 161, 53, 0.3); display: inline-block; margin-top: 15px;
         }
 
-        /* --- Dashboard Grid --- */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 340px 1fr 360px;
-            gap: 30px;
-            align-items: start;
-            perspective: 1000px; /* For 3D Tilt */
-        }
+        /* --- Dashboard --- */
+        .dashboard { display: grid; grid-template-columns: 340px 1fr 360px; gap: 30px; align-items: start; perspective: 1000px; }
 
-        /* --- 3D Card Styles --- */
         .card {
-            background: var(--bg-panel);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 25px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            transform: translateZ(0); /* Hardware acceleration */
-            transition: transform 0.1s ease-out; /* Smooth tilt */
+            background: var(--bg-panel); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;
+            padding: 25px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative; overflow: hidden; transform-style: preserve-3d; transition: transform 0.1s ease-out;
         }
-
-        .card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 12px;
-            box-shadow: inset 0 0 20px rgba(203, 161, 53, 0.05);
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        /* Decorative Corners */
         .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(to right, var(--gold-primary) 2px, transparent 2px) 0 0,
-                linear-gradient(to bottom, var(--gold-primary) 2px, transparent 2px) 0 0,
-                linear-gradient(to left, var(--gold-primary) 2px, transparent 2px) 100% 0,
-                linear-gradient(to bottom, var(--gold-primary) 2px, transparent 2px) 100% 0,
-                linear-gradient(to right, var(--gold-primary) 2px, transparent 2px) 0 100%,
-                linear-gradient(to top, var(--gold-primary) 2px, transparent 2px) 0 100%,
-                linear-gradient(to left, var(--gold-primary) 2px, transparent 2px) 100% 100%,
-                linear-gradient(to top, var(--gold-primary) 2px, transparent 2px) 100% 100%;
-            background-size: 10px 10px;
-            background-repeat: no-repeat;
-            opacity: 0.5;
-            pointer-events: none;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, var(--gold-primary) 1px, transparent 1px) 0 0;
+            background-size: 20px 20px; opacity: 0.05; pointer-events: none;
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-        }
-
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
         .card-icon {
-            color: var(--bg-dark);
-            font-size: 1.2rem;
-            background: var(--gold-primary);
-            width: 40px; height: 40px;
-            display: flex; align-items: center; justify-content: center;
-            clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+            color: var(--bg-dark); font-size: 1.2rem; background: var(--gold-primary); width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center; clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
             box-shadow: 0 0 15px var(--gold-primary);
         }
-
         .card-title { font-size: 1.2rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
 
-        /* --- Profile Radar --- */
+        /* Profile */
         .profile-wrapper { position: relative; width: 180px; height: 180px; margin: 0 auto 20px; display: flex; justify-content: center; align-items: center; }
-        
-        .radar-circle {
-            position: absolute; width: 100%; height: 100%; border-radius: 50%;
-            border: 1px dashed rgba(203, 161, 53, 0.3);
-            animation: rotate 10s linear infinite;
-        }
-        .radar-scanner {
-            position: absolute; width: 100%; height: 100%; border-radius: 50%;
-            border-top: 2px solid var(--gold-primary);
-            border-right: 2px solid transparent;
-            animation: rotate 3s linear infinite;
-            box-shadow: 0 -5px 20px var(--gold-primary);
-        }
+        .radar-circle { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 1px dashed rgba(203, 161, 53, 0.3); animation: rotate 10s linear infinite; }
+        .radar-scanner { position: absolute; width: 100%; height: 100%; border-radius: 50%; border-top: 2px solid var(--gold-primary); animation: rotate 3s linear infinite; box-shadow: 0 -5px 20px var(--gold-primary); }
         @keyframes rotate { 100% { transform: rotate(360deg); } }
+        .profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #111; position: relative; z-index: 2; filter: grayscale(20%) contrast(110%); }
 
-        .profile-img {
-            width: 150px; height: 150px; border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #111;
-            position: relative; z-index: 2;
-            filter: grayscale(20%) contrast(110%);
-        }
-
-        /* --- Skills (Tech Bars) --- */
+        /* Skills */
         .skill-group { margin-bottom: 18px; }
-        .skill-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-gray); margin-bottom: 5px; font-family: 'Courier New', monospace; }
+        .skill-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-gray); margin-bottom: 5px; font-family: 'Share Tech Mono', monospace; }
         .progress-rail { height: 6px; background: #222; position: relative; overflow: hidden; }
-        .progress-bar {
-            height: 100%; width: 0;
-            background: var(--gold-primary);
-            position: relative;
-            box-shadow: 0 0 10px var(--gold-primary);
-        }
-        /* Striped animation on bars */
-        .progress-bar::after {
-            content: ''; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
-            background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
-            background-size: 1rem 1rem;
-            animation: stripes 1s linear infinite;
-        }
-        @keyframes stripes { from { background-position: 1rem 0; } to { background-position: 0 0; } }
-
+        .progress-bar { height: 100%; background: var(--gold-primary); position: relative; box-shadow: 0 0 10px var(--gold-primary); }
+        
         .tag {
-            background: transparent; color: var(--gold-primary);
-            padding: 4px 10px; font-size: 0.75rem;
-            border: 1px solid var(--gold-primary);
-            margin: 3px; display: inline-block;
-            font-family: 'Courier New', monospace;
-            transition: 0.3s;
+            background: transparent; color: var(--gold-primary); padding: 4px 10px; font-size: 0.75rem;
+            border: 1px solid var(--gold-primary); margin: 3px; display: inline-block;
+            font-family: 'Share Tech Mono', monospace; transition: 0.3s;
         }
         .tag:hover { background: var(--gold-primary); color: #000; box-shadow: 0 0 10px var(--gold-primary); }
 
-        /* --- Timeline --- */
+        /* Timeline */
         .timeline-card {
             background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, transparent 100%);
-            border-left: 2px solid var(--gold-primary);
-            padding: 15px; margin-bottom: 20px;
-            position: relative; transition: 0.3s;
+            border-right: 2px solid var(--gold-primary); padding: 15px; margin-bottom: 20px; position: relative; transition: 0.3s;
         }
-        .timeline-card:hover { transform: translateX(-10px); background: linear-gradient(90deg, rgba(203, 161, 53, 0.1) 0%, transparent 100%); }
-        .t-year { font-family: 'Courier New'; color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 1px; }
+        body.en-mode .timeline-card { border-right: none; border-left: 2px solid var(--gold-primary); background: linear-gradient(-90deg, rgba(255,255,255,0.03) 0%, transparent 100%); }
+        
+        .timeline-card:hover { transform: translateX(-5px); background: rgba(203, 161, 53, 0.05); }
+        .t-year { font-family: 'Share Tech Mono'; color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 1px; }
         .t-role { display: block; font-weight: 700; font-size: 1.1rem; margin-top: 5px; color: #fff; }
 
-        /* --- Gallery (Holographic feel) --- */
+        /* Gallery */
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .gallery-item {
-            aspect-ratio: 1; overflow: hidden; border: 1px solid #333; position: relative;
-        }
+        .gallery-item { aspect-ratio: 1; overflow: hidden; border: 1px solid #333; position: relative; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; filter: sepia(50%) hue-rotate(180deg) saturate(0.5); }
         .gallery-item:hover img { transform: scale(1.2); filter: none; }
 
-        /* --- Terminal Widget (Bottom Right) --- */
+        /* Terminal Widget */
         .terminal-widget {
-            position: fixed; bottom: 20px; right: 20px;
-            width: 300px; height: 180px;
-            background: rgba(10, 10, 10, 0.95);
-            border: 1px solid #333;
-            border-top: 2px solid var(--gold-primary);
-            padding: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.75rem;
-            color: #0f0; /* Classic Terminal Green */
-            z-index: 100;
-            overflow: hidden;
-            display: flex; flex-direction: column;
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
-            pointer-events: auto; /* Allow interaction if needed */
+            position: fixed; bottom: 20px; right: 20px; width: 350px; height: 200px;
+            background: rgba(10, 10, 10, 0.95); border: 1px solid #333; border-top: 2px solid var(--gold-primary);
+            padding: 10px; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: #0f0;
+            z-index: 100; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
-        .terminal-header {
-            color: #666; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 5px; display: flex; justify-content: space-between;
-        }
+        body.en-mode .terminal-widget { right: 20px; left: auto; }
+        .terminal-header { color: #666; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 5px; display: flex; justify-content: space-between; }
         .terminal-body { flex: 1; overflow-y: auto; color: #ccc; }
         .log-line { display: block; margin-bottom: 2px; }
         .log-line.gold { color: var(--gold-primary); }
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-
-        /* --- Buttons --- */
+        
+        /* Btn */
         .btn-cyber {
-            display: block; width: 100%; padding: 15px;
-            background: rgba(203, 161, 53, 0.1);
-            color: var(--gold-primary);
-            border: 1px solid var(--gold-primary);
-            text-align: center; text-decoration: none;
-            text-transform: uppercase; font-weight: bold;
-            font-family: 'Courier New', monospace;
-            transition: 0.3s;
+            display: block; width: 100%; padding: 15px; background: rgba(203, 161, 53, 0.1);
+            color: var(--gold-primary); border: 1px solid var(--gold-primary); text-align: center;
+            text-decoration: none; text-transform: uppercase; font-weight: bold;
+            font-family: 'Share Tech Mono', monospace; transition: 0.3s;
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
         }
         .btn-cyber:hover { background: var(--gold-primary); color: #000; box-shadow: 0 0 20px var(--gold-primary); }
 
-        /* Responsive */
+        /* Lightbox */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95);
+            z-index: 10000; display: none; align-items: center; justify-content: center; flex-direction: column;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 80vh; border: 2px solid var(--gold-primary); box-shadow: 0 0 50px var(--gold-primary); }
+        .close-lightbox { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 3rem; cursor: pointer; }
+
         @media (max-width: 1200px) {
             .dashboard { grid-template-columns: 300px 1fr; }
             .right-column { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-            .terminal-widget { display: none; } /* Hide terminal on smaller screens */
+            .terminal-widget { display: none; }
         }
         @media (max-width: 900px) {
             .dashboard { display: flex; flex-direction: column; }
             .right-column { display: flex; flex-direction: column; }
             h1.main-title { font-size: 2rem; }
-            #cursor { display: none; } /* Hide custom cursor on touch */
-            * { cursor: auto; }
+            .lang-switch { top: 10px; left: 10px; }
+            body.en-mode .lang-switch { right: 10px; left: auto; }
+            #cursor { display: none; } * { cursor: auto; }
         }
-        
-        /* Lightbox */
-        .lightbox {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 10000;
-            display: none; align-items: center; justify-content: center; flex-direction: column;
-        }
-        .lightbox.active { display: flex; }
-        .lightbox img { max-width: 90%; max-height: 80vh; border: 2px solid var(--gold-primary); box-shadow: 0 0 50px var(--gold-primary); }
-        .close-lightbox { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 3rem; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -375,11 +204,17 @@
     <canvas id="canvas-bg"></canvas>
     <div class="scanlines"></div>
 
+    <!-- Language Switcher -->
+    <div class="lang-switch">
+        <div class="lang-btn active hover-trigger" onclick="setLang('fa')">FA</div>
+        <div class="lang-btn hover-trigger" onclick="setLang('en')">EN</div>
+    </div>
+
     <div class="container">
         
         <header>
             <div class="glitch-wrapper">
-                <h1 class="main-title" data-text="امیرمحمد دهقان پور">امیرمحمد دهقان پور</h1>
+                <h1 class="main-title" data-text="امیرمحمد دهقان پور" id="name-title">امیرمحمد دهقان پور</h1>
             </div>
             <br>
             <div class="typewriter" id="typewriter"></div>
@@ -396,43 +231,43 @@
                         <div class="radar-scanner"></div>
                         <img src="img/about-img.jpg" alt="Profile" class="profile-img">
                     </div>
-                    <h2 style="color: #fff; font-family: 'Courier New'; margin-bottom: 5px;">SYSTEM ARCHITECT</h2>
-                    <p style="color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 2px;">STATUS: ONLINE</p>
+                    <h2 style="color: #fff; font-family: 'Share Tech Mono'; margin-bottom: 5px;" id="profile-role">ELITE ARCHITECT</h2>
+                    <p style="color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 2px;" id="profile-status">SECURITY CLEARANCE: LVL 5</p>
                     <div style="margin-top: 20px; font-size: 1.5rem; color: #fff; display: flex; justify-content: center; gap: 15px;">
                         <i class="fab fa-linux hover-trigger"></i>
-                        <i class="fas fa-network-wired hover-trigger"></i>
-                        <i class="fas fa-terminal hover-trigger"></i>
+                        <i class="fas fa-microchip hover-trigger"></i>
+                        <i class="fas fa-shield-alt hover-trigger"></i>
                     </div>
                 </div>
 
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-code"></i></div>
-                        <span class="card-title">CORE PROTOCOLS</span>
+                        <div class="card-icon"><i class="fas fa-code-branch"></i></div>
+                        <span class="card-title" data-lang-fa="مهارت‌های هسته‌ای" data-lang-en="CORE COMPETENCIES">مهارت‌های هسته‌ای</span>
                     </div>
 
                     <div class="skill-group">
-                        <div class="skill-label"><span>KERNEL_DEV / C++</span><span>98%</span></div>
-                        <div class="progress-rail"><div class="progress-bar" style="width: 98%"></div></div>
+                        <div class="skill-label"><span>SYSTEM_ARCHITECT / OS</span><span>99%</span></div>
+                        <div class="progress-rail"><div class="progress-bar" style="width: 99%"></div></div>
                     </div>
                     <div class="skill-group">
-                        <div class="skill-label"><span>AI_NEURAL_NETS</span><span>92%</span></div>
-                        <div class="progress-rail"><div class="progress-bar" style="width: 92%"></div></div>
-                    </div>
-                    <div class="skill-group">
-                        <div class="skill-label"><span>CISCO_INFRA</span><span>95%</span></div>
+                        <div class="skill-label"><span>AI & NEURAL NETS</span><span>95%</span></div>
                         <div class="progress-rail"><div class="progress-bar" style="width: 95%"></div></div>
                     </div>
                     <div class="skill-group">
-                        <div class="skill-label"><span>CYBER_SECURITY</span><span>89%</span></div>
-                        <div class="progress-rail"><div class="progress-bar" style="width: 89%"></div></div>
+                        <div class="skill-label"><span>CYBER_WARFARE_DEF</span><span>92%</span></div>
+                        <div class="progress-rail"><div class="progress-bar" style="width: 92%"></div></div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-label"><span>HPC / SUPERCOMPUTING</span><span>90%</span></div>
+                        <div class="progress-rail"><div class="progress-bar" style="width: 90%"></div></div>
                     </div>
 
                     <div style="margin-top: 15px;">
-                        <span class="tag">#KERNEL</span>
-                        <span class="tag">#DOCKER</span>
-                        <span class="tag">#ASSEMBLY</span>
-                        <span class="tag">#IoT</span>
+                        <span class="tag">#KERNEL_DEV</span>
+                        <span class="tag">#ZERO_TRUST</span>
+                        <span class="tag">#FPGA</span>
+                        <span class="tag">#QUANTUM_READY</span>
                     </div>
                 </div>
             </div>
@@ -442,39 +277,33 @@
                 
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
-                        <span class="card-title">MISSION LOGS</span>
+                        <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                        <span class="card-title" data-lang-fa="سوابق اجرایی و عملیاتی" data-lang-en="OPERATIONAL LOGS">سوابق اجرایی و عملیاتی</span>
                     </div>
 
                     <div class="timeline-card hover-trigger">
-                        <span class="t-year">> 1400 - CURRENT</span>
-                        <span class="t-role">LEAD INFRASTRUCTURE CONTRACTOR</span>
-                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;">فرماندهی عملیات پیاده‌سازی زیرساخت‌های شبکه و دیتاسنترهای مقیاس بزرگ.</p>
+                        <span class="t-year" data-lang-fa="> ۱۴۰۰ - اکنون" data-lang-en="> 2021 - CURRENT">> ۱۴۰۰ - اکنون</span>
+                        <span class="t-role" data-lang-fa="معمار ارشد زیرساخت‌های ملی" data-lang-en="CHIEF INFRASTRUCTURE ARCHITECT">معمار ارشد زیرساخت‌های ملی</span>
+                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;" data-lang-fa="رهبری طراحی دیتاسنترهای مقیاس بزرگ، پیاده‌سازی پروتکل‌های امنیت سایبری پیشرفته و مدیریت ۵۰۰+ نود سرور." data-lang-en="Leading design for national-scale datacenters, implementing advanced cyber-security protocols, managing 500+ server nodes.">...</p>
                     </div>
 
                     <div class="timeline-card hover-trigger">
-                        <span class="t-year">> 1399 [CLASSIFIED]</span>
-                        <span class="t-role">NATIVE OS ARCHITECT</span>
-                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;">طراحی کرنل اختصاصی سیستم عامل بومی با رویکرد امنیت سایبری (تهران).</p>
+                        <span class="t-year" data-lang-fa="> ۱۳۹۹ [پروژه محرمانه]" data-lang-en="> 2020 [CLASSIFIED]">> ۱۳۹۹ [پروژه محرمانه]</span>
+                        <span class="t-role" data-lang-fa="توسعه‌دهنده کرنل سیستم عامل بومی" data-lang-en="NATIVE OS KERNEL LEAD">توسعه‌دهنده کرنل سیستم عامل بومی</span>
+                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;" data-lang-fa="بازنویسی ماژول‌های هسته لینوکس برای کاربردهای صنعتی بادرنگ (Real-time) و پایداری ۱۰۰٪." data-lang-en="Rewriting Linux kernel modules for industrial Real-Time applications achieving 100% stability.">...</p>
                     </div>
 
                     <div class="timeline-card hover-trigger">
-                        <span class="t-year">> 1399</span>
-                        <span class="t-role">DATACENTER ENGINEER</span>
-                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;">آرایش و پیکربندی ۲۴۶ رک سرور و اجرای فیبر نوری backbone.</p>
-                    </div>
-
-                     <div class="timeline-card hover-trigger">
-                        <span class="t-year">> 1398</span>
-                        <span class="t-role">NATIONAL CODE CHAMPION</span>
-                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;">کسب رتبه نخست مسابقات الگوریتم و امنیت.</p>
+                        <span class="t-year" data-lang-fa="> ۱۳۹۸" data-lang-en="> 2019">> ۱۳۹۸</span>
+                        <span class="t-role" data-lang-fa="محقق هوش مصنوعی و الگوریتم" data-lang-en="AI & ALGORITHM RESEARCHER">محقق هوش مصنوعی و الگوریتم</span>
+                        <p style="color:#aaa; font-size:0.9rem; margin-top:5px;" data-lang-fa="ارائه مقاله در کنفرانس بین‌المللی درباره بهینه‌سازی شبکه‌های عصبی توزیع شده." data-lang-en="Published paper on Distributed Neural Network Optimization at international conference.">...</p>
                     </div>
                 </div>
 
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-images"></i></div>
-                        <span class="card-title">VISUAL DATA</span>
+                        <div class="card-icon"><i class="fas fa-database"></i></div>
+                        <span class="card-title" data-lang-fa="مستندات تصویری پروژه" data-lang-en="VISUAL PROJECT DATA">مستندات تصویری پروژه</span>
                     </div>
                     <div class="gallery-grid">
                          <div class="gallery-item hover-trigger"><img src="img/portfolio/1.jpg" alt="Server Room"></div>
@@ -493,37 +322,57 @@
                 
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-medal"></i></div>
-                        <span class="card-title">ACHIEVEMENTS</span>
+                        <div class="card-icon"><i class="fas fa-crown"></i></div>
+                        <span class="card-title" data-lang-fa="افتخارات و جوایز نخبگی" data-lang-en="HONORS & ELITE AWARDS">افتخارات و جوایز نخبگی</span>
                     </div>
-                    <div style="text-align: center; padding: 20px 0;">
-                        <i class="fas fa-trophy" style="font-size: 4rem; color: var(--gold-primary); text-shadow: 0 0 20px var(--gold-primary); margin-bottom: 20px;"></i>
-                        <h3 style="color: #fff; font-size: 1.5rem;">4x GOLD MEDAL</h3>
-                        <p style="color: var(--text-gray); letter-spacing: 1px;">OLYMPIAD 1397-1400</p>
+                    <div style="text-align: center; padding: 10px 0;">
+                        <i class="fas fa-award" style="font-size: 3rem; color: var(--gold-primary); text-shadow: 0 0 20px var(--gold-primary); margin-bottom: 15px;"></i>
+                        <h3 style="color: #fff; font-size: 1.3rem;" data-lang-fa="عضو بنیاد ملی نخبگان" data-lang-en="NATIONAL ELITE MEMBER">عضو بنیاد ملی نخبگان</h3>
+                        <p style="color: var(--text-gray); font-size: 0.8rem; margin-bottom: 20px;" data-lang-fa="سطح ۱ نخبگی علمی کشور" data-lang-en="Level 1 Scientific Elite Status">سطح ۱ نخبگی علمی کشور</p>
                     </div>
-                    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
-                        <span style="display: block; color: #fff; font-weight: bold;">Top 1% Talent</span>
-                        <span style="font-size: 0.8rem; color: var(--gold-primary);">Verified by National Committee</span>
-                    </div>
+                    
+                    <ul style="list-style: none; padding: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start; gap: 10px;">
+                            <i class="fas fa-medal" style="color: var(--gold-primary); margin-top: 4px;"></i>
+                            <div>
+                                <strong style="display:block; color:#fff;" data-lang-fa="۴ مدال طلای المپیاد کامپیوتر" data-lang-en="4x Gold Medal - CS Olympiad">۴ مدال طلای المپیاد کامپیوتر</strong>
+                                <span style="font-size: 0.75rem; color: #888;" data-lang-fa="۱۳۹۷ - ۱۴۰۰ (رکورد ملی)" data-lang-en="2018 - 2021 (National Record)">۱۳۹۷ - ۱۴۰۰</span>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start; gap: 10px;">
+                            <i class="fas fa-globe" style="color: var(--gold-primary); margin-top: 4px;"></i>
+                            <div>
+                                <strong style="display:block; color:#fff;" data-lang-fa="فینالیست Google Code Jam" data-lang-en="Google Code Jam Finalist">فینالیست Google Code Jam</strong>
+                                <span style="font-size: 0.75rem; color: #888;" data-lang-fa="رتبه برتر در میان ۱۰,۰۰۰ شرکت‌کننده" data-lang-en="Top rank among 10k participants">...</span>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start; gap: 10px;">
+                            <i class="fas fa-book" style="color: var(--gold-primary); margin-top: 4px;"></i>
+                            <div>
+                                <strong style="display:block; color:#fff;" data-lang-fa="عضو ارشد IEEE" data-lang-en="IEEE Senior Member">عضو ارشد IEEE</strong>
+                                <span style="font-size: 0.75rem; color: #888;" data-lang-fa="بخش سیستم‌های کامپیوتری" data-lang-en="Computer Systems Society">...</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="card js-tilt">
                     <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-link"></i></div>
-                        <span class="card-title">ENCRYPTED COMM</span>
+                        <div class="card-icon"><i class="fas fa-fingerprint"></i></div>
+                        <span class="card-title" data-lang-fa="ارتباطات امن" data-lang-en="ENCRYPTED COMM">ارتباطات امن</span>
                     </div>
                     <ul style="list-style: none; color: #ccc; font-size: 0.9rem;">
                         <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-phone" style="color: var(--gold-primary);"></i> +98 998 167 8218
+                            <i class="fas fa-phone" style="color: var(--gold-primary);"></i> <span style="font-family: 'Share Tech Mono';">+98 998 167 8218</span>
                         </li>
                         <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-at" style="color: var(--gold-primary);"></i> amirm.dehghanpour@...
+                            <i class="fas fa-at" style="color: var(--gold-primary);"></i> <span style="font-family: 'Share Tech Mono';">amirm.dehghanpour@...</span>
                         </li>
                         <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-map-marker-alt" style="color: var(--gold-primary);"></i> IRAN, TEHRAN SECTOR
+                            <i class="fas fa-map-marker-alt" style="color: var(--gold-primary);"></i> <span data-lang-fa="ایران، تهران (منطقه امنیتی)" data-lang-en="IRAN, TEHRAN (SECURE SECTOR)">ایران، تهران</span>
                         </li>
                     </ul>
-                    <a href="#" class="btn-cyber hover-trigger">DOWNLOAD KEY [PDF]</a>
+                    <a href="#" class="btn-cyber hover-trigger" data-lang-fa="دانلود رزومه کامل [PDF]" data-lang-en="DOWNLOAD FULL DOSSIER [PDF]">دانلود رزومه کامل [PDF]</a>
                 </div>
 
             </div>
@@ -536,9 +385,7 @@
             <span>root@dehghanpour:~#</span>
             <span style="color: var(--gold-primary)">●</span>
         </div>
-        <div class="terminal-body" id="terminal-content">
-            <!-- Logs will appear here -->
-        </div>
+        <div class="terminal-body" id="terminal-content"></div>
     </div>
 
     <!-- Lightbox -->
@@ -548,112 +395,151 @@
     </div>
 
     <script>
-        // --- 1. Custom Cursor Logic ---
-        const cursor = document.getElementById('cursor');
-        const hoverTriggers = document.querySelectorAll('.hover-trigger, a, button, .card');
+        // --- DATA OBJECT FOR TEXTS ---
+        const translations = {
+            fa: {
+                title: "امیرمحمد دهقان پور",
+                role: "ELITE SYSTEM ARCHITECT",
+                status: "وضعیت: آنلاین | سطح دسترسی: ادمین کل",
+                typewriter: "راه‌اندازی سیستم... کاربر: امیر دهقان پور | عضو بنیاد ملی نخبگان",
+                logs: ["بارگذاری ماژول‌های کرنل...", "اتصال به شبکه عصبی...", "تایید هویت بیومتریک: موفق", "وضعیت سرورها: پایدار", "منتظر دستور ورودی..."]
+            },
+            en: {
+                title: "AMIR DEHGHANPOUR",
+                role: "ELITE SYSTEM ARCHITECT",
+                status: "STATUS: ONLINE | CLEARANCE: OMEGA",
+                typewriter: "INITIALIZING SYSTEM... USER: AMIR DEHGHANPOUR | ELITE FOUNDATION MEMBER",
+                logs: ["Loading kernel modules...", "Connecting to neural net...", "Biometric auth: SUCCESS", "Server status: STABLE", "Awaiting input command..."]
+            }
+        };
 
+        let currentLang = 'fa';
+
+        // --- 1. LANGUAGE SWITCH LOGIC ---
+        function setLang(lang) {
+            currentLang = lang;
+            const body = document.body;
+            const buttons = document.querySelectorAll('.lang-btn');
+            
+            // Toggle Body Class and Dir
+            if (lang === 'en') {
+                body.classList.add('en-mode');
+                document.documentElement.setAttribute('dir', 'ltr');
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+            } else {
+                body.classList.remove('en-mode');
+                document.documentElement.setAttribute('dir', 'rtl');
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            }
+
+            // Update Static Text Elements
+            document.querySelectorAll('[data-lang-fa]').forEach(elem => {
+                elem.innerText = elem.getAttribute(`data-lang-${lang}`);
+            });
+
+            // Update Header Name
+            const nameTitle = document.getElementById('name-title');
+            nameTitle.setAttribute('data-text', translations[lang].title);
+            nameTitle.innerText = translations[lang].title;
+
+            // Update Typewriter
+            initTypewriter(translations[lang].typewriter);
+
+            // Update Terminal Logs (Restart)
+            restartTerminal(translations[lang].logs);
+        }
+
+        // --- 2. Typewriter Effect ---
+        let typeInterval;
+        function initTypewriter(txt) {
+            const typeElem = document.getElementById('typewriter');
+            clearInterval(typeInterval);
+            typeElem.innerHTML = "";
+            let idx = 0;
+            typeInterval = setInterval(() => {
+                if (idx < txt.length) {
+                    typeElem.innerHTML += txt.charAt(idx);
+                    idx++;
+                } else {
+                    clearInterval(typeInterval);
+                }
+            }, 30);
+        }
+
+        // --- 3. Terminal Logic ---
+        let termInterval;
+        function restartTerminal(messages) {
+            const terminalContent = document.getElementById('terminal-content');
+            terminalContent.innerHTML = "";
+            clearInterval(termInterval);
+            
+            let logIndex = 0;
+            function addLog() {
+                if (logIndex < messages.length) {
+                    const p = document.createElement('div');
+                    p.classList.add('log-line');
+                    if(logIndex % 2 === 0) p.classList.add('gold');
+                    p.innerHTML = `> ${messages[logIndex]}`;
+                    terminalContent.appendChild(p);
+                    terminalContent.scrollTop = terminalContent.scrollHeight;
+                    logIndex++;
+                    termInterval = setTimeout(addLog, Math.random() * 600 + 200);
+                } else {
+                    const blink = document.createElement('div');
+                    blink.innerHTML = "> _ <span class='blink'>█</span>";
+                    terminalContent.appendChild(blink);
+                    terminalContent.scrollTop = terminalContent.scrollHeight;
+                }
+            }
+            addLog();
+        }
+
+        // --- 4. Custom Cursor & Tilt ---
+        const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
-
-        hoverTriggers.forEach(trigger => {
+        document.querySelectorAll('.hover-trigger, a, button, .card, .lang-btn').forEach(trigger => {
             trigger.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
             trigger.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
-        // --- 2. 3D Tilt Effect ---
         const cards = document.querySelectorAll('.js-tilt');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; // x position within the element
-                const y = e.clientY - rect.top;  // y position within the element
-                
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -5; // Max rotation deg
-                const rotateY = ((x - centerX) / centerX) * 5;
-
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * (currentLang === 'fa' ? 5 : 5); // Logic same for both
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
             });
-
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
             });
         });
 
-        // --- 3. Typing Effect ---
-        const text = "INITIALIZING SYSTEM... USER: AMIR DEHGHANPOUR | ACCESS LEVEL: ADMIN";
-        const typeElem = document.getElementById('typewriter');
-        let idx = 0;
-        function type() {
-            if (idx < text.length) {
-                typeElem.innerHTML += text.charAt(idx);
-                idx++;
-                setTimeout(type, 30);
-            }
-        }
-        setTimeout(type, 1000);
-
-        // --- 4. Terminal Simulation ---
-        const terminalContent = document.getElementById('terminal-content');
-        const logs = [
-            "Loading kernel modules...",
-            "Mounting file systems...",
-            "Starting network daemon...",
-            "Connecting to neural link...",
-            "Verifying biometrics...",
-            "User Authenticated: AmirM",
-            "Fetching GitHub repositories...",
-            "Optimizing server stack...",
-            "System Ready.",
-            "Listening for incoming connections..."
-        ];
-        
-        let logIndex = 0;
-        function addLog() {
-            if (logIndex < logs.length) {
-                const p = document.createElement('div');
-                p.classList.add('log-line');
-                if(logIndex === 5 || logIndex === 8) p.classList.add('gold');
-                p.innerHTML = `> ${logs[logIndex]}`;
-                terminalContent.appendChild(p);
-                terminalContent.scrollTop = terminalContent.scrollHeight;
-                logIndex++;
-                setTimeout(addLog, Math.random() * 800 + 200);
-            } else {
-                // Keep cursor blinking at end
-                const blink = document.createElement('div');
-                blink.innerHTML = "> _ <span class='blink'>█</span>";
-                terminalContent.appendChild(blink);
-                terminalContent.scrollTop = terminalContent.scrollHeight;
-            }
-        }
-        setTimeout(addLog, 2000);
-
         // --- 5. Lightbox ---
         const lightbox = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
-        
         document.querySelectorAll('.gallery-item img').forEach(img => {
             img.addEventListener('click', () => {
                 lbImg.src = img.src;
                 lightbox.classList.add('active');
             });
         });
-        
-        document.querySelector('.close-lightbox').addEventListener('click', () => {
-            lightbox.classList.remove('active');
-        });
+        document.querySelector('.close-lightbox').addEventListener('click', () => lightbox.classList.remove('active'));
 
-        // --- 6. Particle Background ---
+        // --- 6. Particles ---
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         let particles = [];
         class Particle {
             constructor() {
@@ -664,32 +550,21 @@
                 this.speedY = Math.random() * 1 - 0.5;
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
             }
             draw() {
                 ctx.fillStyle = 'rgba(203, 161, 53, 0.3)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
             }
         }
-
-        function initParticles() {
-            for(let i=0; i<100; i++) particles.push(new Particle());
-        }
-
+        function initParticles() { for(let i=0; i<80; i++) particles.push(new Particle()); }
         function animateParticles() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
             for(let p of particles) {
-                p.update();
-                p.draw();
+                p.update(); p.draw();
             }
-            // Draw connections
             for(let a=0; a<particles.length; a++) {
                 for(let b=a; b<particles.length; b++) {
                     let dx = particles[a].x - particles[b].x;
@@ -697,24 +572,17 @@
                     let dist = Math.sqrt(dx*dx + dy*dy);
                     if(dist < 100) {
                         ctx.strokeStyle = `rgba(203, 161, 53, ${0.1 - dist/1000})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
+                        ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(particles[a].x, particles[a].y); ctx.lineTo(particles[b].x, particles[b].y); ctx.stroke();
                     }
                 }
             }
             requestAnimationFrame(animateParticles);
         }
+        initParticles(); animateParticles();
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
-        initParticles();
-        animateParticles();
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
+        // Init Default Language
+        setLang('fa');
     </script>
 </body>
 </html>
